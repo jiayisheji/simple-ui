@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@simple-ui/simple-ui": ["libs/simple-ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

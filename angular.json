@@ -1,8 +1,167 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "simple-ui-doc": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/simple-ui-doc",
+      "sourceRoot": "apps/simple-ui-doc/src",
+      "prefix": "doc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/simple-ui-doc",
+            "index": "apps/simple-ui-doc/src/index.html",
+            "main": "apps/simple-ui-doc/src/main.ts",
+            "polyfills": "apps/simple-ui-doc/src/polyfills.ts",
+            "tsConfig": "apps/simple-ui-doc/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/simple-ui-doc/src/favicon.ico", "apps/simple-ui-doc/src/assets"],
+            "styles": ["apps/simple-ui-doc/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/simple-ui-doc/src/environments/environment.ts",
+                  "with": "apps/simple-ui-doc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "simple-ui-doc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "simple-ui-doc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "simple-ui-doc:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/simple-ui-doc/tsconfig.app.json", "apps/simple-ui-doc/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/simple-ui-doc/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/simple-ui-doc/jest.config.js",
+            "tsConfig": "apps/simple-ui-doc/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/simple-ui-doc/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "simple-ui-doc-e2e": {
+      "root": "apps/simple-ui-doc-e2e",
+      "sourceRoot": "apps/simple-ui-doc-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/simple-ui-doc-e2e/cypress.json",
+            "tsConfig": "apps/simple-ui-doc-e2e/tsconfig.e2e.json",
+            "devServerTarget": "simple-ui-doc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "simple-ui-doc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/simple-ui-doc-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/simple-ui-doc-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "simple-ui": {
+      "projectType": "library",
+      "root": "libs/simple-ui",
+      "sourceRoot": "libs/simple-ui/src",
+      "prefix": "sim",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/simple-ui/tsconfig.lib.json",
+            "project": "libs/simple-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/simple-ui/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/simple-ui/tsconfig.lib.json", "libs/simple-ui/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/simple-ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/simple-ui/jest.config.js",
+            "tsConfig": "libs/simple-ui/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/simple-ui/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -38,6 +197,14 @@
       "library": {
         "linter": "tslint"
       }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
     }
-  }
+  },
+  "defaultProject": "simple-ui-doc"
 }

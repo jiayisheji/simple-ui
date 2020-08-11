@@ -2,9 +2,10 @@
   "name": "simple-ui",
   "version": "0.0.0",
   "license": "MIT",
+  "description": "Simple Design components for Angular",
   "scripts": {
     "ng": "nx",
-    "postinstall": "node ./decorate-angular-cli.js",
+    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "nx": "nx",
     "start": "ng serve",
     "build": "ng build",
@@ -27,20 +28,74 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help"
   },
-  "private": true,
   "dependencies": {
-    "@nrwl/angular": "10.0.10"
+    "@nrwl/angular": "10.0.10",
+    "@angular/animations": "^10.0.0",
+    "@angular/common": "^10.0.0",
+    "@angular/compiler": "^10.0.0",
+    "@angular/core": "^10.0.0",
+    "@angular/forms": "^10.0.0",
+    "@angular/platform-browser": "^10.0.0",
+    "@angular/platform-browser-dynamic": "^10.0.0",
+    "@angular/router": "^10.0.0",
+    "rxjs": "~6.5.5",
+    "tslib": "^2.0.0",
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1000.0",
+    "@angular-devkit/build-ng-packagr": "~0.1000.5",
     "@angular/cli": "~10.0.0",
+    "@angular/compiler-cli": "^10.0.0",
+    "@angular/language-service": "^10.0.0",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "@nrwl/cypress": "10.0.10",
+    "@nrwl/jest": "10.0.10",
+    "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "10.0.10",
+    "@types/jest": "25.1.4",
     "@types/node": "~8.9.4",
+    "codelyzer": "~5.0.1",
+    "conventional-changelog": "^3.1.21",
+    "cypress": "^4.1.0",
     "dotenv": "6.2.0",
+    "eslint": "6.8.0",
+    "htmlhint": "^0.11.0",
+    "husky": "^4.2.5",
+    "jest": "25.2.3",
+    "jest-preset-angular": "8.1.2",
+    "lint-staged": "^10.2.11",
+    "ng-packagr": "^10.0.0",
+    "prettier": "2.0.4",
+    "rxjs-tslint-rules": "^4.34.0",
+    "scss-bundle": "^3.1.2",
+    "stylelint": "^13.6.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0",
+    "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "eslint": "6.8.0",
-    "typescript": "~3.9.3",
-    "prettier": "2.0.4",
-    "@nrwl/nx-cloud": "latest"
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "~3.9.3"
+  },
+  "engines": {
+    "node": ">=12.16.0"
+  },
+  "lint-staged": {
+    "{apps,libs}/**/*.{ts,json,md,scss,html}": [
+      "npx nx affected:lint --uncommitted --parallel --fix=true",
+      "npx nx format:write --uncommitted"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   }
 }

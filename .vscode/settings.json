@@ -1,0 +1,91 @@
+{
+  // 文件排序
+  "explorer.sortOrder": "type",
+  // Editor settings
+  "editor.snippetSuggestions": "top",
+  "editor.autoIndent": "full",
+  "editor.codeLens": false,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorStyle": "line",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.letterSpacing": 0.5,
+  "editor.lineHeight": 25,
+  "editor.minimap.enabled": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.suggestSelection": "first",
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.codeActionsOnSave": {
+    // For ESLint
+    "source.fixAll.eslint": true,
+    // For TSLint
+    "source.fixAll.tslint": true,
+    // For Stylelint
+    "source.fixAll.stylelint": true,
+    // import sort
+    "source.organizeImports": true
+  },
+  // File settings
+  "files.associations": {
+    "*.template": "plaintext",
+    "*.md": "mdx"
+  },
+  "files.defaultLanguage": "",
+  "files.trimTrailingWhitespace": true,
+  // gitlens, git 可视化功能增强
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true
+  },
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
+  "eslint.validate": ["javascript", "javascriptreact", "vue", "typescript", "typescriptreact"],
+  // markdown
+  "markdownlint.config": {
+    "MD033": {
+      "allowed_elements": ["iframe", "details", "summary", "div", "hr", "br", "a", "img"]
+    }
+  },
+  // html
+  "html.format.indentInnerHtml": true,
+  "html.format.indentHandlebars": true,
+  "html.format.endWithNewline": true,
+  "html.format.extraLiners": "",
+  // emmet
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showSuggestionsAsSnippets": true,
+  // 以下配置大多是设置默认格式化程序
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "shd101wyy.markdown-preview-enhanced"
+  },
+  // typescript
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.words": ["PAGINATOR", "echarts", "hljs", "overridable", "stylelint"]
+}

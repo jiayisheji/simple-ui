@@ -1,0 +1,188 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-prettier",
+    "stylelint-config-rational-order"
+  ],
+  plugins: [
+    "stylelint-order",
+    "stylelint-scss"
+  ],
+  "rules": {
+    "color-hex-case": "lower",
+    "color-no-invalid-hex": true,
+    "function-calc-no-unspaced-operator": true,
+    "function-comma-space-after": "always-single-line",
+    "function-comma-space-before": "never",
+    "function-name-case": "lower",
+    "function-url-quotes": [
+      "always",
+      {
+        "except": [
+          "empty"
+        ]
+      }
+    ],
+    "function-url-scheme-blacklist": [
+      "data"
+    ],
+    "function-whitespace-after": "always",
+    "number-leading-zero": "always",
+    "number-no-trailing-zeros": true,
+    "length-zero-no-unit": true,
+    "string-no-newline": true,
+    "string-quotes": "single",
+    "unit-case": "lower",
+    "unit-no-unknown": true,
+    "unit-whitelist": [
+      "px",
+      "%",
+      "deg",
+      "s",
+      "ms",
+      "em",
+      "vh",
+      "vw",
+      "vmin"
+    ],
+    "value-list-comma-space-after": "always-single-line",
+    "value-list-comma-space-before": "never",
+    "shorthand-property-no-redundant-values": true,
+    "property-case": "lower",
+    "no-duplicate-at-import-rules": true,
+    "declaration-block-no-duplicate-properties": [
+      true,
+      {
+        "ignore": [
+          "consecutive-duplicates-with-different-values"
+        ]
+      }
+    ],
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-block-single-line-max-declarations": 1,
+    "declaration-block-semicolon-space-before": "never",
+    "declaration-block-semicolon-space-after": "always-single-line",
+    "declaration-block-semicolon-newline-before": "never-multi-line",
+    "declaration-block-semicolon-newline-after": "always-multi-line",
+    "declaration-colon-space-after": "always-single-line",
+    "declaration-property-value-blacklist": [
+      {
+        "/.*/": [
+          "initial"
+        ]
+      },
+      {
+        "message": "The `initial` value is not supported in IE."
+      }
+    ],
+    "declaration-property-unit-whitelist": [
+      "font-size": [
+        "rem",
+        "em",
+        "px"
+      ]
+    ],
+    "block-closing-brace-newline-after": "always",
+    "block-closing-brace-newline-before": "always-multi-line",
+    "block-opening-brace-newline-after": "always-multi-line",
+    "block-opening-brace-space-before": "always-multi-line",
+    "selector-attribute-quotes": "always",
+    "selector-attribute-brackets-space-inside": "never",
+    "selector-attribute-operator-space-after": "never",
+    "selector-attribute-operator-space-before": "never",
+    "selector-combinator-space-after": "always",
+    "selector-combinator-space-before": "always",
+    "selector-pseudo-class-case": "lower",
+    "selector-pseudo-class-parentheses-space-inside": "never",
+    "selector-pseudo-element-case": "lower",
+    "selector-pseudo-element-colon-notation": "double",
+    "selector-type-case": "lower",
+    "selector-max-id": 0,
+    "selector-max-compound-selectors": 3,
+    "selector-max-specificity": [
+      "0,3,2",
+      {
+        "ignoreSelectors": [
+          ":not",
+          ":hover",
+          ":focus",
+          ":active",
+          ":host",
+          ":host::ng-deep",
+          ":host ::ng-deep",
+          "::ng-deep",
+          ":host-context"
+        ]
+      }
+    ],
+    "selector-no-vendor-prefix": true,
+    "selector-no-qualifying-type": [
+      true,
+      "ignore": [
+        "attribute",
+        "class",
+        "id"
+      ]
+    ],
+    "selector-max-universal": 0,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "ng-deep"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "host"
+        ]
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignoreTypes": [
+          "/^doc-/",
+          "/^router-/"
+        ]
+      }
+    ],
+    "selector-class-pattern": [
+      "^(sim-|cdk-|example-|demo-|ng-|doc-|test-)",
+      {
+        "resolveNestedSelectors": true
+      }
+    ],
+    "no-missing-end-of-source-newline": true,
+    "no-eol-whitespace": true,
+    "max-line-length": [
+      100,
+      {
+        "ignorePattern": "/https?://.*/"
+      }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      "ignoreProperties": [
+        "appearance"
+      ]
+    ],
+    "max-nesting-depth": 3,
+    "declaration-no-important": true,
+    "at-rule-no-vendor-prefix": true,
+    "media-feature-name-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "no-empty-source": null,
+    "font-family-name-quotes": "always-where-recommended",
+
+    "scss/dollar-variable-pattern": ["^_?sim-.+", {
+      "ignore": "local"
+    }],
+    "scss/at-function-pattern": "^sim-.+",
+    "scss/at-mixin-pattern": "^sim-.+"
+  }
+}

@@ -21,5 +21,16 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "simple-ui-doc": {
+      "tags": ["doc"]
+    },
+    "simple-ui-doc-e2e": {
+      "tags": [],
+      "implicitDependencies": ["simple-ui-doc"]
+    },
+    "simple-ui": {
+      "tags": ["simple-ui"]
+    }
+  }
 }
