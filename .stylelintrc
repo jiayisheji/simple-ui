@@ -160,7 +160,7 @@
     "no-missing-end-of-source-newline": true,
     "no-eol-whitespace": true,
     "max-line-length": [
-      100,
+      140,
       {
         "ignorePattern": "/https?://.*/"
       }
@@ -183,6 +183,6 @@
       "ignore": "local"
     }],
     "scss/at-function-pattern": "^sim-.+",
-    "scss/at-mixin-pattern": "^sim-.+"
+    "scss/at-mixin-pattern": "^(sim|simple)-.+"
   }
 }

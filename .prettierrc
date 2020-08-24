@@ -19,13 +19,13 @@
     {
       "files": "*.html",
       "options": {
-        "printWidth": 100
+        "printWidth": 140
       }
     },
     {
       "files": "*.scss",
       "options": {
-        "singleQuote": false
+        "singleQuote": true
       }
     }
   ]

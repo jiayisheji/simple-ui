@@ -121,7 +121,7 @@
     "simple-ui": {
       "projectType": "library",
       "root": "libs/simple-ui",
-      "sourceRoot": "libs/simple-ui/src",
+      "sourceRoot": "libs/simple-ui",
       "prefix": "sim",
       "architect": {
         "build": {
@@ -149,7 +149,7 @@
             "jestConfig": "libs/simple-ui/jest.config.js",
             "tsConfig": "libs/simple-ui/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "libs/simple-ui/src/test-setup.ts"
+            "setupFile": "libs/simple-ui/test-setup.ts"
           }
         }
       },
