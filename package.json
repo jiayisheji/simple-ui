@@ -26,7 +26,9 @@
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "stage-release": "ts-node --project tools/release/tsconfig.json tools/release/stage-release.ts",
+    "publish-release": "ts-node --project tools/release/tsconfig.json tools/release/publish-release.ts"
   },
   "dependencies": {
     "@angular/animations": "^10.0.0",

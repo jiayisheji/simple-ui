@@ -1,0 +1,30 @@
+{{> header}}
+
+{{#each packageGroups}}
+{{#if title}}
+### {{title}}
+{{/if}}
+
+{{#if breakingChanges.length}}
+_Breaking changes:_
+
+{{#each breakingChanges}}
+* {{#if commit.scope}}**{{commit.scope}}:** {{/if}}{{text}}
+{{/each}}
+
+{{/if}}
+{{#if deprecations.length}}
+_Deprecations:_
+
+{{#each deprecations}}
+* {{#if commit.scope}}**{{commit.scope}}:** {{/if}}{{text}}
+{{/each}}
+
+{{/if}}
+| type | subject |
+| ---------- | --------------------- |
+{{#each commits}}
+| {{type}} | {{> commit root=@root}} |
+{{/each}}
+
+{{/each}}
