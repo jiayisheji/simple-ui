@@ -15,5 +15,5 @@ jobs:
         uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.1
         with:
           github_access_token: ${{ secrets.ACCESS_TOKEN }}
-          base_href: https://jiayisheji.github.io/simple-ui
+          base_href: https://jiayisheji.github.io/simple-ui/
           angular_dist_build_folder: dist/apps/simple-ui-doc
