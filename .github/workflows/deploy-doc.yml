@@ -1,0 +1,19 @@
+name: Publish And Deploy Doc Demo # 自动部署的名称
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 运行环境，告诉它运行在什么环境
+    steps: # 步骤
+      # 第一步：下载源码（CI/CD拉取代码到自己的本地）
+      - name: Checkout
+        uses: actions/checkout@master
+      # 第二步：打包构建
+      - name: Build and Deploy
+        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.1
+        with:
+          github_access_token: ${{ secrets.ACCESS_TOKEN }}
+          base_href: https://jiayisheji.github.io/simple-ui
+          angular_dist_build_folder: dist/apps/simple-ui-doc
