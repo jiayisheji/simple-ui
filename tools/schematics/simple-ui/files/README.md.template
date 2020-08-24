@@ -1,0 +1,32 @@
+# <%= classify(name) %> 中文
+
+描述。
+
+## Getting Started
+
+## Dependencies
+
+```ts
+import { Sim<%= classify(name) %>Module } from 'simple-ui/<%= dasherize(name) %>';
+```
+
+## Usage
+
+模块中导入：
+
+```ts
+...
+import { Sim<%= classify(name) %>Module } from 'simple-ui/<%= dasherize(name) %>';
+@NgModule({
+    ...
+    imports: [..., Sim<%= classify(name) %>Module],
+    ...
+})
+export class DemoModule {}
+```
+
+模板中使用：
+
+```html
+<sim-<%= dasherize(name) %>>sim-<%= dasherize(name) %></sim-<%= dasherize(name) %>>
+```

@@ -1,0 +1,5 @@
+export * from './<%= dasherize(name) %>.component';
+export * from './<%= dasherize(name) %>.module';
+<% if (directive) { %>export * from './<%= dasherize(name) %>.directive';<% } %>
+<% if (service) { %>export * from './<%= dasherize(name) %>.service';<% } %>
+<% if (types) { %>export * from './<%= dasherize(name) %>.typings';<% } %>

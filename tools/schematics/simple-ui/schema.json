@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "simple-ui",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "组件名称",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "组件使用名字?"
+    },
+    "project": {
+      "type": "string",
+      "description": "项目的名称",
+      "default": "simple-ui",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "default": "/lib/simple-ui",
+      "description": "生成目标的文件夹路径",
+      "visible": false
+    },
+    "service": {
+      "type": "boolean",
+      "default": false,
+      "description": "标志是否应该生成service"
+    },
+    "directive": {
+      "type": "boolean",
+      "default": false,
+      "description": "标志是否应该生成directive"
+    },
+    "types": {
+      "type": "boolean",
+      "default": false,
+      "description": "标志是否应该生成types/interfaces"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

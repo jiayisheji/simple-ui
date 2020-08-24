@@ -1,0 +1,69 @@
+$sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
+
+/// 注册组件
+@include register-component($sim-<%= dasherize(name) %>);
+
+/// 主题风格
+@mixin sim-<%= dasherize(name) %>-theme($config-or-theme) {
+  @include check-component-theme($config-or-theme, $sim-<%= dasherize(name) %>) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-<%= dasherize(name) %>-color($color);
+    }
+    @if $density != null {
+      @include sim-<%= dasherize(name) %>-density($density);
+    }
+    @if $typography != null {
+      @include sim-<%= dasherize(name) %>-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-<%= dasherize(name) %>-color($config-or-theme) {
+  $theme: sim-get-color-config($config-or-theme);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  .sim-<%= dasherize(name) %> {
+    color: sim-color($foreground, disabled-<%= dasherize(name) %>);
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($theme, $type);
+      &.sim-#{$type} {
+        &:hover {
+          color: sim-color($color, default-contrast);
+          background-color: sim-color($color, default);
+        }
+        &:active {
+          color: sim-color($color, default-contrast);
+          background-color: sim-color($color, darker);
+        }
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-<%= dasherize(name) %>-typography($config-or-theme) {
+  $typography: sim-get-typography-config($config-or-theme);
+  .sim-<%= dasherize(name) %> {
+    font: {
+      family: sim-font-family($typography, body2);
+      size: sim-font-size($typography, body2);
+    }
+  }
+}
+
+/// 密度配置
+@mixin sim-<%= dasherize(name) %>-density($config-or-theme) {
+  $density: sim-get-density-config($config-or-theme);
+
+  .sim-<%= dasherize(name) %> {
+    /// $size-scale-map: (small: minimum, large: maximum);$size-scale-map
+    border-radius: sim-density-prop-value($density, $property-name: radius);
+  }
+}

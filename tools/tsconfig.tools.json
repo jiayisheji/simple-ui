@@ -4,8 +4,8 @@
     "outDir": "../dist/out-tsc/tools",
     "rootDir": ".",
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "types": ["node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["schematics/**/*.ts"]
 }
