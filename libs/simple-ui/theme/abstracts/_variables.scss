@@ -1,0 +1,27 @@
+/// 全局组件注册表映射
+/// @type List
+/// @access private
+$_sim-components: () !default;
+
+// 使用的默认动画曲线
+$sim-linear-out-slow-in-timing-function: cubic-bezier(0, 0, 0.2, 0.1) !default;
+$sim-fast-out-slow-in-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$sim-fast-out-linear-in-timing-function: cubic-bezier(0.4, 0, 1, 1) !default;
+
+$sim-ease-in-out-curve-function: cubic-bezier(0.35, 0, 0.25, 1) !default;
+
+$sim-swift-ease-out-duration: 400ms !default;
+$sim-swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
+$sim-swift-ease-out: all $sim-swift-ease-out-duration $sim-swift-ease-out-timing-function !default;
+
+$sim-swift-ease-in-duration: 300ms !default;
+$sim-swift-ease-in-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2) !default;
+$sim-swift-ease-in: all $sim-swift-ease-in-duration $sim-swift-ease-in-timing-function !default;
+
+$sim-swift-ease-in-out-duration: 500ms !default;
+$sim-swift-ease-in-out-timing-function: $sim-ease-in-out-curve-function !default;
+$sim-swift-ease-in-out: all $sim-swift-ease-in-out-duration $sim-swift-ease-in-out-timing-function !default;
+
+$sim-swift-linear-duration: 80ms !default;
+$sim-swift-linear-timing-function: linear !default;
+$sim-swift-linear: all $sim-swift-linear-duration $sim-swift-linear-timing-function !default;

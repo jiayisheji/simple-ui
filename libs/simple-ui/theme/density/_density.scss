@@ -1,0 +1,27 @@
+@import './density-utils';
+
+/// 自定义显示密度
+/// @param {String} $name - 要注册的组件名称
+@function sim-density-config($density-config: null) {
+  @if $density-config == null {
+    @return $sim-density-cosy;
+  }
+
+  $density-properties: map-keys($sim-density-cosy);
+
+  @each $name in $density-properties {
+    /// 如果取不到属性值，直接抛出异常
+    @if (map-get($density-config, $name) == null) {
+      @error 'sim-density: Supported density properties #{$density-properties}, but the lack of #{$name}.';
+    }
+  }
+
+  // 验证自定义设置是否符合标准 density-supported-scales：(default, minimum, maximum)
+  @each $name, $value in $density-config {
+    @if not sim-is-density-scale-object($value) {
+      @error 'sim-density: Supported density scales (default, minimum, maximum), But #{$name} is not legit.';
+    }
+  }
+
+  @return $density-config;
+}

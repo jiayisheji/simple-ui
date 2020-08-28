@@ -1,0 +1,46 @@
+@import './theme/abstracts/index';
+@import './theme/typography/typography';
+@import './theme/density/density';
+@import './theme/theming/theming';
+@import './theme/vendors/index';
+@import './theme/component-all-theme';
+
+/// 将组件注册到已知组件列表中
+/// @param {Object} $theme-config - 主题配置
+/// --------------- $color - 颜色系统
+/// --------------- $typography - 排版系统
+/// --------------- $density - 布局系统
+/// @param {String} $schema - 主题模式 light | dark
+/// @param {String[]} $exclude - 排除组件 用于自定义组件主题 如果不使用该组件也可以使用此方法排除
+@mixin simple-ui-theme($theme-config, $schema: 'light', $exclude: ()) {
+  /// 获取字体排版配置
+  $typography: if(_sim-is-theme-object($theme-config), sim-get-typography-config($theme-config), sim-typography-config());
+  $density: if(_sim-is-theme-object($theme-config), sim-get-density-config($theme-config), 0);
+  /// 获取主题颜色配置
+  $color: if(_sim-is-theme-object($theme-config), sim-get-color-config($theme-config), sim-color-theme((), $schema));
+
+  // 存储所有排除的组件样式
+  $excluded: ();
+
+  @if length($exclude) > 0 {
+    $excluded: is-component($exclude);
+  }
+
+  @if length($excluded) > 0 {
+    @warn unquote('You have excluded the following components from the theme: "#{$excluded}".'+
+    ' You can now add your own themes for the excluded components.');
+  }
+
+  @if $density == null {
+    @error 'No density configuration specified.';
+  }
+
+  $theme-or-config: (
+    color: $color,
+    density: $density,
+    typography: $typography
+  );
+
+  @include simple-ui-core-theme($theme-or-config);
+  @include simple-ui-components-theme($theme-or-config);
+}

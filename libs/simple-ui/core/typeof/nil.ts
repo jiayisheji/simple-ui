@@ -1,4 +1,4 @@
-import { SafeAny } from '../types';
+import { SafeAny } from '@ngx-simple/simple-ui/core/types';
 
 /**
  * @description 检查给定参数是否为 undefined。

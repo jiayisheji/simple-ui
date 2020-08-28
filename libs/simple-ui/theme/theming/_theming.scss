@@ -1,0 +1,291 @@
+@import './palette';
+@import './generate-palette';
+
+// 为主题创建色调到颜色的映射。这是用来定义一个主题调色板的设计色调
+// @param $color-map
+// @param $primary
+/// @param $lighter
+@function sim-palette($base-palette, $default: 500, $lighter: 100, $darker: 700, $text: $default) {
+  $result: $base-palette;
+  $contrast: map-get($base-palette, contrast);
+  // 对于调色板中的每个色相，向map添加一个“对比度”颜色
+  @each $hue, $color in $base-palette {
+    @if $hue != contrast {
+      @if map-has-key($result, '#{$hue}-contrast') == false {
+        $result: map_merge(
+          $result,
+          (
+            '#{$hue}-contrast': map-get($contrast, $hue)
+          )
+        );
+      }
+    }
+  }
+  @return map-merge(
+    $result,
+    (
+      default: map-get($base-palette, $default),
+      lighter: map-get($base-palette, $lighter),
+      darker: map-get($base-palette, $darker),
+      text: map-get($base-palette, $text),
+      default-contrast: map-get($contrast, $darker),
+      lighter-contrast: map-get($contrast, $lighter),
+      darker-contrast: map-get($contrast, $darker)
+    )
+  );
+}
+
+/// 为单一颜色生成类似于材料的调色板
+/// @access private
+/// @group Palettes
+/// @requires {function} sim-gen-color
+/// @param {Color} $color - 用于生成调色板的基本颜色
+/// @param {Boolean} $debug - 用于调试生成调色板
+/// @returns {Map} - 由26种颜色变化组成的地图
+@function sim-generate-palette($color, $debug: false) {
+  $saturations: (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 'A100', 'A200', 'A400', 'A700');
+  $results: ();
+  $contrasts: ();
+  @each $saturation in $saturations {
+    $shade: _sim-gen-color($color, $saturation);
+    $results: map-merge(
+      $results,
+      (
+        $saturation: $shade
+      )
+    );
+    $contrast: _sim-gen-text-contrast($shade);
+    $contrasts: map-merge(
+      $contrasts,
+      (
+        $saturation: $contrast
+      )
+    );
+  }
+  $results: map-merge(
+    $results,
+    (
+      contrast: $contrasts
+    )
+  );
+  @if ($debug == true) {
+    @debug 'Customize Colors Generate Palette：';
+    @debug $results;
+    @return null;
+  }
+  @return sim-palette($results);
+}
+
+// 从主题调色板(sim-palette的输出)获取颜色。色相可以是标准值之一(500,A400，等等)，四个预先配置的色相之一(default，lighter，darker， text)，或者任何前面提到的“-contrast”前缀（text除外）。
+//
+// @param $color-map 主题调色板(sim-palette的输出)
+// @param $hue 从调色板的色相来使用。如果这个值在0和1之间，它将被视为不透明度。
+// @param $opacity 颜色的alpha通道值
+@function sim-color($palette, $hue: default, $opacity: null) {
+  // 如果hueKey是一个介于0和1之间的数字，那么它实际上包含一个不透明度值，因此回想一下这个函数的默认色调和给定的不透明度。
+  @if type-of($hue) == number and $hue >= 0 and $hue <= 1 {
+    @return sim-color($palette, default, $hue);
+  }
+
+  $color: map-get($palette, $hue);
+
+  @if (type-of($color) != color) {
+    // 如果$color被解析成不同于颜色的东西(例如CSS变量)，我们就不能应用不透明度，所以我们就返回原来的值，否则Sass会抛出一个错误或输出一些无效的东西。
+    @return $color;
+  }
+
+  @return rgba($color, if($opacity == null, opacity($color), $opacity));
+}
+
+// 创建一个容器对象，该对象用于将高亮主题指定给各个组件主题混合
+@function sim-light-theme(
+  $primary,
+  $secondary,
+  $info: #3591fe,
+  $success: #59c520,
+  $warning: #f6ac1e,
+  $danger: #ef0f30,
+  $grays: sim-palette($sim-palette-greys),
+  $foreground: $sim-light-theme-foreground,
+  $background: $sim-light-theme-background
+) {
+  $info-palette: _sim-get-config-palette($info, null, $sim-palette-info);
+  $success-palette: _sim-get-config-palette($success, null, $sim-palette-success);
+  $warning-palette: _sim-get-config-palette($warning, null, $sim-palette-warning);
+  $danger-palette: _sim-get-config-palette($danger, null, $sim-palette-danger);
+  $grays-palette: _sim-get-config-palette($grays, null, $sim-palette-greys);
+  $foreground-palette: _sim-get-config-palette($foreground, foreground, $sim-light-theme-foreground);
+  $background-palette: _sim-get-config-palette($background, background, $sim-light-theme-background);
+  @return (
+    primary: $primary,
+    secondary: $secondary,
+    info: $info-palette,
+    success: $success-palette,
+    warning: $warning-palette,
+    danger: $danger-palette,
+    grays: $grays-palette,
+    is-dark: false,
+    foreground: $foreground-palette,
+    background: $background-palette
+  );
+}
+
+// 创建一个容器对象，用于将暗主题指定给各个组件主题混合。
+@function sim-dark-theme(
+  $primary,
+  $secondary,
+  $info: #3591fe,
+  $success: #59c520,
+  $warning: #f6ac1e,
+  $danger: #ef0f30,
+  $grays: sim-palette($sim-palette-greys),
+  $foreground: $sim-dark-theme-foreground,
+  $background: $sim-dark-theme-background
+) {
+  $info-palette: _sim-get-config-palette($info, null, $sim-palette-info);
+  $success-palette: _sim-get-config-palette($success, null, $sim-palette-success);
+  $warning-palette: _sim-get-config-palette($warning, null, $sim-palette-warning);
+  $danger-palette: _sim-get-config-palette($danger, null, $sim-palette-danger);
+  $grays-palette: _sim-get-config-palette($grays, null, $sim-palette-greys);
+  $foreground-palette: _sim-get-config-palette($foreground, foreground, $sim-light-theme-foreground);
+  $background-palette: _sim-get-config-palette($background, background, $sim-light-theme-background);
+  @return (
+    primary: $primary,
+    secondary: $secondary,
+    info: $info-palette,
+    success: $success-palette,
+    warning: $warning-palette,
+    danger: $danger-palette,
+    grays: $grays-palette,
+    is-dark: true,
+    foreground: $foreground-palette,
+    background: $background-palette
+  );
+}
+
+// 抹平传递进来的主题色差异。
+@function _sim-get-config-palette($theme, $palette, $default) {
+  @if ($palette != null) {
+    /// 处理前景色
+    @if ($palette == 'foreground') {
+      // 允许的必须前景主题属性
+      $foregrounds: (
+        base,
+        divider,
+        disabled,
+        disabled-button,
+        disabled-text,
+        elevation,
+        text,
+        hint-text,
+        secondary-text,
+        icon,
+        slider-min,
+        slider-off,
+        slider-off-active
+      );
+      $theme: if(type-of($theme) != 'map', (), $theme);
+
+      @each $foreground in $foregrounds {
+        @if (not map-has-key($theme, $foreground)) {
+          $theme: map-merge(
+            $theme,
+            (
+              $foreground: map-get($default, $foreground)
+            )
+          );
+        }
+        @if (not map-has-key($theme, $foreground)) {
+          @error 'sim-light-theme-foreground: Lack of support #{$foreground}';
+        }
+      }
+      @return $theme;
+    }
+    /// 处理背景色
+    @if ($palette == 'background') {
+      // 允许的必须背景主题属性
+      $backgrounds: (
+        background,
+        disabled-background,
+        status-bar,
+        app-bar,
+        hover,
+        active,
+        card,
+        dialog,
+        disabled-button,
+        elevation,
+        focused-button,
+        selected-button,
+        selected-disabled-button,
+        disabled-button-toggle,
+        unselected-chip,
+        disabled-list-option,
+        list-option-group,
+        tooltip
+      );
+      $theme: if(type-of($theme) != 'map', (), $theme);
+
+      @each $background in $backgrounds {
+        @if (not map-has-key($theme, $background)) {
+          $theme: map-merge(
+            $theme,
+            (
+              $background: map-get($default, $background)
+            )
+          );
+        }
+        @if (not map-has-key($theme, $background)) {
+          @error 'sim-light-theme-background: Lack of support #{$background}';
+        }
+      }
+      @return $theme;
+    }
+    /// 处理其他主题色
+    @if (type-of($theme) != 'map' or map-get($theme, $palette) == null) {
+      @return sim-palette($default);
+    }
+  } @else {
+    @if (type-of($theme) != 'map') {
+      @return sim-palette($default);
+    }
+  }
+
+  @if (type-of($theme) == 'color') {
+    @return sim-generate-palette($theme);
+  }
+
+  @return sim-palette($theme);
+}
+
+// 创建一个容器对象，用于将主题指定给各个组件主题混合。
+@function sim-color-theme($theme-config: (), $schema: 'light') {
+  $primary-palette: _sim-get-config-palette($theme-config, primary, $sim-palette-primary);
+  $secondary-palette: _sim-get-config-palette($theme-config, secondary, $sim-palette-secondary);
+
+  @return if(
+    $schema == 'light',
+    sim-light-theme(
+      $primary: $primary-palette,
+      $secondary: $secondary-palette,
+      $info: map-get($theme-config, info),
+      $success: map-get($theme-config, success),
+      $warning: map-get($theme-config, warning),
+      $danger: map-get($theme-config, danger),
+      $grays: map-get($theme-config, grays),
+      $foreground: map-get($theme-config, foreground),
+      $background: map-get($theme-config, background)
+    ),
+    sim-dark-theme(
+      $primary: $primary-palette,
+      $secondary: $secondary-palette,
+      $info: map-get($theme-config, info),
+      $success: map-get($theme-config, success),
+      $warning: map-get($theme-config, warning),
+      $danger: map-get($theme-config, danger),
+      $grays: map-get($theme-config, grays),
+      $foreground: map-get($theme-config, foreground),
+      $background: map-get($theme-config, background)
+    )
+  );
+}

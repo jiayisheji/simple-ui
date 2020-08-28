@@ -1,0 +1,25 @@
+@import 'elevation';
+@import 'a11y';
+@import 'overlay';
+
+@mixin simple-ui-core-theme($config-or-theme) {
+  $theme: sim-get-color-config($config-or-theme);
+
+  @include sim-a11y();
+  @include sim-overlay();
+
+  // 生成主题字体颜色
+  @each $type in primary, secondary, success, info, warning, danger {
+    $color: map-get($theme, $type);
+    .sim-text-#{$type} {
+      color: sim-color($color, $type);
+    }
+  }
+
+  // 为每个提升值提供外部CSS类。每个CSS类都被格式化为“sim-elevation-z$zValue”，其中“$zValue”对应元素被提升到的z空间。
+  @for $zValue from 1 through 24 {
+    .#{$_sim-elevation-prefix}#{$zValue} {
+      @include sim-elevation($zValue);
+    }
+  }
+}

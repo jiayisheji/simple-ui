@@ -1,0 +1,15 @@
+@mixin sim-a11y() {
+  .cdk-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    clip: rect(0 0 0 0);
+  }
+}

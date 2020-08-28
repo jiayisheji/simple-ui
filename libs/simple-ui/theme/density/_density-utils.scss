@@ -1,0 +1,84 @@
+$_sim-density-interval: 4px !default;
+$_sim-density-minimum-scale: minimum !default;
+$_sim-density-maximum-scale: maximum !default;
+$_sim-density-supported-scales: (default, minimum, maximum) !default;
+$_sim-density-default-scale: 0 !default;
+$_sim-density-supported-special: special !default;
+
+/// @param {Map} $density-config - 组分的密度配置
+/// @param {String|Number} $density-scale - 组件的密度标度值。例如:' -3 '，' 0 '或' minimum '
+/// @param {String} $property-name - 组件的密度目标属性名称
+/// @returns {String} 返回基于给定密度配置和密度比例的组件属性值
+@function sim-density-prop-value($density-config, $density-scale: default, $property-name) {
+  /// 优先获取特殊密度配置
+  $special: _sim-get-density-scale-special($density-config, $property-name);
+  /// 验证标度值如果是字符串，那么和预设支持的标度值进行匹配，如果不匹配，直接抛出异常。
+  @if (
+    type-of($density-scale) ==
+      'string' and
+      (($special == null) and (index($list: $_sim-density-supported-scales, $value: $density-scale) == null))
+  ) {
+    @error 'sim-density: Supported density scales #{$_sim-density-supported-scales}, but received #{$density-scale}.';
+  }
+
+  /// 如果有特殊密度配置 直接返回对应的密度值
+  @if ($special != null) {
+    @if not map-has-key($special, $density-scale) {
+      @error 'sim-density: Supported density scales #{map-keys($special)}, but received #{$density-scale}.';
+    }
+    @return map-get($special, $density-scale);
+  }
+
+  $value: null;
+  /// 根据对应的目标属性名称获取，对应的密度配置值
+  $property-scale-map: map-get($density-config, $property-name);
+
+  /// 如果取不到属性值，直接抛出异常
+  @if ($property-scale-map == null) {
+    @error 'sim-density: Supported density properties #{map-keys($density-config)}, but received #{$property-name}.';
+  }
+
+  @if map-has-key($property-scale-map, $density-scale) {
+    $value: map-get($property-scale-map, $density-scale);
+  }
+
+  /* prettier-ignore */
+  @else {
+    $value: map-get($property-scale-map, default) + $density-scale * $_sim-density-interval;
+  }
+
+  $min-value: map-get($property-scale-map, $_sim-density-minimum-scale);
+  $max-value: map-get($property-scale-map, $_sim-density-maximum-scale);
+
+  @if ($value < $min-value or $value > $max-value) {
+    @error 'sim-density: #{$property-name} must be between #{$min-value} and ' +
+      '#{$max-value} (inclusive), but received #{$value}.';
+  }
+
+  @return $value;
+}
+
+@function sim-is-density-scale-object($value) {
+  @debug (map-get($value, special)) or
+    (map-has-key($value, default) and map-has-key($value, minimum) and map-has-key($value, maximum) and length($value) >= 3);
+  @return type-of($value) == 'map' and
+    (
+      (map-get($value, special)) or
+        (map-has-key($value, default) and map-has-key($value, minimum) and map-has-key($value, maximum) and length($value) >= 3)
+    );
+}
+
+/// @access private
+@function _sim-get-density-scale-special($object, $name) {
+  $value: map-get($object, $name);
+
+  @if ($value == null) {
+    @return null;
+  }
+
+  @if (map-has-key($value, $_sim-density-supported-special)) {
+    @return $value;
+  }
+
+  @return null;
+}

@@ -1,3 +1,4 @@
+declare var global: any;
 export const root = (typeof global === 'object' && global) || this;
 
 export const arrayProto = Array.prototype;

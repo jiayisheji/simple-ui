@@ -1,0 +1,47 @@
+/* stylelint-disable property-no-vendor-prefix,selector-no-vendor-prefix,value-no-vendor-prefix */
+@mixin sim-user-select($value) {
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+@mixin sim-input-placeholder {
+  &::placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+    opacity: 1;
+    @content;
+  }
+
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+}
+
+@mixin sim-cursor-grab {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+@mixin sim-cursor-grabbing {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+@mixin sim-backface-visibility($value) {
+  -webkit-backface-visibility: $value;
+  backface-visibility: $value;
+}
+/* stylelint-enable */

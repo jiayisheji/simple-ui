@@ -1,0 +1,123 @@
+/// 将组件注册到已知组件列表中
+/// @access private
+/// @param {String} $name - 要注册的组件名称
+@mixin sim-register-component($name) {
+  $component: map-get($_sim-components, $name);
+  @if $component == null {
+    $component: unique-id();
+
+    $_sim-components: map-merge($_sim-components, (#{$name}: $component)) !global;
+  }
+}
+
+/// 测试组件或组件列表是否在已知组件列表中。
+/// @access private
+/// @param {String|List} $excludes - 要检入的组件列表
+/// @return {List} - 传递的项的列表
+@function sim-is-component($items) {
+  $register: map-keys($_sim-components);
+  @each $item in $items {
+    @if not(index($register, $item)) {
+      @error unquote('Can\'t exclude "#{$item}" because it is not in the list of known components.');
+    } @else {
+      $_sim-components: map-remove($_sim-components, $item);
+    }
+  }
+  @return $items;
+}
+
+/// @access private
+/// @param {String|List} $theme - 要检入的组件列表
+/// @param {String} $id - 要检查的组件id
+@mixin sim-check-component-theme($theme, $id) {
+  @if (map-has-key($_sim-components, $id)) {
+    @content;
+  }
+}
+
+/// @access private
+/// 检查给定值是否解析为主题对象。主题对象始终是类型为“map”，
+/// 可以选择只指定“color”、“density”或“typography”。
+@function _sim-is-theme-object($value) {
+  @return type-of($value) == 'map' and
+    (map_has_key($value, color) or map_has_key($value, density) or map_has_key($value, typography) or length($value) == 0);
+}
+
+/// 从给定的主题或配置中获取颜色配置
+@function sim-get-color-config($theme, $default: null) {
+  // 如果已经传递了配置，则直接返回配置
+  @if not _sim-is-theme-object($theme) {
+    @return $theme;
+  }
+  // 如果主题已经通过，如果存在，提取配置，或者退回到默认的颜色配置
+  @if map_has_key($theme, color) {
+    @return map_get($theme, color);
+  }
+  @return $default;
+}
+
+/// 从给定的主题或配置中获取密度配置
+@function sim-get-density-config($theme-or-config, $default: 0) {
+  // 如果已经传递了配置，则直接返回配置
+  @if not _sim-is-theme-object($theme-or-config) {
+    @return $theme-or-config;
+  }
+  // 如果主题已经通过，如果存在，提取配置，或者退回到默认的密度配置
+  @if map_has_key($theme-or-config, density) {
+    @return map_get($theme-or-config, density);
+  }
+  @return $default;
+}
+
+/// 从给定的主题或配置中获取排版配置
+@function sim-get-typography-config($theme-or-config, $default: null) {
+  // 如果已经传递了配置，则直接返回配置。
+  @if not _sim-is-theme-object($theme-or-config) {
+    @return $theme-or-config;
+  }
+  // 如果主题已经通过，如果存在，则提取配置，或者返回到默认的排版配置。
+  @if (map_has_key($theme-or-config, typography)) {
+    @return map_get($theme-or-config, typography);
+  }
+  @return $default;
+}
+
+/// Converts pixels to relative values (em).
+/// @access public
+/// @param {number|string} $pixels - The pixel value to be converted.
+/// @param {number|string} $context [$browser-context] - The base context to convert against.
+@function sim-em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return ($pixels / $context) * 1em;
+}
+
+/// Pixels to root relative values (rem).
+/// @access public
+/// @param {number|string} $pixels - The pixel value to be converted.
+/// @param {number|string} $context [$browser-context] - The base context to convert against.
+@function sim-rem($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return ($pixels / $context) * 1rem;
+}
+
+/// Relative value(em/rem) to pixel.
+/// @access public
+/// @param {number|string} $num - The relative value to be converted.
+/// @param {number|string} $context [$browser-context] - The base context to convert against.
+@function sim-px($num, $context: $browser-context) {
+  @if type-of $num == 'number' {
+    @return ($num / ($num * 0 + 1)) * 16px;
+  }
+
+  @return $num;
+}

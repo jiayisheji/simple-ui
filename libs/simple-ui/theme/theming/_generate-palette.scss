@@ -1,0 +1,105 @@
+@import './linear-channel-values';
+
+/// 计算给定颜色的亮度
+/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests.
+///
+/// @param {Color} $color - The color to calculate luminance for.
+@function _sim-gen-luminance($color) {
+  @if type-of($color) == 'color' {
+    $red: nth($_sim-linear-channel-values, red($color) + 1);
+    $green: nth($_sim-linear-channel-values, green($color) + 1);
+    $blue: nth($_sim-linear-channel-values, blue($color) + 1);
+
+    @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+  }
+  @return $color;
+}
+
+/// 算两种颜色之间的对比度
+/// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+///
+/// @param {Color} $background - The background color.
+/// @param {Color} $foreground - The foreground color.
+/// @returns {Number} - The contrast ratio between the background and foreground colors.
+@function _sim-gen-contrast($background, $foreground) {
+  $backLum: _sim-gen-luminance($background) + 0.05;
+  $foreLum: _sim-gen-luminance($foreground) + 0.05;
+
+  @return max($backLum, $foreLum) / min($backLum, $foreLum);
+}
+
+/// 生成一个颜色阴影从基本颜色和饱和度等级
+/// @access private
+/// @group Palettes
+/// @param {Color} $color - 用于生成色度的基本色
+/// @param {number|string} $saturation - 用于创建颜色阴影的饱和等级
+@function _sim-gen-color($color, $saturation) {
+  @if ($saturation == 50) {
+    @return lighten(saturate($color, 10.4), 37.7);
+  } @else if ($saturation == 100) {
+    @return lighten(desaturate($color, 10.4), 31.8);
+  } @else if ($saturation == 200) {
+    @return lighten(desaturate($color, 17), 18.7);
+  } @else if ($saturation == 300) {
+    @return lighten(desaturate($color, 12.9), 9.1);
+  } @else if ($saturation == 400) {
+    @return lighten(desaturate($color, 6.6), 4.1);
+  } @else if ($saturation == 500) {
+    @return $color;
+  } @else if ($saturation == 600) {
+    @return darken(saturate($color, 12.4), 5.1);
+  } @else if ($saturation == 700) {
+    @return darken(saturate($color, 24.5), 8.8);
+  } @else if ($saturation == 800) {
+    @return darken(saturate($color, 23.2), 12.7);
+  } @else if ($saturation == 900) {
+    @return darken(saturate($color, 16.1), 17);
+  } @else if ($saturation == 'A100') {
+    @return lighten(saturate($color, 10.4), 16.7);
+  } @else if ($saturation == 'A200') {
+    @return lighten(saturate($color, 10.4), 7.7);
+  } @else if ($saturation == 'A400') {
+    @return darken(saturate($color, 10.4), 3.9);
+  } @else if ($saturation == 'A700') {
+    @return darken(saturate($color, 10.4), 16.6);
+  }
+}
+
+/// 为传递的颜色返回一个对比色
+/// @group Palettes
+/// @param {Color} $background - 用于返回对比/底色的背景色
+/// @param {Color} $foreground - 前景色在与背景有足够对比的情况下使用
+/// @param {String} $contrast - The contrast level according to WCAG 2.0 standards.
+/// @returns {Color} - Returns either white or black depending on the luminance of the input color.
+/// @link https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+@function _sim-gen-text-contrast($background, $foreground: white, $contrast: 'AAA') {
+  @if type-of($foreground) == 'color' and type-of($background) == 'color' {
+    $level: map-get(
+      (
+        'A': 3,
+        'AA': 4.5,
+        'AAA': 7
+      ),
+      $contrast
+    );
+
+    @if $level == null {
+      @error "$contrast must be 'A', 'AA', or 'AAA'";
+    }
+
+    @if _sim-gen-contrast($background, $foreground) >= $level {
+      @return $foreground;
+    } @else {
+      $lightContrast: _sim-gen-contrast($background, white);
+      $darkContrast: _sim-gen-contrast($background, black);
+
+      @if ($lightContrast > $darkContrast) {
+        @return white;
+      } @else {
+        @return rgba(black, 0.87);
+      }
+    }
+  } @else {
+    @error 'Expected color for $background/$foreground but got #{$background}/#{$foreground}';
+  }
+}

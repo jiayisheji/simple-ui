@@ -1,0 +1,36 @@
+/// 舒适的显示密度
+$sim-density-height-config: (
+  default: 32px,
+  minimum: 24px,
+  maximum: 40px
+) !default;
+
+$sim-density-size-config: (
+  default: 32px,
+  minimum: 24px,
+  maximum: 40px
+) !default;
+
+$sim-density-radius-config: (
+  default: 4px,
+  minimum: 4px,
+  maximum: 6px
+) !default;
+
+$sim-density-padding-config: (
+  default: 32px,
+  minimum: 24px,
+  maximum: 40px
+) !default;
+
+$sim-density-margin-config: (
+  default: 32px,
+  minimum: 24px,
+  maximum: 40px
+) !default;
+
+$sim-density-switch-config: (
+  default: 16px,
+  minimum: 12px,
+  maximum: 24px
+) !default;
