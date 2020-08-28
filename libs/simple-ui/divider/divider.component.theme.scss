@@ -1,0 +1,74 @@
+@import './divider-variables';
+
+$sim-divider: unquote(sim-divider);
+
+// 注册组件
+@include sim-register-component($sim-divider);
+
+@mixin sim-divider-color($config-or-theme) {
+  $theme: sim-get-color-config($config-or-theme);
+  $foreground: map-get($theme, foreground);
+  $divider: sim-color($foreground, divider);
+
+  .sim-divider {
+    border-top-color: $divider;
+  }
+
+  .sim-divider-vertical {
+    border-right-color: $divider;
+  }
+
+  .sim-divider-text {
+    color: sim-color($foreground, text);
+    &::before,
+    &::after {
+      border-top-color: $divider;
+    }
+  }
+}
+
+@mixin sim-divider-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-divider-text {
+    $font-size: sim-font-size($config, body1);
+    font: {
+      size: $font-size;
+      weight: sim-font-weight($config, body1);
+    }
+    $line-height: sim-line-height($config, body1);
+
+    // 要保证这个是偶数不然边框就是显示2px样子
+    $line-height: if(unitless($line-height), round($font-size * $line-height), $line-height);
+    // 要保证这个是偶数不然边框就是显示2px样子
+    line-height: if($line-height % 2 == 0px, $line-height, $line-height + 1);
+  }
+}
+
+@mixin sim-divider-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+  .sim-divider,
+  .sim-divider-text {
+    margin: sim-density-prop-value($sim-divider-density-config, $density-scale, $property-name: margin) 0;
+  }
+  .sim-divider.sim-divider-vertical {
+    margin: 0 sim-density-prop-value($sim-divider-density-config, $density-scale, $property-name: margin) / 2;
+  }
+}
+
+@mixin sim-divider-theme($theme-or-color-config) {
+  @include sim-check-component-theme($theme-or-color-config, $sim-divider) {
+    $color: sim-get-color-config($theme-or-color-config);
+    $density: sim-get-density-config($theme-or-color-config);
+    $typography: sim-get-typography-config($theme-or-color-config);
+
+    @if $color != null {
+      @include sim-divider-color($color);
+    }
+    @if $density != null {
+      @include sim-divider-density($density);
+    }
+    @if $typography != null {
+      @include sim-divider-typography($typography);
+    }
+  }
+}

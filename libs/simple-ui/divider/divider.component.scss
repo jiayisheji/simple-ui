@@ -1,0 +1,84 @@
+// divider border configuration
+$sim-divider-width: 1px;
+$sim-divider-style: solid;
+$sim-divider-dashed-style: dashed;
+
+.sim-divider {
+  display: block;
+  border-top-width: $sim-divider-width;
+  border-top-style: $sim-divider-style;
+
+  &.sim-divider-inset {
+    margin-left: 20%;
+  }
+
+  &.sim-divider-dashed {
+    border-top-style: $sim-divider-dashed-style;
+  }
+
+  &.sim-divider-vertical {
+    position: relative;
+    top: -0.06em;
+    display: inline-block;
+    width: 0;
+    height: 0.9em;
+    vertical-align: middle;
+    border-top: 0;
+    border-right-width: $sim-divider-width;
+    border-right-style: $sim-divider-style;
+
+    &.sim-divider-dashed {
+      border-right-style: $sim-divider-dashed-style;
+    }
+  }
+}
+
+.sim-divider-text {
+  display: table;
+  box-sizing: border-box;
+  height: 1px;
+  white-space: nowrap;
+  text-align: center;
+  border-top: 0;
+  user-select: none;
+
+  .sim-divider-inner-text {
+    display: inline-block;
+    padding: 0 24px;
+  }
+  &::before,
+  &::after {
+    position: relative;
+    top: 50%;
+    display: table-cell;
+    width: 50%;
+    border-top-width: $sim-divider-width;
+    border-top-style: $sim-divider-style;
+    transform: translateY(50%);
+    content: '';
+  }
+  &.sim-divider-text-dashed {
+    &::before,
+    &::after {
+      border-top-style: $sim-divider-dashed-style;
+    }
+  }
+
+  &[align='end'] {
+    &::before {
+      width: 95%;
+    }
+    &::after {
+      width: 5%;
+    }
+  }
+
+  &[align='start'] {
+    &::before {
+      width: 5%;
+    }
+    &::after {
+      width: 95%;
+    }
+  }
+}
