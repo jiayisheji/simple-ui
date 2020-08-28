@@ -1,0 +1,13 @@
+// Default minimum and maximum margin for <%= dasherize(name) %>.
+$sim-<%= dasherize(name) %>-margin: 16px !default;
+$sim-<%= dasherize(name) %>-minimum-margin: $sim-<%= dasherize(name) %>-margin !default;
+$sim-<%= dasherize(name) %>-maximum-margin: 24px !default;
+
+// Density configuration for the <%= dasherize(name) %>. Captures the margin for both <%= dasherize(name) %>.
+$sim-<%= dasherize(name) %>-density-config: (
+  margin: (
+    default: $sim-<%= dasherize(name) %>-margin,
+    maximum: $sim-<%= dasherize(name) %>-maximum-margin,
+    minimum: $sim-<%= dasherize(name) %>-minimum-margin
+  )
+) !default;

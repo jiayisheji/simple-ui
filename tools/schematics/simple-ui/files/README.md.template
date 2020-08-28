@@ -7,7 +7,7 @@
 ## Dependencies
 
 ```ts
-import { Sim<%= classify(name) %>Module } from 'simple-ui/<%= dasherize(name) %>';
+import { Sim<%= classify(name) %>Module } from '@ngx-simple/simple-ui/simple-ui/<%= dasherize(name) %>';
 ```
 
 ## Usage

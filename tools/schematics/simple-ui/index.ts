@@ -22,7 +22,7 @@ export default function (schema: SimpleOptions): Rule {
 
     return chain([
       createFiles(options),
-      updateThemeBundle(options),
+      options.theme ? updateThemeBundle(options) : noop(),
       options.service
         ? externalSchematic('@schematics/angular', 'service', {
             name: schema.name,
@@ -84,7 +84,7 @@ function createFiles(options: SimpleOptions) {
 
 function updateThemeBundle(options: SimpleOptions): Rule {
   return (tree: Tree) => {
-    const themePath = `${options.projectRoot}/theme/theming-bundle.scss`;
+    const themePath = `${options.projectRoot}/theme/_component-all-theme.scss`;
     const importPlaceholder = '/// @import component.theme';
     const includePlaceholder = '/// @include component.theme';
     const name = strings.dasherize(options.name);

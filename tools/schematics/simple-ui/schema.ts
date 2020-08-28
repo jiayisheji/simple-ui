@@ -3,6 +3,7 @@ export interface SimpleOptions {
   project: string;
   path: string;
   service?: boolean;
+  theme?: boolean;
   directive?: boolean;
   types?: boolean;
   folderName?: string;

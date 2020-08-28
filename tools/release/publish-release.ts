@@ -64,8 +64,8 @@ class PublishReleaseTask extends BaseReleaseTask {
 
     const newVersion = this.currentVersion;
     const newVersionName = this.currentVersion.format();
-
-    await this.releasePackages.run(releasePackages);
+    await this.releasePackages.run(['simple-ui']);
+    // await this.releasePackages.run(releasePackages);
     // 确保没有未提交的更改。切换到发布分支之前进行检查就足够了，因为未暂存的更改并非特定于Git分支。
     this.verifyNoUncommittedChanges();
 

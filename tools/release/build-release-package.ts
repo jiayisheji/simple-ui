@@ -97,7 +97,6 @@ export class BuildReleasePackages {
     const packageJson = await readJSON(packageJsonPath);
     const { version, dependencies } = this.packageJson;
     packageJson.version = version;
-    console.log(version, dependencies);
     // 更新dependencies
     Object.keys(packageJson.dependencies).reduce((deps, pack) => {
       if (dependencies[pack]) {

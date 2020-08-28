@@ -1,11 +1,11 @@
 $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
 /// 注册组件
-@include register-component($sim-<%= dasherize(name) %>);
+@include sim-register-component($sim-<%= dasherize(name) %>);
 
 /// 主题风格
 @mixin sim-<%= dasherize(name) %>-theme($config-or-theme) {
-  @include check-component-theme($config-or-theme, $sim-<%= dasherize(name) %>) {
+  @include sim-check-component-theme($config-or-theme, $sim-<%= dasherize(name) %>) {
     $color: sim-get-color-config($config-or-theme);
     $density: sim-get-density-config($config-or-theme);
     $typography: sim-get-typography-config($config-or-theme);
@@ -30,7 +30,11 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
   $is-dark: map-get($theme, is-dark);
 
   .sim-<%= dasherize(name) %> {
-    color: sim-color($foreground, disabled-<%= dasherize(name) %>);
+    // 从前景色对象获取text属性
+    color: sim-color($foreground, text);
+    // 从背景色对象获取background属性
+    background: sim-color($background, background);
+    // 循环获取调色板对象
     @each $type in (primary, secondary, info, success, warning, danger) {
       $color: map-get($theme, $type);
       &.sim-#{$type} {
@@ -60,10 +64,10 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
 /// 密度配置
 @mixin sim-<%= dasherize(name) %>-density($config-or-theme) {
-  $density: sim-get-density-config($config-or-theme);
+  $density-scale: sim-get-density-config($config-or-theme);
 
   .sim-<%= dasherize(name) %> {
-    /// $size-scale-map: (small: minimum, large: maximum);$size-scale-map
+    /// $size-scale-map: (small: minimum, large: maximum);
     border-radius: sim-density-prop-value($density, $property-name: radius);
   }
 }
