@@ -1,3 +1,5 @@
+import { TemplateRef } from '@angular/core';
+
 /** angular ngClass 绑定类型 */
 export type NgClassInterface =
   | string
@@ -11,3 +13,6 @@ export type NgClassInterface =
 export interface NgStyleInterface {
   [attr: string]: string | number;
 }
+
+/** string和TemplateRef<void>的连接类型。 */
+export type NgStringOrTemplateRef = string | TemplateRef<void>;

@@ -1,6 +1,6 @@
-import { ElementRef } from '@angular/core';
 import { SafeAny } from '@ngx-simple/simple-ui/core/types';
 import { Constructor } from './constructor';
+import { HasElementRef } from './element';
 
 export interface CanColor {
   /**
@@ -23,30 +23,29 @@ export type ThemePalette = 'primary' | 'secondary' | 'success' | 'info' | 'warni
 
 export type CanColorCtor = Constructor<CanColor>;
 
-export interface HasElementRef {
-  _elementRef: ElementRef;
-}
-
 /**
  * 用来扩展指令的`color`属性
  */
 export function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaultColor?: ThemePalette): CanColorCtor & T {
   return class extends base {
     private _color: ThemePalette;
+    private _nativeElement: HTMLElement;
 
     get color(): ThemePalette {
       return this._color;
     }
     set color(value: ThemePalette) {
       const colorPalette = value;
-
+      if (!this._nativeElement) {
+        this._nativeElement = this._elementRef.nativeElement;
+      }
       if (colorPalette !== this._color) {
-        const elementRef = this._elementRef.nativeElement.classList;
+        const { classList } = this._nativeElement;
         if (this._color) {
-          elementRef.remove(`sim-${this._color}`);
+          classList.remove(`sim-${this._color}`);
         }
         if (colorPalette) {
-          elementRef.add(`sim-${colorPalette}`);
+          classList.add(`sim-${colorPalette}`);
         }
 
         this._color = colorPalette;
