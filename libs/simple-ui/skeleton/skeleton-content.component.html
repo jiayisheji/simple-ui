@@ -1,0 +1,15 @@
+<ng-container *ngTemplateOutlet="skeleton; context: { $implicit: data }"></ng-container>
+<ng-template #skeleton let-data>
+  <div class="sim-skeleton-block" [style]="row.style" *ngFor="let row of data; trackBy: trackByFn">
+    <ng-container *ngFor="let col of row.cols; trackBy: trackByFn">
+      <ng-container *ngIf="col.rows; else elseTemplate">
+        <div [style]="col.style">
+          <ng-container *ngTemplateOutlet="skeleton; context: { $implicit: col.rows }"></ng-container>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="sim-skeleton-bar" [ngClass]="col.type ? 'sim-skeleton-' + col.type : ''" [style]="col.style"></div>
+      </ng-template>
+    </ng-container>
+  </div>
+</ng-template>

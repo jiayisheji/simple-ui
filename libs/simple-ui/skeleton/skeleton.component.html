@@ -1,0 +1,6 @@
+<ng-container *ngIf="loading; else skeletonTemplate">
+  <sim-skeleton-content [data]="_skeletons"></sim-skeleton-content>
+</ng-container>
+<ng-template #skeletonTemplate>
+  <ng-content></ng-content>
+</ng-template>

@@ -1,0 +1,43 @@
+@import '../theme/abstracts/mixins';
+
+.sim-skeleton {
+  display: block;
+}
+
+.sim-skeleton-block {
+  display: flex;
+}
+
+.sim-skeleton-bar {
+  position: relative;
+  width: 100%;
+  height: 16px;
+  border-radius: 2px;
+  &.sim-skeleton-avatar {
+    border-radius: 50%;
+  }
+}
+
+.sim-skeleton-animate .sim-skeleton-bar::before {
+  @include sim-fill;
+
+  border-radius: inherit;
+  opacity: 0;
+  animation: 1.4s cubic-bezier(0.23, 1, 0.32, 1) infinite simSkeletonProgress;
+  content: '';
+}
+
+@keyframes simSkeletonProgress {
+  0% {
+    width: 0;
+    opacity: 0.1;
+  }
+  20% {
+    width: 0;
+    opacity: 0.5;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
