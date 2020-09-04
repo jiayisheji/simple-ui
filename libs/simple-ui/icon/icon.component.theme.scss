@@ -1,0 +1,51 @@
+$sim-icon: unquote(sim-icon);
+
+/// 注册组件
+@include sim-register-component($sim-icon);
+
+/// 主题风格
+@mixin sim-icon-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-icon) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-icon-color($color);
+    }
+    @if $density != null {
+      @include sim-icon-density($density);
+    }
+    @if $typography != null {
+      @include sim-icon-typography($typography);
+    }
+  }
+}
+
+// 主题风格
+@mixin sim-icon-color($config-or-theme) {
+  $theme: sim-get-color-config($config-or-theme);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+  .sim-icon {
+    color: inherit;
+
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($theme, $type);
+      &.sim-#{$type} {
+        color: sim-color($color, default);
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-icon-typography($config-or-theme) {
+  $typography: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-icon-density($config-or-theme) {
+  $density: sim-get-density-config($config-or-theme);
+}
