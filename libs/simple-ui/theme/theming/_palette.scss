@@ -260,12 +260,12 @@ $sim-light-theme-background: (
   unselected-chip: map_get($sim-palette-greys, 300),
   disabled-list-option: map_get($sim-palette-greys, 200),
   list-option-group: white,
-  tooltip: rgba(rgb(0, 0, 0), 0.78)
+  tooltip: rgba(black, 0.78)
 );
 
 // 高亮主题的前景调色板
 $sim-light-theme-foreground: (
-  base: white,
+  base: black,
   divider: $sim-dark-dividers,
   disabled: $sim-dark-disabled-text,
   disabled-button: rgba(black, 0.26),

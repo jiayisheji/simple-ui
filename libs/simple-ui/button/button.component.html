@@ -1,0 +1,20 @@
+<span class="sim-button-wrapper">
+  <ng-content></ng-content>
+</span>
+<svg
+  *ngIf="loading && !disabled"
+  preserveAspectRatio="xMidYMid meet"
+  height="1em"
+  width="1em"
+  fill="none"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  stroke="currentColor"
+  class="sim-button-loading-icon"
+>
+  <g fill-rule="evenodd" stroke-width="2">
+    <circle opacity=".3" cx="12" cy="12" r="11"></circle>
+    <path d="M12 1c2.8 0 5.6 1.1 7.8 3.2 4.3 4.3 4.3 11.3 0 15.6s-11.3 4.3-15.6 0"></path>
+  </g>
+</svg>
+<span class="sim-button-focus-overlay"></span>

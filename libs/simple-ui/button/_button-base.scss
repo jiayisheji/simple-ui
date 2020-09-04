@@ -1,0 +1,64 @@
+@import '../theme/abstracts/variables';
+@import '../theme/vendors/elevation';
+
+$sim-stroked-button-border-width: 1px;
+$sim-button-focus-transition: opacity 200ms $sim-swift-ease-in-out-timing-function,
+  background-color 200ms $sim-swift-ease-in-out-timing-function;
+
+@mixin _sim-button-base($link: false) {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  overflow: visible;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: baseline;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  transition: background-color 0.3s $sim-swift-ease-in-out-timing-function, border-color 0.3s $sim-swift-ease-in-out-timing-function,
+    color 0.3s $sim-swift-ease-in-out-timing-function;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  @if ($link) {
+    &.sim-button-disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+  } @else {
+    &.sim-button-disabled,
+    &.sim-button-loading {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  /** cdk */
+  &.cdk-keyboard-focused,
+  &.cdk-program-focused {
+    .sim-button-focus-overlay {
+      opacity: 0.12;
+    }
+  }
+}
+
+@mixin sim-button-focus-overlay($hover: 0.04, $active: 0.12) {
+  &:hover:not(.sim-button-disabled) .sim-button-focus-overlay {
+    opacity: $hover;
+  }
+  &:active:not(.sim-button-disabled) .sim-button-focus-overlay {
+    opacity: $active;
+  }
+}

@@ -1,0 +1,329 @@
+@import './button-variables';
+
+$sim-button: unquote(sim-button);
+
+/// 注册组件
+@include sim-register-component($sim-button);
+
+/// 主题风格
+@mixin sim-button-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-button) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-button-color($color);
+    }
+    @if $density != null {
+      @include sim-button-density($density);
+    }
+    @if $typography != null {
+      @include sim-button-typography($typography);
+    }
+  }
+}
+
+// 为每个受支持的调色板的按钮元素应用焦点样式
+@mixin _sim-button-focus-overlay-color($theme) {
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($theme, $type);
+    &.sim-#{$type} .sim-button-focus-overlay {
+      background-color: sim-color($color);
+    }
+  }
+
+  &.sim-button-disabled .sim-button-focus-overlay {
+    background-color: transparent;
+  }
+}
+
+@mixin _sim-button-hover-overlay-color($theme, $hue) {
+  $foreground: map-get($theme, foreground);
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($theme, $type);
+    &.sim-#{$type} .sim-button-focus-overlay {
+      background-color: sim-color($color, $hue);
+    }
+    &.sim-#{$type}:active .sim-button-focus-overlay {
+      background-color: map-get($foreground, base);
+    }
+  }
+}
+
+// 为每个受支持的调色板的按钮元素应用一个属性
+@mixin _sim-button-theme-property($theme, $property, $hue) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($theme, $type);
+    &.sim-#{$type} {
+      #{$property}: sim-color($color, $hue);
+    }
+  }
+
+  &.sim-button-disabled {
+    $palette: if($property == 'color', $foreground, $background);
+
+    #{$property}: sim-color($palette, disabled-button);
+  }
+}
+
+@mixin _sim-outlined-button($config) {
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  &:hover {
+    color: sim-color($primary);
+    border-color: sim-color($primary);
+  }
+  &:active {
+    box-shadow: 0 0 10px sim-color($primary, lighter) inset;
+  }
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    &.sim-#{$type} {
+      color: sim-color($color);
+      border-color: sim-color($color);
+      &:hover {
+        border-color: sim-color($color, 0.5);
+      }
+      &:active {
+        border-color: sim-color($color);
+        box-shadow: 0 0 10px sim-color($color, lighter) inset;
+      }
+    }
+  }
+  &.sim-button-disabled {
+    color: sim-color($foreground, disabled-button);
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-button-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-button-focus-overlay {
+    background-color: map-get($foreground, base);
+  }
+
+  .sim-button,
+  .sim-icon-button,
+  .sim-fab-button,
+  .sim-stroked-button,
+  .sim-outlined-button {
+    color: inherit;
+    background: transparent;
+  }
+
+  .sim-button,
+  .sim-icon-button,
+  .sim-fab-button,
+  .sim-stroked-button {
+    @include _sim-button-theme-property($config, 'color', text);
+    @include _sim-button-focus-overlay-color($config);
+  }
+
+  .sim-stroked-button:not(.sim-button-disabled) {
+    border-color: map-get($foreground, divider);
+  }
+
+  .sim-outlined-button {
+    &:not(.sim-button-disabled) {
+      border-color: map-get($foreground, divider);
+    }
+    @include _sim-outlined-button($config);
+  }
+
+  .sim-flat-button,
+  .sim-raised-button {
+    color: sim-color($foreground, text);
+    background-color: sim-color($background, raised-button);
+
+    @include _sim-button-theme-property($config, 'color', default-contrast);
+    @include _sim-button-theme-property($config, 'background-color', default);
+    @include _sim-button-hover-overlay-color($config, default-contrast);
+  }
+
+  .sim-raised-button {
+    $elevation: map-get($foreground, elevation);
+    @include sim-overridable-elevation(2, $elevation);
+
+    &:not(.sim-button-disabled):active {
+      @include sim-overridable-elevation(8, $elevation);
+    }
+
+    &.sim-button-disabled {
+      @include sim-overridable-elevation(0, $elevation);
+    }
+  }
+
+  .sim-button-loading {
+    @include _sim-button-loading-color($config-or-theme);
+  }
+
+  .sim-link-button {
+    @include _sim-button-link-color($config-or-theme);
+  }
+}
+
+@mixin _sim-button-loading-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $background: map-get($config, background);
+
+  border-color: transparent;
+  .sim-button-loading {
+    color: map-get($foreground, text);
+  }
+
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    &.sim-#{$type} {
+      border-color: transparent;
+      &.sim-button-loading {
+        color: sim-color($color, text);
+      }
+
+      &.sim-flat-button,
+      &.sim-raised-button {
+        &.sim-button-loading {
+          color: sim-color($color, default-contrast);
+        }
+      }
+    }
+  }
+}
+
+/// link button color
+@mixin _sim-button-link-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+
+  color: sim-color($primary);
+  &:hover {
+    color: sim-color($primary, 300);
+  }
+  &:active {
+    color: sim-color($primary, darker);
+  }
+  &::before {
+    background-color: sim-color($primary, 300);
+  }
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    &.sim-#{$type} {
+      color: sim-color($color);
+      &:hover {
+        color: sim-color($color, 300);
+      }
+      &:active {
+        color: sim-color($color, darker);
+      }
+      &::before {
+        background-color: sim-color($color, 300);
+      }
+    }
+  }
+
+  &.sim-button-disabled {
+    color: map-get($foreground, disabled-button);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-button-typography($config-or-theme) {
+  $typography: sim-get-typography-config($config-or-theme);
+
+  .sim-button,
+  .sim-outlined-button,
+  .sim-flat-button,
+  .sim-icon-button,
+  .sim-raised-button,
+  .sim-stroked-button,
+  .sim-fab-button,
+  .sim-link-button {
+    font-weight: sim-font-weight($typography, button);
+    font-family: sim-font-family($typography, button);
+
+    @include _sim-font-size($typography, button);
+  }
+}
+
+@mixin _sim-font-size($typography, $scale) {
+  $button: sim-font-size($typography, $scale);
+
+  @each $size, $scale in (small: -2, medium: 0, large: 2) {
+    &.sim-#{$size} {
+      font-size: $button + $scale;
+    }
+  }
+}
+
+/// 密度配置
+@mixin sim-button-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  .sim-button,
+  .sim-raised-button,
+  .sim-stroked-button,
+  .sim-broken-button,
+  .sim-flat-button,
+  .sim-outlined-button {
+    @include _sim-button-size($density-scale);
+  }
+
+  .sim-fab-button,
+  .sim-icon-button {
+    @include _sim-button-size($density-scale, $property-name-map: (width: height, height: height, line-height: height, padding: null));
+  }
+
+  .sim-button,
+  .sim-outlined-button,
+  .sim-flat-button,
+  .sim-icon-button,
+  .sim-raised-button,
+  .sim-stroked-button,
+  .sim-broken-button {
+    &:not(.sim-fab-button) {
+      @include _sim-button-radius($density-scale);
+    }
+  }
+}
+
+/// 按钮圆角
+@mixin _sim-button-radius($density-scale) {
+  @each $size, $scale in (small: minimum, medium: $density-scale, large: maximum) {
+    &.sim-#{$size}:not(.sim-button-pilled) {
+      border-radius: sim-density-prop-value($sim-button-density-config, $scale, $property-name: radius);
+    }
+  }
+}
+
+/// 按钮尺寸
+@mixin _sim-button-size($density-scale, $property-name-map: (height: height, padding: padding, line-height: height)) {
+  @each $size, $scale in (small: minimum, medium: $density-scale, large: maximum) {
+    &.sim-#{$size} {
+      @include _sim-button-size-property($sim-button-density-config, $scale, $property-name-map);
+    }
+  }
+}
+
+@mixin _sim-button-size-property($config, $scale, $property-name-map) {
+  @each $attr in map-keys($property-name-map) {
+    $property-name: map-get($property-name-map, $attr);
+    @if $attr == 'padding' {
+      @if not $property-name {
+        padding: 0;
+      } @else {
+        padding: 0 sim-density-prop-value($config, $scale, $property-name);
+      }
+    } @else {
+      #{$attr}: sim-density-prop-value($config, $scale, $property-name);
+    }
+  }
+}

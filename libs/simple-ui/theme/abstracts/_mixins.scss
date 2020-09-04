@@ -1,0 +1,21 @@
+// 这个混合确保一个元素跨越用定义的定位填充最近的祖先元素
+@mixin sim-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin sim-optionally-nest-content() {
+  @at-root {
+    $selector-context: #{&};
+    @if ($selector-context == '') {
+      @content;
+    } @else {
+      #{$selector-context} {
+        @content;
+      }
+    }
+  }
+}
