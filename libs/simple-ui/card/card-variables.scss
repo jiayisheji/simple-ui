@@ -1,0 +1,18 @@
+// Density configuration for the card.
+$sim-card-density-config: (
+  margin: (
+    default: 16px,
+    maximum: 24px,
+    minimum: 16px
+  ),
+  padding: (
+    default: 16px,
+    maximum: 24px,
+    minimum: 16px
+  ),
+  radius: (
+    default: 4px,
+    minimum: 4px,
+    maximum: 6px
+  )
+) !default;

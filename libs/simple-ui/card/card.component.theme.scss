@@ -1,0 +1,130 @@
+@import './card-variables';
+
+$sim-card: unquote(sim-card);
+
+/// 注册组件
+@include sim-register-component($sim-card);
+
+/// 主题风格
+@mixin sim-card-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-card) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-card-color($color);
+    }
+    @if $density != null {
+      @include sim-card-density($density);
+    }
+    @if $typography != null {
+      @include sim-card-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-card-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-card {
+    color: sim-color($foreground, text);
+    background: sim-color($background, card);
+    @include sim-theme-overridable-elevation(1, $config);
+
+    &.sim-card-flat {
+      @include sim-theme-overridable-elevation(0, $config);
+    }
+
+    &.sim-card-hoverable:not(.sim-card-flat):hover {
+      @include sim-theme-overridable-elevation(4, $config);
+    }
+  }
+
+  .sim-card-reveal {
+    color: sim-color($foreground, text);
+    background: sim-color($background, card);
+  }
+
+  .sim-card-subtitle {
+    color: sim-color($foreground, secondary-text);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-card-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-card {
+    font-family: sim-font-family($config);
+  }
+
+  .sim-card-title {
+    font: {
+      size: sim-font-size($config, headline);
+      weight: sim-font-weight($config, title);
+    }
+  }
+
+  .sim-card-header .sim-card-title {
+    font-size: sim-font-size($config, title);
+  }
+
+  .sim-card-subtitle,
+  .sim-card-content {
+    font-size: sim-font-size($config, body1);
+  }
+}
+
+/// 密度配置
+@mixin sim-card-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  $padding: sim-density-prop-value($sim-card-density-config, $density-scale, padding);
+  $margin: sim-density-prop-value($sim-card-density-config, $density-scale, margin);
+
+  .sim-card-subtitle,
+  .sim-card-content {
+    margin-bottom: $margin;
+  }
+
+  .sim-card,
+  .sim-card-reveal {
+    padding: $padding;
+    border-radius: sim-density-prop-value($sim-card-density-config, $density-scale, radius);
+    .sim-divider-horizontal {
+      & ~ .sim-card-content {
+        padding-top: $padding;
+      }
+    }
+  }
+
+  .sim-card-header-text {
+    margin: 0 $margin;
+  }
+
+  .sim-card-actions {
+    margin-right: -padding / 2;
+    margin-left: -padding / 2;
+  }
+
+  .sim-card-footer {
+    // 负边距会拉出元素，与填充相反，使页脚与card的侧面齐平
+    margin: 0 -$margin -$margin -$margin;
+  }
+
+  .sim-card-image {
+    width: calc(100% + #{$padding * 2});
+    margin: 0 (-$padding) 16px (-$padding);
+    &:first-child {
+      margin-top: -$padding;
+    }
+  }
+
+  .sim-card > .sim-card-image:last-child {
+    margin-bottom: -$padding;
+  }
+}

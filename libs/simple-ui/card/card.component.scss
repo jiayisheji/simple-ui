@@ -1,0 +1,165 @@
+@import '../theme/vendors/elevation';
+@import '../theme/abstracts/mixins';
+
+$sim-card-header-size: 40px !default;
+
+.sim-card-subtitle,
+.sim-card-content {
+  display: block;
+}
+
+.sim-card,
+.sim-card-reveal {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  @include sim-elevation-transition;
+
+  .sim-divider-horizontal {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 0;
+
+    &.sim-divider-inset {
+      position: static;
+      margin: 0;
+    }
+  }
+}
+
+.sim-card-revealed {
+  overflow: hidden;
+
+  .sim-card-reveal {
+    height: 100%;
+  }
+}
+
+.sim-card-header {
+  display: flex;
+  flex-direction: row;
+  .sim-card-title {
+    margin-bottom: 12px;
+  }
+}
+
+.sim-card-avatar {
+  flex-shrink: 0;
+  width: $sim-card-header-size;
+  height: $sim-card-header-size;
+  // <img>标签的行为类似于'background-size: cover'。IE中不支持。
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sim-card-extra {
+  display: block;
+  margin-left: auto;
+}
+
+.sim-card-title-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sim-card-footer {
+  position: relative;
+  display: block;
+}
+
+.sim-card-actions {
+  position: relative;
+  padding: 8px 0;
+  .sim-button {
+    margin: 0 8px;
+  }
+  &-align-end {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.sim-card-cover {
+  display: block;
+  border-radius: inherit;
+}
+
+.sim-card-reveal-container {
+  @include sim-fill;
+}
+
+.sim-card-reveal-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+// 第一个/最后一个子元素调整
+.sim-card > :first-child,
+.sim-card-content > :first-child {
+  margin-top: 0;
+}
+.sim-card > :last-child:not(.sim-card-footer),
+.sim-card > :last-child:not(.sim-card-actions),
+.sim-card-content > :last-child:not(.sim-card-footer) {
+  margin-bottom: 0;
+}
+
+.sim-card-image {
+  &:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  &.sim-sm {
+    width: 80px;
+    height: 80px;
+  }
+
+  &.sim-md {
+    width: 112px;
+    height: 112px;
+  }
+
+  &.sim-lg {
+    width: 152px;
+    height: 152px;
+  }
+
+  &.sim-xl {
+    width: 240px;
+    height: 240px;
+    margin: -8px;
+
+    .sim-card-title-group > & {
+      margin: -8px 0 8px;
+    }
+  }
+}
+
+.sim-card > .sim-card-image:last-child {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.sim-card > .sim-card-actions:last-child {
+  margin-bottom: -8px;
+  padding-bottom: 0;
+}
+
+.sim-card-actions .sim-button:first-child,
+.sim-card-actions .sim-raised-button:first-child {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.sim-card-title:not(:first-child),
+.sim-card-subtitle:not(:first-child) {
+  margin-top: -4px;
+}
+
+.sim-card-header .sim-card-subtitle:not(:first-child) {
+  margin-top: -8px;
+}

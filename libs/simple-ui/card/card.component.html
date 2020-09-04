@@ -1,0 +1,6 @@
+<ng-content></ng-content>
+<ng-content select="sim-card-footer"></ng-content>
+<div class="sim-card-reveal-container" [@translateCard] *ngIf="_revealed">
+  <ng-content select="sim-card-reveal"></ng-content>
+</div>
+<ng-content select="sim-card-reveal-button"></ng-content>
