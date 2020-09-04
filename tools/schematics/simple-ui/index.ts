@@ -99,7 +99,7 @@ function updateThemeBundle(options: SimpleOptions): Rule {
     // 替换后文件
     const replaceText = sourceText
       .replace(importPlaceholder, `@import '../${name}/${name}.component.theme';\n${importPlaceholder}`)
-      .replace(includePlaceholder, `@include sim-${name}-theme($theme-or-config);\n  ${includePlaceholder}`);
+      .replace(includePlaceholder, `@include sim-${name}-theme($config-or-theme);\n  ${includePlaceholder}`);
     // 更新目标文件内容
     tree.overwrite(themePath, replaceText);
     return tree;

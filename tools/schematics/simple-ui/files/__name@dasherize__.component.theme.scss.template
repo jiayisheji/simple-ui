@@ -1,3 +1,5 @@
+@import './<%= dasherize(name) %>-variables';
+
 $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
 /// 注册组件
@@ -24,10 +26,10 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
 /// 主题颜色配置
 @mixin sim-<%= dasherize(name) %>-color($config-or-theme) {
-  $theme: sim-get-color-config($config-or-theme);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-  $is-dark: map-get($theme, is-dark);
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
 
   .sim-<%= dasherize(name) %> {
     // 从前景色对象获取text属性
@@ -36,7 +38,7 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
     background: sim-color($background, background);
     // 循环获取调色板对象
     @each $type in (primary, secondary, info, success, warning, danger) {
-      $color: map-get($theme, $type);
+      $color: map-get($config, $type);
       &.sim-#{$type} {
         &:hover {
           color: sim-color($color, default-contrast);
@@ -53,11 +55,11 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
 /// 字体排版配置
 @mixin sim-<%= dasherize(name) %>-typography($config-or-theme) {
-  $typography: sim-get-typography-config($config-or-theme);
+  $config: sim-get-typography-config($config-or-theme);
   .sim-<%= dasherize(name) %> {
     font: {
-      family: sim-font-family($typography, body2);
-      size: sim-font-size($typography, body2);
+      family: sim-font-family($config, body2);
+      size: sim-font-size($config, body2);
     }
   }
 }
@@ -68,6 +70,6 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
   .sim-<%= dasherize(name) %> {
     /// $size-scale-map: (small: minimum, large: maximum);
-    border-radius: sim-density-prop-value($density, $property-name: radius);
+    margin: sim-density-prop-value($sim-card-density-config, $density-scale, margin);
   }
 }

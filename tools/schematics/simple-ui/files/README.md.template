@@ -2,12 +2,10 @@
 
 描述。
 
-## Getting Started
-
 ## Dependencies
 
 ```ts
-import { Sim<%= classify(name) %>Module } from '@ngx-simple/simple-ui/simple-ui/<%= dasherize(name) %>';
+import { Sim<%= classify(name) %>Module } from '@ngx-simple/simple-ui/<%= dasherize(name) %>';
 ```
 
 ## Usage
@@ -16,7 +14,7 @@ import { Sim<%= classify(name) %>Module } from '@ngx-simple/simple-ui/simple-ui/
 
 ```ts
 ...
-import { Sim<%= classify(name) %>Module } from 'simple-ui/<%= dasherize(name) %>';
+import { Sim<%= classify(name) %>Module } from '@ngx-simple/simple-ui/<%= dasherize(name) %>';
 @NgModule({
     ...
     imports: [..., Sim<%= classify(name) %>Module],
@@ -30,3 +28,6 @@ export class DemoModule {}
 ```html
 <sim-<%= dasherize(name) %>>sim-<%= dasherize(name) %></sim-<%= dasherize(name) %>>
 ```
+
+请参阅详细文档 [https://jiayisheji.github.io/simple-ui/components/<%= dasherize(name) %>](https://jiayisheji.github.io/simple-ui/components/<%= dasherize(name) %>)
+
