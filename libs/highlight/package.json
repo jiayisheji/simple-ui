@@ -1,0 +1,46 @@
+{
+  "name": "@ngx-simple/highlight",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiayisheji/simple-ui.git"
+  },
+  "keywords": [
+    "angular",
+    "simple",
+    "components",
+    "design",
+    "ui",
+    "framework",
+    "frontend",
+    "code",
+    "highlight",
+    "highlight.js"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiayisheji/simple-ui/issues"
+  },
+  "homepage": "https://jiayisheji.github.io/simple-ui",
+  "peerDependencies": {
+    "@angular/common": "^10.0.6",
+    "@angular/core": "^10.0.6",
+    "highlight.js": "^10.1.2",
+    "rxjs": "~6.5.5"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-update": {
+    "migrations": "./schematics/migration.json",
+    "packageGroup": [
+      "@ngx-simple/highlight",
+      "@ngx-simple/simple-ui"
+    ]
+  }
+}

@@ -25,8 +25,9 @@ const types = ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor'
  * - simple-ui/* simple-ui模块
  * - simple-ui-doc：simple-ui-doc 演示文档
  * - tools：工具箱
+ * - highlight：代码高亮包装组件
  */
-const scopes = ['simple-ui-doc', 'tools', 'deps', 'simple-ui/*'];
+const scopes = ['simple-ui-doc', 'highlight', 'tools', 'deps', 'simple-ui/*'];
 
 function parseMessage(message) {
   const PATTERN = /^(\w+)(?:\(([^)]+)\))?\: (.+)$/;
