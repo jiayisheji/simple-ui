@@ -1,0 +1,30 @@
+<div
+  class="sim-tab-header-pagination sim-tab-header-pagination-before sim-elevation-z4"
+  #previousPaginator
+  aria-hidden="true"
+  [class.sim-tab-header-pagination-disabled]="_disableScrollBefore"
+  (click)="_handlePaginatorClick('before')"
+  (mousedown)="_handlePaginatorPress('before', $event)"
+  (touchend)="_stopInterval()"
+>
+  <div class="sim-tab-header-pagination-chevron"></div>
+</div>
+<div class="sim-tab-label-container" #tabListContainer (keydown)="_handleKeydown($event)">
+  <div #tabList class="sim-tab-list" role="tablist" (cdkObserveContent)="_onContentChanges()">
+    <div class="sim-tab-labels">
+      <ng-content></ng-content>
+    </div>
+    <sim-tab-ink-bar></sim-tab-ink-bar>
+  </div>
+</div>
+<div
+  class="sim-tab-header-pagination sim-tab-header-pagination-after sim-elevation-z4"
+  #nextPaginator
+  aria-hidden="true"
+  [class.sim-tab-header-pagination-disabled]="_disableScrollAfter"
+  (mousedown)="_handlePaginatorPress('after', $event)"
+  (click)="_handlePaginatorClick('after')"
+  (touchend)="_stopInterval()"
+>
+  <div class="sim-tab-header-pagination-chevron"></div>
+</div>

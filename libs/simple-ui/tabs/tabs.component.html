@@ -1,0 +1,40 @@
+<sim-tab-header
+  class="sim-tab-header"
+  #tabHeader
+  [selectedIndex]="selectedIndex || 0"
+  (indexFocused)="_focusChanged($event)"
+  (selectFocusedIndex)="selectedIndex = $event"
+>
+  <div
+    class="sim-tab-label"
+    simTabLabelWrapper
+    role="tab"
+    *ngFor="let tab of _tabs; let i = index"
+    [id]="_getTabLabelId(i)"
+    [attr.tabIndex]="_getTabIndex(tab, i)"
+    [disabled]="tab.disabled"
+    [class.sim-tab-label-active]="selectedIndex == i"
+    (click)="_handleClick(tab, tabHeader, i)"
+  >
+    <div class="sim-tab-label-content">
+      <ng-template [ngIf]="tab.templateLabel">
+        <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
+      </ng-template>
+      <ng-template [ngIf]="!tab.templateLabel">{{ tab.label }}</ng-template>
+    </div>
+  </div>
+</sim-tab-header>
+<div class="sim-tab-container" #tabContainer>
+  <sim-tab-body
+    role="tabpanel"
+    *ngFor="let tab of _tabs; let i = index"
+    [class.sim-tab-body-active]="selectedIndex == i"
+    [attr.id]="_getTabContentId(i)"
+    [content]="tab.content"
+    [position]="tab.position"
+    [origin]="tab.origin"
+    [animationDuration]="animationDuration"
+    (_onCentered)="_removeTabContainerHeight()"
+    (_onCentering)="_setTabContainerHeight($event)"
+  ></sim-tab-body>
+</div>

@@ -1,0 +1,180 @@
+.sim-tabset {
+  display: flex;
+  flex-direction: column;
+}
+
+.sim-tab-header {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  // width: 500px;
+  &-pagination {
+    position: relative;
+    z-index: 2;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    &-disabled {
+      box-shadow: none;
+      cursor: default;
+    }
+  }
+}
+
+.sim-tab-header-pagination-controls-enabled .sim-tab-header-pagination {
+  display: flex;
+}
+
+.sim-tab-header-pagination-chevron {
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: '';
+}
+
+.sim-tab-header-pagination-before {
+  padding-left: 4px;
+  .sim-tab-header-pagination-chevron {
+    transform: rotate(-135deg);
+  }
+}
+
+.sim-tab-header-pagination-after {
+  padding-right: 4px;
+  .sim-tab-header-pagination-chevron {
+    transform: rotate(45deg);
+  }
+}
+
+.sim-tab-list {
+  position: relative;
+  flex-grow: 1;
+  transition: transform 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+.sim-tab-label-container {
+  z-index: 1;
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.sim-tab-labels {
+  display: flex;
+}
+
+.sim-tab-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 160px;
+  height: 48px;
+  padding: 0 24px;
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.6;
+  &:last-child {
+    margin-right: 0;
+  }
+  &:focus {
+    outline: 0;
+    &:not(.sim-tab-label-disabled) {
+      opacity: 1;
+    }
+  }
+
+  &-active {
+    font-weight: 700;
+    opacity: 1;
+  }
+  &.sim-tab-label-disabled {
+    cursor: default;
+  }
+  &-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+}
+
+.sim-tab-container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  transition: height 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+.sim-tab-body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  flex-basis: 100%;
+  overflow: hidden;
+  &.sim-tab-body-active {
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.sim-tabset-dynamic-height .sim-tab-body.sim-tab-body-active {
+  overflow-y: hidden;
+}
+
+.sim-tab-body-content {
+  height: 100%;
+  overflow: auto;
+
+  .sim-tabset-dynamic-height & {
+    overflow: hidden;
+  }
+}
+
+.sim-tab-nav-bar {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.sim-tab-links {
+  position: relative;
+}
+.sim-tab-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 160px;
+  height: 48px;
+  padding: 0 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.sim-tab-ink-bar {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  height: 2px;
+  transition: 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}

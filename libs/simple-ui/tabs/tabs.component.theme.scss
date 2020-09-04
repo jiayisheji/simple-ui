@@ -1,0 +1,92 @@
+// 注册组件
+$sim-tabs: unquote(sim-tabs);
+
+/// 注册组件
+@include sim-register-component($sim-tabs);
+
+/// 主题风格
+@mixin sim-tabs-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-tabs) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-tabs-color($color);
+    }
+    @if $density != null {
+      @include sim-tabs-density($density);
+    }
+    @if $typography != null {
+      @include sim-tabs-typography($typography);
+    }
+  }
+}
+
+// 主题风格
+@mixin sim-tabs-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+  $primary: map-get($config, primary);
+
+  $header-border: 1px solid sim-color($foreground, divider);
+
+  .sim-tabset {
+    color: map-get($foreground, secondary-text);
+  }
+
+  .sim-tab-label,
+  .sim-tab-link {
+    color: map-get($foreground, text);
+  }
+
+  .sim-tab-links,
+  .sim-tab-header {
+    border-bottom: $header-border;
+  }
+
+  .sim-tab-label.sim-tab-label-disabled {
+    color: map-get($foreground, disabled-text);
+  }
+
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-tabset.sim-#{$type} {
+      .sim-tab-ink-bar {
+        background-color: sim-color($color);
+      }
+      .sim-tab-label-active {
+        color: sim-color($color);
+      }
+    }
+    .sim-tab-nav-bar.sim-#{$type} {
+      .sim-tab-ink-bar {
+        background-color: sim-color($color);
+      }
+      .sim-tab-link-active {
+        color: sim-color($color);
+      }
+    }
+  }
+
+  .sim-tab-header-pagination-chevron {
+    border-color: map-get($foreground, text);
+    .sim-tab-header-pagination-disabled & {
+      border-color: map-get($foreground, disabled-text);
+    }
+  }
+}
+// 排版风格
+@mixin sim-tabs-typography($config-or-theme) {
+  $typography: sim-get-typography-config($config-or-theme);
+  .sim-tabset {
+    @include sim-typography-level-to-styles($typography, body2);
+  }
+}
+
+/// 密度配置
+@mixin sim-tabs-density($config-or-theme) {
+  $config: sim-get-density-config($config-or-theme);
+}
