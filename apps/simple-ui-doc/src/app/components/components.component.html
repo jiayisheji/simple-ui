@@ -1,0 +1,45 @@
+<div class="doc-component-container">
+  <header class="doc-component-header">
+    <h1 class="sim-display3">
+      {{ headline }}
+      <small>{{ subheading }}</small>
+    </h1>
+  </header>
+  <main class="doc-component-content">
+    <div>
+      <div class="doc-component-nav">
+        <div class="doc-component-nav-content">
+          <ul class="doc-nav-list">
+            <li class="doc-nav-item" *ngFor="let component of components">
+              <div class="doc-nav-item-title">
+                <ng-container *ngIf="component.link; else linkTemplate">
+                  <a [attr.href]="component.link">{{ component.name }}</a>
+                </ng-container>
+                <ng-template #linkTemplate>
+                  <ng-container *ngIf="component.path; else pathTemplate">
+                    <a [routerLink]="component.path">{{ component.name }}</a>
+                  </ng-container>
+                  <ng-template #pathTemplate>
+                    <span>{{ component.name }}</span>
+                  </ng-template>
+                </ng-template>
+                <sim-divider></sim-divider>
+              </div>
+              <ul class="doc-sidenav">
+                <li
+                  class="doc-sidenav-item"
+                  (click)="setHeadline(item)"
+                  *ngFor="let item of component.children"
+                  [routerLinkActive]="['doc-nav-item-selected']"
+                >
+                  <a [routerLink]="[item.path]">{{ item.name }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+</div>

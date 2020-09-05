@@ -21,9 +21,22 @@
             "polyfills": "apps/simple-ui-doc/src/polyfills.ts",
             "tsConfig": "apps/simple-ui-doc/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/simple-ui-doc/src/favicon.ico", "apps/simple-ui-doc/src/assets"],
-            "styles": ["apps/simple-ui-doc/src/styles.scss"],
-            "scripts": []
+            "assets": [
+              "apps/simple-ui-doc/src/favicon.ico",
+              "apps/simple-ui-doc/src/assets",
+              {
+                "glob": "**/*",
+                "input": "apps/simple-ui-doc/src/app/examples",
+                "output": "/assets/examples",
+                "ignore": ["**/index.ts"]
+              }
+            ],
+            "styles": ["apps/simple-ui-doc/src/styles.scss", "./node_modules/highlight.js/styles/github.css"],
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["apps/simple-ui-doc/src/styles"]
+            },
+            "allowedCommonJsDependencies": ["highlight.js"]
           },
           "configurations": {
             "production": {
@@ -146,10 +159,56 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
+            "testPathPattern": ["libs/simple-ui"],
             "jestConfig": "libs/simple-ui/jest.config.js",
             "tsConfig": "libs/simple-ui/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/simple-ui/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        },
+        "@ngneat/spectator:spectator-component": {
+          "jest": true,
+          "style": "scss"
+        }
+      }
+    },
+    "highlight": {
+      "projectType": "library",
+      "root": "libs/highlight",
+      "sourceRoot": "libs/highlight/src",
+      "prefix": "simple-ui",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/highlight/tsconfig.lib.json",
+            "project": "libs/highlight/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/highlight/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/highlight/tsconfig.lib.json", "libs/highlight/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/highlight/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/highlight/jest.config.js",
+            "tsConfig": "libs/highlight/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/highlight/src/test-setup.ts"
           }
         }
       },

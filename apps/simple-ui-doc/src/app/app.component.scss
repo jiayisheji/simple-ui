@@ -1,0 +1,42 @@
+@import 'core';
+
+$doc-primary: map-get($doc-palette, primary);
+
+$doc-topbar: 56px;
+
+:host {
+  position: absolute;
+  top: $doc-topbar;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.doc-topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: $doc-topbar;
+  background: sim-color($doc-primary);
+}
+
+.doc-navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+  color: #fff;
+  svg {
+    display: inline-block;
+    margin: 0 4px 3px 0;
+    vertical-align: middle;
+  }
+}
+
+.doc-flex-spacer {
+  flex-grow: 1;
+}

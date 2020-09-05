@@ -87,5 +87,5 @@
   },
   // typescript
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "cSpell.words": ["PAGINATOR", "echarts", "hljs", "ngneat", "overridable", "stylelint"]
+  "cSpell.words": ["PAGINATOR", "echarts", "hljs", "ngneat", "overridable", "stylelint", "tabset"]
 }

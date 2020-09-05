@@ -1,5 +1,5 @@
 {
-  "npmScope": "simple-ui",
+  "npmScope": "@ngx-simple",
   "affected": {
     "defaultBase": "master"
   },
@@ -31,6 +31,9 @@
     },
     "simple-ui": {
       "tags": ["simple-ui"]
+    },
+    "highlight": {
+      "tags": ["highlight"]
     }
   }
 }

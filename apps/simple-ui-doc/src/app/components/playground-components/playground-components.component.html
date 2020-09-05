@@ -1,0 +1,12 @@
+<header class="doc-component-viewer-header">
+  <ng-content select="h1"></ng-content>
+  <ng-content select="p"></ng-content>
+</header>
+<nav sim-tab-nav-bar class="doc-component-viewer-tab">
+  <a [routerLink]="['overview']" sim-tab-link>描述</a>
+  <a [routerLink]="['api']" sim-tab-link>接口</a>
+  <a [routerLink]="['examples']" sim-tab-link>示例</a>
+</nav>
+<div class="doc-component-viewer-content">
+  <router-outlet></router-outlet>
+</div>

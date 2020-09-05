@@ -1,0 +1,53 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from '@doc/shared';
+import { <%= classify(name) %>ExampleModule } from '@doc/examples/<%= dasherize(name) %>-example/<%= dasherize(name) %>-example.module';
+import { PlaygroundComponentsModule } from '@doc/components/playground-components/playground-components.module';
+import { Sim<%= classify(name) %>Module } from '@ngx-simple/simple-ui/<%= dasherize(name) %>';
+import { <%= classify(name) %>Component } from './<%= dasherize(name) %>.component';
+import { ApiComponent } from './api/api.component';
+import { ExamplesComponent } from './examples/examples.component';
+import { OverviewComponent } from './overview/overview.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: <%= classify(name) %>Component,
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full',
+      },
+      {
+        path: 'overview',
+        component: OverviewComponent,
+      },
+      {
+        path: 'api',
+        component: ApiComponent,
+      },
+      {
+        path: 'examples',
+        component: ExamplesComponent,
+      },
+    ],
+  },
+];
+
+@NgModule({
+  imports: [
+    RouterModule.forChild(routes),
+    Sim<%= classify(name) %>Module,
+    SharedModule,
+    PlaygroundComponentsModule,
+    <%= classify(name) %>ExampleModule,
+  ],
+  declarations: [
+    <%= classify(name) %>Component,
+    OverviewComponent,
+    ApiComponent,
+    ExamplesComponent,
+  ],
+})
+export class <%= classify(name) %>Module {}

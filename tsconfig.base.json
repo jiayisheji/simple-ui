@@ -16,7 +16,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngx-simple/simple-ui/*": ["libs/simple-ui/*"]
+      "@ngx-simple/simple-ui/*": ["libs/simple-ui/*"],
+      "@ngx-simple/highlight": ["libs/highlight/src/index.ts"],
+      "@doc/shared": ["apps/simple-ui-doc/src/app/shared/index.ts"],
+      "@doc/core": ["apps/simple-ui-doc/src/app/core/index.ts"],
+      "@doc/components/*": ["apps/simple-ui-doc/src/app/components/*"],
+      "@doc/examples/*": ["apps/simple-ui-doc/src/app/examples/*"],
+      "@doc/env/*": ["apps/simple-ui-doc/src/environments/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

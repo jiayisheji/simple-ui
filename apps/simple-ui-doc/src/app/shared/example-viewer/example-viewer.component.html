@@ -1,0 +1,45 @@
+<div class="example-viewer-title">
+  <div class="example-viewer-title-spacer">
+    <ng-content select="doc-example-viewer-label"></ng-content>
+  </div>
+  <button sim-icon-button (click)="toggleSourceShow()" [simTooltip]="isSourceShow ? '展开' : '收起'">
+    <sim-icon [svgIcon]="isSourceShow ? 'code-expand' : 'code-collapsed'"></sim-icon>
+  </button>
+</div>
+<div class="example-viewer-source" *ngIf="isSourceShow">
+  <sim-tabset>
+    <sim-tab label="HTML">
+      <div class="example-source-wrapper" *ngIf="path | exampleUrl: 'html' | codeFromUrl | async as htmlCode">
+        <button sim-icon-button simTooltip="复制代码" [cdkCopyToClipboard]="htmlCode" (cdkCopyToClipboardCopied)="copied($event)">
+          <sim-icon svgIcon="copy"></sim-icon>
+        </button>
+        <pre>
+          <code [simHighlight]="htmlCode" languages="xml"></code>
+        </pre>
+      </div>
+    </sim-tab>
+    <sim-tab label="TS">
+      <div class="example-source-wrapper" *ngIf="path | exampleUrl: 'ts' | codeFromUrl | async as tsCode">
+        <button sim-icon-button simTooltip="复制代码" [cdkCopyToClipboard]="tsCode" (cdkCopyToClipboardCopied)="copied($event)">
+          <sim-icon svgIcon="copy"></sim-icon>
+        </button>
+        <pre>
+          <code [simHighlight]="tsCode" languages="ts"></code>
+        </pre>
+      </div>
+    </sim-tab>
+    <sim-tab label="CSS">
+      <div class="example-source-wrapper" *ngIf="path | exampleUrl: 'css' | codeFromUrl | async as cssCode">
+        <button sim-icon-button simTooltip="复制代码" [cdkCopyToClipboard]="cssCode" (cdkCopyToClipboardCopied)="copied($event)">
+          <sim-icon svgIcon="copy"></sim-icon>
+        </button>
+        <pre>
+          <code [simHighlight]="cssCode" languages="css"></code>
+        </pre>
+      </div>
+    </sim-tab>
+  </sim-tabset>
+</div>
+<div class="example-viewer-body">
+  <ng-content></ng-content>
+</div>

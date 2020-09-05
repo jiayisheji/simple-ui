@@ -1,0 +1,10 @@
+@import 'themes';
+
+/// 全局前景色和背景色
+$doc-background: #fafafa;
+$doc-primary-text: $sim-dark-primary-text;
+$doc-font-family: $sim-font-family;
+
+$doc-palette: sim-color-theme();
+// 显示密度
+$doc-density: 0;

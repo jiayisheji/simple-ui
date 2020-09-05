@@ -1,0 +1,32 @@
+@import 'core';
+$doc-foreground: map-get($doc-palette, foreground);
+
+.doc-component-viewer-header h1 {
+  color: map-get($doc-foreground, text);
+  font-weight: sim-font-weight($doc-typography, headline);
+  font-size: sim-font-size($doc-typography, headline);
+  line-height: sim-line-height($doc-typography, headline);
+
+  span {
+    margin-left: 12px;
+  }
+}
+
+.doc-component-viewer-header p {
+  color: map-get($doc-foreground, secondary-text);
+  line-height: 28px;
+}
+
+code {
+  padding: 3px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.doc-component-viewer-tab {
+  margin-bottom: 25px;
+}
+
+.doc-component-viewer-content {
+  position: relative;
+  min-height: 500px;
+}

@@ -1,0 +1,26 @@
+<h2 class="sim-h2">如何使用</h2>
+<h3 class="sim-h3">模块导入</h3>
+<pre>
+  <code simHighlight languages="typescript">
+  <![CDATA[
+  import { SimButtonModule } from '@ngx-simple/simple-ui/button';
+
+@NgModule({
+  imports: [...,SimButtonModule],
+  declarations: [DemoComponent]
+})
+export class DemoModule {}
+  ]]>
+  </code>
+</pre>
+<h3 class="sim-h3">页面使用</h3>
+<pre>
+  <code simHighlight languages="html">
+  <![CDATA[<button sim-button color='primary'>文字按钮</button>]]>
+  </code>
+</pre>
+<h3 class="sim-h3">演示示例</h3>
+<doc-example-viewer path="button-example/button-overview/button-overview-example">
+  <doc-example-viewer-label>Basic buttons</doc-example-viewer-label>
+  <doc-button-overview-example></doc-button-overview-example>
+</doc-example-viewer>

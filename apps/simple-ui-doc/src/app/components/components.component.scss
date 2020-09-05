@@ -1,0 +1,129 @@
+@import 'core';
+
+doc-components {
+  position: relative;
+  z-index: 1;
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+$doc-primary: map-get($doc-palette, primary);
+$doc-foreground: map-get($doc-palette, foreground);
+
+$doc-sidenav-width: 240px;
+
+.doc-component-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}
+
+.doc-component-header {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  background: sim-color($doc-primary, 600);
+  h1 {
+    margin: 0;
+    padding: 28px 8px;
+    color: #fff;
+    font-weight: 300;
+    font-size: 20px;
+  }
+  small {
+    margin-left: 5px;
+    color: #d3d3d3;
+  }
+}
+
+.doc-component-content {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.doc-component-nav {
+  position: sticky;
+  top: 0;
+  &-content {
+    width: $doc-sidenav-width;
+    height: 100vh;
+    overflow: auto;
+    border-right: 1px solid map-get($doc-foreground, divider);
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.26);
+    }
+  }
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  a {
+    display: block;
+    color: map-get($doc-foreground, secondary-text);
+    text-decoration: none;
+    &:hover {
+      color: map-get($doc-foreground, text);
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  .sim-divider {
+    margin: 0 16px 0 24px;
+  }
+
+  .doc-nav-item-title {
+    margin: 16px 0;
+    line-height: 36px;
+  }
+
+  .doc-sidenav-item {
+    height: 40px;
+    line-height: 40px;
+  }
+  .doc-sidenav-item,
+  .doc-nav-item {
+    a,
+    span {
+      display: block;
+      padding: 0 16px 0 24px;
+    }
+
+    span {
+      color: map-get($doc-foreground, hint-text);
+    }
+  }
+
+  .doc-nav-item-selected {
+    background: rgba(63, 81, 181, 0.15);
+    a {
+      color: sim-color($doc-primary);
+      &:hover {
+        color: sim-color($doc-primary);
+      }
+    }
+    &:hover {
+      background: rgba(63, 81, 181, 0.3);
+    }
+  }
+}
+
+.doc-component-container router-outlet + ng-component {
+  flex-grow: 1;
+  padding: 20px 50px;
+}
+
+doc-playground-components {
+  display: block;
+}

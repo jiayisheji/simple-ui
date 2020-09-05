@@ -80,10 +80,16 @@
       "font-size": [
         "rem",
         "em",
-        "px"
+        "px",
+        "%"
       ]
     ],
-    "block-closing-brace-newline-after": "always",
+    "block-closing-brace-newline-after": [
+      "always",
+      {
+        "ignoreAtRules": ["if", "else"]
+      }
+    ],
     "block-closing-brace-newline-before": "always-multi-line",
     "block-opening-brace-newline-after": "always-multi-line",
     "block-opening-brace-space-before": "always-multi-line",
@@ -147,7 +153,8 @@
       {
         "ignoreTypes": [
           "/^doc-/",
-          "/^router-/"
+          "/^router-/",
+          "ng-component"
         ]
       }
     ],
@@ -179,10 +186,10 @@
     "no-empty-source": null,
     "font-family-name-quotes": "always-where-recommended",
 
-    "scss/dollar-variable-pattern": ["^_?sim-.+", {
+    "scss/dollar-variable-pattern": ["^_?(sim|doc)-.+", {
       "ignore": "local"
     }],
-    "scss/at-function-pattern": "^sim-.+",
-    "scss/at-mixin-pattern": "^(sim|simple)-.+"
+    "scss/at-function-pattern": "^_?(sim|doc)-.+",
+    "scss/at-mixin-pattern": "^_?(sim|simple|doc)-.+"
   }
 }

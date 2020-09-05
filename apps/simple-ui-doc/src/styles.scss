@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import './styles/base/normalize';
+@import './styles/base/reset';
+@import './styles/core';
+
+body {
+  color: $doc-primary-text;
+  font-size: $doc-browser-context;
+  font-family: $doc-font-family;
+  line-height: $doc-browser-line-height;
+  background: $doc-background;
+}
+
+@include simple-ui-theme(
+  (
+    typography: $doc-typography,
+    color: $doc-palette,
+    density: $doc-density
+  )
+);
+
+@include sim-base-typography(sim-typography-config($font-family: null));
