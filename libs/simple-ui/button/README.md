@@ -5,7 +5,7 @@
 ## Dependencies
 
 ```ts
-import { SimButtonModule } from '@ngx-simple/simple-ui/simple-ui/button';
+import { SimButtonModule } from '@ngx-simple/simple-ui/button';
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ import { SimButtonModule } from '@ngx-simple/simple-ui/simple-ui/button';
 
 ```ts
 ...
-import { SimButtonModule } from 'simple-ui/button';
+import { SimButtonModule } from '@ngx-simple/simple-ui/button';
 @NgModule({
     ...
     imports: [..., SimButtonModule],

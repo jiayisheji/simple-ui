@@ -1,0 +1,55 @@
+// 注册组件
+$sim-tooltip: unquote(sim-tooltip);
+
+/// 注册组件
+@include sim-register-component($sim-tooltip);
+
+/// 主题风格
+@mixin sim-tooltip-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-tooltip) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-tooltip-color($color);
+    }
+    @if $density != null {
+      @include sim-tooltip-density($density);
+    }
+    @if $typography != null {
+      @include sim-tooltip-typography($typography);
+    }
+  }
+}
+
+// 主题风格
+@mixin sim-tooltip-color($config-or-theme) {
+  $theme: sim-get-color-config($config-or-theme);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  $tooltip: map-get($background, tooltip);
+
+  .sim-tooltip-arrow {
+    border-color: $tooltip;
+  }
+
+  .sim-tooltip-inner {
+    color: #fff;
+    background: $tooltip;
+  }
+}
+// 排版风格
+@mixin sim-tooltip-typography($config-or-theme) {
+  $typography: sim-get-typography-config($config-or-theme);
+  .sim-tooltip {
+    @include sim-typography-level-to-styles($typography, caption);
+  }
+}
+
+/// 密度配置
+@mixin sim-tooltip-density($config-or-theme) {
+  $density: sim-get-density-config($config-or-theme);
+}

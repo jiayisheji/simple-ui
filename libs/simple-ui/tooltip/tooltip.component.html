@@ -1,0 +1,17 @@
+<div
+  class="sim-tooltip"
+  [@state]="_visibility"
+  (@state.start)="_animationStart()"
+  (@state.done)="_animationDone($event)"
+  [style.max-width]="maxWidth"
+  [ngClass]="panelClass"
+  (mouseenter)="trigger == 'hover' ? onMouseEnter() : null"
+  (mouseleave)="trigger == 'hover' ? onMouseLeave() : null"
+>
+  <div class="sim-tooltip-content" [ngClass]="positionClass">
+    <div class="sim-tooltip-arrow"></div>
+    <div class="sim-tooltip-inner">
+      <ng-container *simStringTemplateOutlet="message">{{ message }}</ng-container>
+    </div>
+  </div>
+</div>
