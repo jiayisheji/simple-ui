@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  Directive,
   ElementRef,
   HostBinding,
   HostListener,
@@ -12,7 +13,7 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
-import { BooleanInput } from '../core/coercion';
+import { BooleanInput } from '@ngx-simple/simple-ui/core/coercion';
 import {
   CanColor,
   CanDisable,
@@ -23,8 +24,31 @@ import {
   mixinSize,
   ThemePalette,
   ThemeSize
-} from '../core/common-behaviors';
-import { InputBoolean } from '../core/decorators';
+} from '@ngx-simple/simple-ui/core/common-behaviors';
+import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
+
+@Directive({
+  selector: `sim-button-group`,
+  host: {
+    class: 'sim-button-group',
+    role: 'group'
+  },
+  exportAs: 'simButtonGroup'
+})
+export class SimButtonGroupDirective {
+  @Input()
+  @HostBinding('class.sim-button-group-spaced')
+  @InputBoolean<SimButtonGroupDirective, 'spaced'>()
+  spaced: boolean;
+
+  /**
+   * 按钮尺寸
+   */
+  @Input()
+  size: ThemeSize;
+
+  constructor(_elementRef: ElementRef, protected renderer: Renderer2) {}
+}
 
 const BUTTON_HOST_ATTRIBUTES = [
   'sim-button',

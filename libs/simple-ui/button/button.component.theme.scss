@@ -282,23 +282,15 @@ $sim-button: unquote(sim-button);
     @include _sim-button-size($density-scale, $property-name-map: (width: height, height: height, line-height: height, padding: null));
   }
 
-  .sim-button,
-  .sim-outlined-button,
-  .sim-flat-button,
-  .sim-icon-button,
-  .sim-raised-button,
-  .sim-stroked-button,
-  .sim-broken-button {
-    &:not(.sim-fab-button) {
-      @include _sim-button-radius($density-scale);
-    }
+  .sim-button-base {
+    @include _sim-button-radius($density-scale);
   }
 }
 
 /// 按钮圆角
 @mixin _sim-button-radius($density-scale) {
   @each $size, $scale in (small: minimum, medium: $density-scale, large: maximum) {
-    &.sim-#{$size}:not(.sim-button-pilled) {
+    &.sim-#{$size} {
       border-radius: sim-density-prop-value($sim-button-density-config, $scale, $property-name: radius);
     }
   }

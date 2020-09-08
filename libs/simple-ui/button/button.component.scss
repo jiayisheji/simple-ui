@@ -68,7 +68,7 @@
     opacity: 0.15;
   }
 }
-.sim-fab-button {
+.sim-button-base.sim-fab-button {
   border-radius: 50%;
 }
 
@@ -146,5 +146,20 @@
   }
   .sim-button-loading-wrapper {
     display: none;
+  }
+}
+
+.sim-button-group-spaced {
+  .sim-button-base + .sim-button-base {
+    margin-left: 8px;
+  }
+}
+
+.sim-button-group {
+  display: inline-flex;
+  &:not(.sim-button-group-spaced) {
+    .sim-button-base {
+      border-radius: 0;
+    }
   }
 }
