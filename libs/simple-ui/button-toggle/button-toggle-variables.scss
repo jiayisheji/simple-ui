@@ -1,0 +1,8 @@
+// Density configuration for the button-toggle.
+$sim-button-toggle-density-config: (
+  height: (
+    default: 32px,
+    minimum: 24px,
+    maximum: 40px
+  )
+) !default;

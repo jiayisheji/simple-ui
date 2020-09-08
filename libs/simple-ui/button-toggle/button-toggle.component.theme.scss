@@ -1,0 +1,199 @@
+@import './button-toggle-variables';
+
+$sim-button-toggle: unquote(sim-button-toggle);
+
+/// 注册组件
+@include sim-register-component($sim-button-toggle);
+
+/// 主题风格
+@mixin sim-button-toggle-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-button-toggle) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-button-toggle-color($color);
+    }
+    @if $density != null {
+      @include sim-button-toggle-density($density);
+    }
+    @if $typography != null {
+      @include sim-button-toggle-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-button-toggle-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+  $divider-color: sim-color($foreground, divider);
+
+  .sim-button-toggle-appearance-standard {
+    @include _sim-button-toggle-appearance-standard($config);
+  }
+
+  .sim-button-toggle-appearance-outline {
+    @include _sim-button-toggle-appearance-outline($config);
+  }
+}
+
+@mixin _sim-button-toggle-appearance-standard($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $divider-color: sim-color($foreground, divider);
+
+  & {
+    color: sim-color($foreground, hint-text);
+    border-color: $divider-color;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+
+    .sim-button-toggle-focus-overlay {
+      background-color: sim-color($background, focused-button, 1);
+    }
+
+    &:first-child {
+      border-left: 1px solid $divider-color;
+    }
+
+    &:hover {
+      color: sim-color($foreground, secondary-text);
+    }
+  }
+
+  &.sim-button-toggle-checked {
+    color: sim-color($foreground, secondary-text);
+    background-color: sim-color($background, selected-button);
+
+    &:not(:first-child)::before {
+      background-color: $divider-color;
+    }
+  }
+
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($theme, $type);
+    &.sim-#{$type} {
+      .sim-button-toggle-focus-overlay {
+        background-color: sim-color($color);
+      }
+      &:hover {
+        color: sim-color($color, text);
+      }
+      &.sim-button-toggle-checked {
+        color: sim-color($color, default-contrast);
+        background-color: sim-color($color);
+
+        &:not(:first-child)::before {
+          background-color: $divider-color;
+        }
+      }
+    }
+  }
+
+  .sim-button-toggle-group-vertical & {
+    border-color: $divider-color;
+    border-style: solid;
+    border-width: 0 1px 1px;
+
+    &:first-child {
+      border-top: 1px solid $divider-color;
+    }
+  }
+
+  &.sim-button-toggle-disabled {
+    color: sim-color($foreground, disabled-button);
+    background-color: sim-color($background, disabled-button-toggle);
+
+    &.sim-button-toggle-checked {
+      background-color: sim-color($background, selected-disabled-button);
+    }
+  }
+}
+
+@mixin _sim-button-toggle-appearance-outline($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $divider-color: sim-color($foreground, divider);
+
+  & {
+    color: sim-color($foreground, hint-text);
+    border-color: $divider-color;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+
+    &:first-child {
+      border-left: 1px solid $divider-color;
+    }
+
+    &:hover {
+      color: sim-color($foreground, text);
+    }
+  }
+
+  &.sim-button-toggle-checked {
+    color: sim-color($foreground, text);
+    border-color: sim-color($foreground, hint-text);
+
+    &:not(:first-child)::before {
+      background-color: sim-color($foreground, hint-text);
+    }
+  }
+
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($theme, $type);
+    &.sim-#{$type} {
+      &:hover {
+        color: sim-color($color, text);
+      }
+      &.sim-button-toggle-checked {
+        color: sim-color($color, text);
+        border-color: sim-color($color);
+
+        &:not(:first-child)::before {
+          background-color: sim-color($color);
+        }
+      }
+    }
+  }
+
+  .sim-button-toggle-group-vertical & {
+    border-color: $divider-color;
+    border-style: solid;
+    border-width: 0 1px 1px;
+
+    &:first-child {
+      border-top: 1px solid $divider-color;
+    }
+  }
+
+  &.sim-button-toggle-disabled {
+    color: sim-color($foreground, disabled-button);
+    background-color: sim-color($background, disabled-button-toggle);
+
+    &.sim-button-toggle-checked {
+      background-color: sim-color($background, selected-disabled-button);
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-button-toggle-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-button-toggle-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  .sim-button-toggle {
+    @each $size, $scale in (small: minimum, medium: $density-scale, large: maximum) {
+      &.sim-#{$size} .sim-button-toggle-content {
+        line-height: sim-density-prop-value($sim-button-toggle-density-config, $scale, height);
+      }
+    }
+  }
+}
