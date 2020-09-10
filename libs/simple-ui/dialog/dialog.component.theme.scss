@@ -1,0 +1,58 @@
+@import './dialog-variables';
+
+$sim-dialog: unquote(sim-dialog);
+
+/// 注册组件
+@include sim-register-component($sim-dialog);
+
+/// 主题风格
+@mixin sim-dialog-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-dialog) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-dialog-color($color);
+    }
+    @if $density != null {
+      @include sim-dialog-density($density);
+    }
+    @if $typography != null {
+      @include sim-dialog-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-dialog-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-dialog {
+    @include sim-theme-elevation(24, $config);
+
+    color: sim-color($foreground, text);
+    background: sim-color($background, dialog);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-dialog-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-dialog-title {
+    @include sim-typography-level-to-styles($config, subtitle);
+  }
+}
+
+/// 密度配置
+@mixin sim-dialog-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  .sim-chip {
+    /// $size-scale-map: (small: minimum, large: maximum);
+    margin: sim-density-prop-value($sim-card-density-config, $density-scale, margin);
+  }
+}
