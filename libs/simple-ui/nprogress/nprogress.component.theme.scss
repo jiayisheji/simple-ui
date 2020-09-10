@@ -1,0 +1,61 @@
+@import './nprogress-variables';
+
+$sim-nprogress: unquote(sim-nprogress);
+
+/// 注册组件
+@include sim-register-component($sim-nprogress);
+
+/// 主题风格
+@mixin sim-nprogress-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-nprogress) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-nprogress-color($color);
+    }
+    @if $density != null {
+      @include sim-nprogress-density($density);
+    }
+    @if $typography != null {
+      @include sim-nprogress-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-nprogress-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-nprogress {
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($config, $type);
+      &.sim-#{$type} {
+        .sim-nprogress-inner {
+          background-color: sim-color($color);
+        }
+        .sim-nprogress-meteor {
+          box-shadow: 0 0 10px sim-color($color), 0 0 5px sim-color($color);
+        }
+        .sim-nprogress-spinner-icon {
+          border-top-color: sim-color($color);
+          border-left-color: sim-color($color);
+        }
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-nprogress-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-nprogress-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

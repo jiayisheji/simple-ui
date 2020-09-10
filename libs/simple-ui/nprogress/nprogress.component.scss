@@ -1,0 +1,76 @@
+.sim-nprogress {
+  position: relative;
+  z-index: 999999;
+  pointer-events: none;
+  &-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 100%;
+    opacity: 0;
+    zoom: 1;
+  }
+  &-active {
+    opacity: 1;
+    transition: none;
+  }
+  &-placeholder {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+  }
+  &-inner {
+    width: 100%;
+    height: 100%;
+    transform: translate(-100%, 0, 0);
+  }
+  &-meteor {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 100%;
+    opacity: 1;
+  }
+  &-spinner {
+    position: absolute;
+    top: 15px;
+    display: block;
+    &-icon {
+      box-sizing: border-box;
+      width: 18px;
+      height: 18px;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 2px;
+      border-radius: 50%;
+      animation: spinner-animation 400ms linear infinite;
+    }
+    &-left {
+      right: unset;
+      left: 15px;
+    }
+    &-right {
+      right: 15px;
+    }
+  }
+  &-thick {
+    .sim-nprogress-spinner-icon {
+      width: 24px;
+      height: 24px;
+      border-width: 3px;
+    }
+    .sim-nprogress-placeholder {
+      height: 3px;
+    }
+  }
+}
+
+@keyframes spinner-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

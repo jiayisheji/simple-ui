@@ -10,6 +10,7 @@
 @import '../button-toggle/button-toggle.component.theme';
 @import '../alert/alert.component.theme';
 @import '../dialog/dialog.component.theme.scss';
+@import '../nprogress/nprogress.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -24,5 +25,6 @@
   @include sim-button-toggle-theme($config-or-theme);
   @include sim-alert-theme($config-or-theme);
   @include sim-dialog-theme($config-or-theme);
+  @include sim-nprogress-theme($config-or-theme);
   /// @include component.theme
 }

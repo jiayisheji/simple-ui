@@ -1,0 +1,21 @@
+<ng-container *ngIf="state$ | async; let state">
+  <div class="sim-nprogress-container" [class.sim-nprogress-active]="state.active" [style.transition]="'opacity ' + speed + 'ms ' + ease">
+    <div class="sim-nprogress-placeholder">
+      <div
+        class="sim-nprogress-inner"
+        [style.transform]="state.transform"
+        [style.transition]="state.active ? 'all ' + speed + 'ms ' + ease : 'none'"
+      >
+        <div *ngIf="meteor" class="sim-nprogress-meteor"></div>
+      </div>
+    </div>
+    <div
+      *ngIf="spinner"
+      class="sim-nprogress-spinner"
+      [class.sim-nprogress-spinner-left]="spinnerPosition == 'left'"
+      [class.sim-nprogress-spinner-right]="spinnerPosition == 'right'"
+    >
+      <div class="sim-nprogress-spinner-icon"></div>
+    </div>
+  </div>
+</ng-container>
