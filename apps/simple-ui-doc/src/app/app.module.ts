@@ -6,12 +6,22 @@ import { environment } from '@doc/env/environment';
 import { SIM_HIGHLIGHT_OPTIONS } from '@ngx-simple/highlight';
 import { SimButtonModule } from '@ngx-simple/simple-ui/button';
 import { SimIconService } from '@ngx-simple/simple-ui/icon';
+import { SimNprogressHttpModule, SimNprogressModule, SimNprogressRouterModule } from '@ngx-simple/simple-ui/nprogress';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, SimButtonModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    SimButtonModule,
+    SimNprogressModule,
+    SimNprogressRouterModule,
+    SimNprogressHttpModule
+  ],
   providers: [
     {
       provide: SIM_HIGHLIGHT_OPTIONS,
