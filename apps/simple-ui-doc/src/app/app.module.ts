@@ -30,6 +30,6 @@ import { AppComponent } from './app.component';
 export class AppModule {
   constructor(iconService: SimIconService) {
     // 设置加载svg字体目录
-    iconService.addSvgIconAssets(environment.host + 'assets/icon/');
+    iconService.addSvgIconAssets(environment.host + '/assets/icon/');
   }
 }

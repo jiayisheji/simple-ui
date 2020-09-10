@@ -33,5 +33,15 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       //   name: '标签页'
       // }
     ]
+  },
+  {
+    path: '',
+    name: '反馈',
+    children: [
+      {
+        path: 'alert',
+        name: '警告提示'
+      }
+    ]
   }
 ];

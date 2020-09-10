@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { capitalize } from '@ngx-simple/simple-ui/core/utils';
+import { capitalize } from '@ngx-simple/core/utils';
 import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 
 @Component({

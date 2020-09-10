@@ -1,0 +1,65 @@
+<h2 class="sim-h2">如何使用</h2>
+<h3 class="sim-h3">模块导入</h3>
+<pre>
+  <code simHighlight languages="typescript">
+  <![CDATA[
+  import { SimAlertModule } from '@ngx-simple/simple-ui/alert';
+
+@NgModule({
+  imports: [...,SimAlertModule],
+  declarations: [DemoComponent]
+})
+export class DemoModule {}
+  ]]>
+  </code>
+</pre>
+<h3 class="sim-h3">页面使用</h3>
+<pre>
+  <code simHighlight languages="html">
+  <![CDATA[<sim-alert>警告提示</sim-alert>]]>
+  </code>
+</pre>
+<h3 class="sim-h3">演示示例</h3>
+
+<sim-alert type="info">
+  我是Message info
+</sim-alert>
+<sim-alert type="success">
+  我是Message success
+</sim-alert>
+<sim-alert type="warning">
+  我是Message warning
+</sim-alert>
+<sim-alert type="danger">
+  我是Message danger
+</sim-alert>
+
+<sim-alert [dismissible]="true">
+  我是Message dismissible
+</sim-alert>
+
+<sim-alert [dismissible]="true" closeText="close">
+  我是Message dismissible closeText
+</sim-alert>
+
+<sim-alert dismissible>
+  我是Message alert
+  <button sim-alert-close>close</button>
+</sim-alert>
+
+<sim-alert>
+  <sim-alert-heading>我是Message alert heading</sim-alert-heading>
+  <p>我是Message alert</p>
+</sim-alert>
+
+<sim-alert>
+  <sim-alert-heading>我是Message alert heading</sim-alert-heading>
+  <p>我是Message alert</p>
+  <sim-alert-actions>
+    actions
+  </sim-alert-actions>
+</sim-alert>
+
+<sim-alert duration="2000">
+  我是Message duration
+</sim-alert>
