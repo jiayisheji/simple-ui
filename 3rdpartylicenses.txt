@@ -38,6 +38,9 @@ MIT
 @angular/router
 MIT
 
+@ngx-simple/core
+MIT
+
 @ngx-simple/highlight
 MIT
 
