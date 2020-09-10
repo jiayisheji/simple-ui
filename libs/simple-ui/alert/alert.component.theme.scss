@@ -1,0 +1,82 @@
+@import './alert-variables';
+
+$sim-alert: unquote(sim-alert);
+
+/// 注册组件
+@include sim-register-component($sim-alert);
+
+/// 主题风格
+@mixin sim-alert-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-alert) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-alert-color($color);
+    }
+    @if $density != null {
+      @include sim-alert-density($density);
+    }
+    @if $typography != null {
+      @include sim-alert-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-alert-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-alert {
+    // 从前景色对象获取text属性
+    color: sim-color($foreground, secondary-text);
+    // 从背景色对象获取background属性
+    background: sim-color($background, background);
+    // 循环获取调色板对象
+    @each $type in (info, success, warning, danger) {
+      $color: map-get($config, $type);
+      &.sim-alert-#{$type} {
+        background-color: sim-color($color, 0.08);
+        border-color: sim-color($color, 0.24);
+      }
+    }
+  }
+
+  .sim-alert-heading {
+    color: sim-color($foreground, text);
+  }
+
+  .sim-alert-actions-standard .sim-alert-close {
+    color: sim-color($foreground, hint-text);
+    &:hover {
+      color: sim-color($foreground, text);
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-alert-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-alert {
+    font: {
+      family: sim-font-family($config, body2);
+      size: sim-font-size($config, body2);
+    }
+  }
+  .sim-alert-heading {
+    font-size: sim-font-size($config, subheading);
+  }
+}
+
+/// 密度配置
+@mixin sim-alert-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  .sim-alert {
+    margin-bottom: sim-density-prop-value($sim-card-density-config, $density-scale, margin);
+  }
+}

@@ -1,0 +1,70 @@
+@import '../theme/abstracts/variables';
+
+.sim-alert {
+  display: flex;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.sim-alert-text {
+  flex: 1 1 auto;
+}
+
+.sim-alert-message {
+  padding: 8px;
+}
+
+.sim-alert-message .sim-alert-icon-wrapper {
+  padding: 0 10px 0 7px;
+}
+
+.sim-alert-message .sim-alert-icon {
+  font-size: 16px;
+}
+
+.sim-alert-notification {
+  padding: 16px;
+}
+
+.sim-alert-notification .sim-alert-icon-wrapper {
+  padding: 0 10px;
+}
+
+.sim-alert-banner {
+  margin-bottom: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.sim-alert-actions {
+  display: block;
+}
+
+.sim-alert-notification .sim-alert-icon {
+  font-size: 24px;
+}
+
+.sim-alert-notification .sim-alert-heading {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.sim-alert-actions-standard .sim-alert-close {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  background: none;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s $sim-swift-ease-in-out-timing-function;
+
+  &:not(.sim-alert-close-text) {
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

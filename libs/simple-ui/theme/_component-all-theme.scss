@@ -7,6 +7,8 @@
 @import '../tabs/tabs.component.theme';
 @import '../icon/icon.component.theme';
 @import '../tooltip/tooltip.component.theme';
+@import '../button-toggle/button-toggle.component.theme';
+@import '../alert/alert.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -18,5 +20,7 @@
   @include sim-tabs-theme($config-or-theme);
   @include sim-icon-theme($config-or-theme);
   @include sim-tooltip-theme($config-or-theme);
+  @include sim-button-toggle-theme($config-or-theme);
+  @include sim-alert-theme($config-or-theme);
   /// @include component.theme
 }

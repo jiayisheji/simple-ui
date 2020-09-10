@@ -1,0 +1,28 @@
+<div
+  class="sim-alert"
+  *ngIf="_visible"
+  [class.sim-alert-dismissible]="dismissible"
+  [class.sim-alert-success]="type === 'success'"
+  [class.sim-alert-info]="type === 'info'"
+  [class.sim-alert-warning]="type === 'warning'"
+  [class.sim-alert-danger]="type === 'danger'"
+  [class.sim-alert-message]="!notification || !_heading || !banner"
+  [class.sim-alert-notification]="notification || !!_heading"
+  [class.sim-alert-banner]="banner"
+  [@slideAlertMotion]
+  (@slideAlertMotion.done)="onFadeAnimationDone()"
+>
+  <div class="sim-alert-icon-wrapper" *ngIf="showIcon">
+    <ng-content select="sim-alert-icon, [sim-alert-icon]"></ng-content>
+    <sim-icon *ngIf="!_icon" sim-alert-icon [svgIcon]="icon || _inferredIconType[type]" [color]="type"></sim-icon>
+  </div>
+  <div class="sim-alert-text">
+    <ng-content></ng-content>
+  </div>
+  <ng-content select="sim-alert-actions, [sim-alert-actions]"></ng-content>
+  <div class="sim-alert-actions sim-alert-actions-standard" *ngIf="!_actions && dismissible">
+    <button *ngIf="!_close" sim-alert-close [class.sim-alert-close-text]="closeText">
+      <span aria-hidden="true">{{ closeText || '&times;' }}</span>
+    </button>
+  </div>
+</div>
