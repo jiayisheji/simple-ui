@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, ViewEncapsulation } from '@angular/core';
-import { NgClassInterface, NgStringOrTemplateRef } from '@ngx-simple/simple-ui/core/types';
+import { NgClassInterface, NgStringOrTemplateRef } from '@ngx-simple/core/types';
 import { Observable, Subject } from 'rxjs';
 import { simTooltipAnimations } from './tooltip-animations';
 

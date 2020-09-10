@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Inject, Injectable, OnDestroy, Optional, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { SafeAny } from '@ngx-simple/simple-ui/core/types';
+import { SafeAny } from '@ngx-simple/core/types';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
 import { catchError, finalize, map, share, tap } from 'rxjs/operators';
 

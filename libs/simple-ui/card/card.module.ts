@@ -35,6 +35,7 @@ import {
   ],
   imports: [CommonModule, SimSkeletonModule],
   exports: [
+    SimSkeletonModule,
     SimCardComponent,
     SimCardTitleDirective,
     SimCardHeaderComponent,

@@ -16,9 +16,9 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { toNumber } from '@ngx-simple/simple-ui/core/coercion';
-import { CanColor, mixinColor, MixinElementRefBase, ThemePalette } from '@ngx-simple/simple-ui/core/common-behaviors';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
+import { toNumber } from '@ngx-simple/core/coercion';
+import { CanColor, mixinColor, MixinElementRefBase, ThemePalette } from '@ngx-simple/core/common-behaviors';
+import { InputBoolean } from '@ngx-simple/core/decorators';
 import { merge, Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { SimTabHeaderComponent } from './tab-header.component';

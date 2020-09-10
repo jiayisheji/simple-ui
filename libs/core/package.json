@@ -1,0 +1,41 @@
+{
+  "name": "@ngx-simple/core",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiayisheji/simple-ui.git"
+  },
+  "keywords": [
+    "angular",
+    "simple",
+    "components",
+    "design",
+    "ui",
+    "core",
+    "util",
+    "framework",
+    "frontend"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiayisheji/simple-ui/issues"
+  },
+  "homepage": "https://jiayisheji.github.io/simple-ui",
+  "peerDependencies": {
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0",
+    "@angular/animations": "^10.0.0",
+    "@angular/forms": "^10.0.0",
+    "@angular/router": "^10.0.0",
+    "@angular/platform-browser": "^10.0.0",
+    "rxjs": "~6.5.5"
+  },
+  "dependencies": {
+    "@angular/cdk": "^10.1.3",
+    "tslib": "^2.0.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

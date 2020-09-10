@@ -20,7 +20,7 @@ import {
   mixinTabIndex,
   mixinUnsubscribe,
   untilUnmounted
-} from '@ngx-simple/simple-ui/core/common-behaviors';
+} from '@ngx-simple/core/common-behaviors';
 import { filter } from 'rxjs/operators';
 import { SimTabNavBarComponent } from './tab-nav-bar.component';
 

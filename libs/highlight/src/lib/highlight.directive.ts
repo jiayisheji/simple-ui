@@ -11,7 +11,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { isArray, isString } from '@ngx-simple/simple-ui/core/typeof';
+import { isArray, isString } from '@ngx-simple/core/typeof';
 import { animationFrameScheduler } from 'rxjs';
 import { SimHighlightService } from './highlight.service';
 import { SimHighlightOptions, SIM_HIGHLIGHT_OPTIONS } from './highlight.type';

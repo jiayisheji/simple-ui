@@ -13,7 +13,7 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
-import { BooleanInput } from '@ngx-simple/simple-ui/core/coercion';
+import { BooleanInput } from '@ngx-simple/core/coercion';
 import {
   CanColor,
   CanDisable,
@@ -24,8 +24,8 @@ import {
   mixinSize,
   ThemePalette,
   ThemeSize
-} from '@ngx-simple/simple-ui/core/common-behaviors';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
+} from '@ngx-simple/core/common-behaviors';
+import { InputBoolean } from '@ngx-simple/core/decorators';
 
 @Directive({
   selector: `sim-button-group`,

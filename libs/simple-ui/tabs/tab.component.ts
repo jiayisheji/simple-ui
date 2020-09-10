@@ -18,8 +18,8 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
-import { CanDisable, mixinDisabled, MixinElementRefBase } from '@ngx-simple/simple-ui/core/common-behaviors';
-import { SafeAny } from '@ngx-simple/simple-ui/core/types';
+import { CanDisable, mixinDisabled, MixinElementRefBase } from '@ngx-simple/core/common-behaviors';
+import { SafeAny } from '@ngx-simple/core/types';
 import { Subject } from 'rxjs';
 import { SimTabContentDirective } from './tab-content.directive';
 import { SimTabLabelDirective } from './tab-label.directive';

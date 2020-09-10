@@ -13,7 +13,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { SafeAny } from '@ngx-simple/simple-ui/core/types';
+import { SafeAny } from '@ngx-simple/core/types';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { TabBodyOriginState, TabBodyPositionState } from './tab.type';

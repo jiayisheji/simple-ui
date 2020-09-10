@@ -12,8 +12,8 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { BooleanInput } from '@ngx-simple/simple-ui/core/coercion';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
+import { BooleanInput } from '@ngx-simple/core/coercion';
+import { InputBoolean } from '@ngx-simple/core/decorators';
 
 @Directive({
   selector: '[simDividerInnerText], sim-divider-inner-text'

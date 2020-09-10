@@ -23,11 +23,11 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
-import { toBoolean } from '@ngx-simple/simple-ui/core/coercion';
-import { MixinElementRefBase, mixinUnsubscribe, untilUnmounted } from '@ngx-simple/simple-ui/core/common-behaviors';
-import { InputNumber } from '@ngx-simple/simple-ui/core/decorators';
-import { POSITION_MAP } from '@ngx-simple/simple-ui/core/overlay';
-import { NgClassInterface, NgStringOrTemplateRef, SafeAny } from '@ngx-simple/simple-ui/core/types';
+import { toBoolean } from '@ngx-simple/core/coercion';
+import { MixinElementRefBase, mixinUnsubscribe, untilUnmounted } from '@ngx-simple/core/common-behaviors';
+import { InputNumber } from '@ngx-simple/core/decorators';
+import { POSITION_MAP } from '@ngx-simple/core/overlay';
+import { NgClassInterface, NgStringOrTemplateRef, SafeAny } from '@ngx-simple/core/types';
 import { take, takeUntil } from 'rxjs/operators';
 import { SimTooltipComponent, TooltipTrigger } from './tooltip.component';
 

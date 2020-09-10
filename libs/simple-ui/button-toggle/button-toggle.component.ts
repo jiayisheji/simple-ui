@@ -26,11 +26,11 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { toBoolean } from '@ngx-simple/simple-ui/core/coercion';
-import { mixinColor, MixinElementRefBase, mixinSize, ThemePalette, ThemeSize } from '@ngx-simple/simple-ui/core/common-behaviors';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
-import { isArray } from '@ngx-simple/simple-ui/core/typeof';
-import { OnChangeType, OnTouchedType, SafeAny } from '@ngx-simple/simple-ui/core/types';
+import { toBoolean } from '@ngx-simple/core/coercion';
+import { mixinColor, MixinElementRefBase, mixinSize, ThemePalette, ThemeSize } from '@ngx-simple/core/common-behaviors';
+import { InputBoolean } from '@ngx-simple/core/decorators';
+import { isArray } from '@ngx-simple/core/typeof';
+import { OnChangeType, OnTouchedType, SafeAny } from '@ngx-simple/core/types';
 
 export class SimButtonToggleChange<T> {
   constructor(

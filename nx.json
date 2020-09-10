@@ -1,5 +1,5 @@
 {
-  "npmScope": "@ngx-simple",
+  "npmScope": "ngx-simple",
   "affected": {
     "defaultBase": "master"
   },
@@ -23,17 +23,24 @@
   },
   "projects": {
     "simple-ui-doc": {
-      "tags": ["doc"]
+      "tags": ["doc"],
+      "implicitDependencies": ["core", "simple-ui"]
     },
     "simple-ui-doc-e2e": {
       "tags": [],
-      "implicitDependencies": ["simple-ui-doc"]
+      "implicitDependencies": ["simple-ui-doc", "core", "simple-ui"]
     },
     "simple-ui": {
-      "tags": ["simple-ui"]
+      "tags": ["simple-ui"],
+      "implicitDependencies": ["core"]
     },
     "highlight": {
-      "tags": ["highlight"]
+      "tags": ["highlight"],
+      "implicitDependencies": ["core"]
+    },
+    "core": {
+      "tags": ["core"],
+      "implicitDependencies": []
     }
   }
 }

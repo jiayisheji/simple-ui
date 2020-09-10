@@ -21,8 +21,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { toNumber } from '@ngx-simple/simple-ui/core/coercion';
-import { MixinElementRefBase, mixinUnsubscribe } from '@ngx-simple/simple-ui/core/common-behaviors';
+import { toNumber } from '@ngx-simple/core/coercion';
+import { MixinElementRefBase, mixinUnsubscribe } from '@ngx-simple/core/common-behaviors';
 import { merge, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TabInkBarComponent } from './tab-ink-bar.component';

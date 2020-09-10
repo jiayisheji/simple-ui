@@ -6,5 +6,5 @@
     "entryFile": "./public-api",
     "flatModuleFile": "simple-ui"
   },
-  "whitelistedNonPeerDependencies": ["tslib", "angular"]
+  "whitelistedNonPeerDependencies": ["tslib", "angular", "@ngx-simple/core"]
 }

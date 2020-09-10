@@ -1,6 +1,6 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
-import { SafeAny } from '@ngx-simple/simple-ui/core/types';
+import { SafeAny } from '@ngx-simple/core/types';
 import { BehaviorSubject, EMPTY, from, Observable, throwError, zip } from 'rxjs';
 import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { HighlightJSApi, LanguageFn, SimHighlightOptions, SIM_HIGHLIGHT_OPTIONS } from './highlight.type';

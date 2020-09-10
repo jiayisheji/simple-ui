@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
-import { isArray } from '@ngx-simple/simple-ui/core/typeof';
-import { NgStyleInterface } from '@ngx-simple/simple-ui/core/types';
+import { InputBoolean } from '@ngx-simple/core/decorators';
+import { isArray } from '@ngx-simple/core/typeof';
+import { NgStyleInterface } from '@ngx-simple/core/types';
 
 export interface SimSkeletonCol {
   // 24栅格布局，列占的宽度

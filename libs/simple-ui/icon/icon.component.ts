@@ -17,8 +17,8 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { CanColor, mixinColor, MixinElementRefBase, ThemePalette } from '@ngx-simple/simple-ui/core/common-behaviors';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
+import { CanColor, mixinColor, MixinElementRefBase, ThemePalette } from '@ngx-simple/core/common-behaviors';
+import { InputBoolean } from '@ngx-simple/core/decorators';
 import { take } from 'rxjs/operators';
 import { SimIconService } from './icon.service';
 

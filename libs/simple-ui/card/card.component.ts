@@ -9,8 +9,8 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { InputBoolean } from '@ngx-simple/simple-ui/core/decorators';
-import { isArray } from '@ngx-simple/simple-ui/core/typeof';
+import { InputBoolean } from '@ngx-simple/core/decorators';
+import { isArray } from '@ngx-simple/core/typeof';
 import { SimSkeletonRow } from '@ngx-simple/simple-ui/skeleton';
 import { CardAnimations } from './card-animations';
 

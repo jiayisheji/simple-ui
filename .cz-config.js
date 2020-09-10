@@ -57,8 +57,9 @@ module.exports = {
    * - simple-ui-doc：simple-ui-doc 演示文档
    * - tools：工具箱
    * - highlight：代码高亮包装组件
+   * - core simple-ui/core模块
    */
-  scopes: ['simple-ui-doc', 'tools', 'deps', 'highlight'],
+  scopes: ['simple-ui-doc', 'tools', 'deps', 'highlight', 'core'],
 
   allowTicketNumber: false,
   isTicketNumberRequired: false,

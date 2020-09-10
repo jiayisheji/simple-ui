@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { CanColor, mixinColor, MixinElementRefBase, mixinUnsubscribe, ThemePalette } from '@ngx-simple/simple-ui/core/common-behaviors';
+import { CanColor, mixinColor, MixinElementRefBase, mixinUnsubscribe, ThemePalette } from '@ngx-simple/core/common-behaviors';
 import { merge } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TabInkBarComponent } from './tab-ink-bar.component';

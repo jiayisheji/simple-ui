@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
-import { CanDisable, mixinDisabled, MixinElementRefBase } from '@ngx-simple/simple-ui/core/common-behaviors';
+import { CanDisable, mixinDisabled, MixinElementRefBase } from '@ngx-simple/core/common-behaviors';
 
 const _TabLabelWrapperMixinBase = mixinDisabled(MixinElementRefBase);
 
