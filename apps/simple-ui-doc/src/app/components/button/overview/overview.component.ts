@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { indicate } from '@ngx-simple/core/operators';
+import { of, Subject } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'doc-overview',
@@ -6,17 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  loading: boolean;
+  loading$ = new Subject<boolean>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   setLoading() {
-    this.loading = true;
-    const timer = setTimeout(() => {
-      this.loading = false;
-      clearTimeout(timer);
-    }, 2000);
+    of(null).pipe(delay(2000), indicate(this.loading$)).subscribe();
   }
 }

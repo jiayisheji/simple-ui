@@ -184,27 +184,33 @@
   <p></p>
   <h2>可交互状态加载中</h2>
   <p>默认按钮是没有交互行为，给按钮扩充加载状态，当按钮进行异步操作时，加载状态很好给用户一个提示交互效果</p>
-  <button sim-flat-button [loading]="loading" (click)="setLoading()" color="primary">加载中</button>
+  <button sim-flat-button [loading]="loading$ | async" (click)="setLoading()" color="primary">加载中</button>
+  <h2>按钮分组</h2>
+  <p>默认按钮无间隙</p>
+  <sim-button-group>
+    <button sim-flat-button sim-raised-button>默认按钮</button>
+    <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
+    <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
+    <button sim-flat-button sim-raised-button color="info">信息按钮</button>
+    <button sim-flat-button sim-raised-button color="success">成功按钮</button>
+    <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
+    <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
+    <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
+  </sim-button-group>
+  <p></p>
+  <p>
+    通过添加
+    <code>spaced</code>
+    属性增加间隙
+  </p>
+  <sim-button-group spaced>
+    <button sim-flat-button sim-raised-button>默认按钮</button>
+    <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
+    <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
+    <button sim-flat-button sim-raised-button color="info">信息按钮</button>
+    <button sim-flat-button sim-raised-button color="success">成功按钮</button>
+    <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
+    <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
+    <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
+  </sim-button-group>
 </doc-viewer>
-
-<sim-button-group>
-  <button sim-flat-button sim-raised-button>默认按钮</button>
-  <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
-  <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
-  <button sim-flat-button sim-raised-button color="info">信息按钮</button>
-  <button sim-flat-button sim-raised-button color="success">成功按钮</button>
-  <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
-  <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
-  <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
-</sim-button-group>
-
-<sim-button-group spaced>
-  <button sim-flat-button sim-raised-button>默认按钮</button>
-  <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
-  <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
-  <button sim-flat-button sim-raised-button color="info">信息按钮</button>
-  <button sim-flat-button sim-raised-button color="success">成功按钮</button>
-  <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
-  <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
-  <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
-</sim-button-group>
