@@ -1,0 +1,63 @@
+$sim-pseudo-checkbox: unquote(sim-pseudo-checkbox);
+
+/// 注册组件
+@include sim-register-component($sim-pseudo-checkbox);
+
+/// 主题风格
+@mixin sim-pseudo-checkbox-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-pseudo-checkbox) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-pseudo-checkbox-color($color);
+    }
+    @if $density != null {
+      @include sim-pseudo-checkbox-density($density);
+    }
+    @if $typography != null {
+      @include sim-pseudo-checkbox-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-pseudo-checkbox-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-pseudo-checkbox {
+    color: map-get($foreground, divider);
+    background: sim-color($background, card);
+  }
+
+  // 循环获取调色板对象
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-#{$type} {
+      .sim-pseudo-checkbox-checked,
+      .sim-pseudo-checkbox-indeterminate {
+        color: sim-color($color, default-contrast);
+        background: sim-color($color);
+      }
+    }
+  }
+
+  .sim-pseudo-checkbox.sim-pseudo-checkbox-disabled {
+    color: map-get($foreground, divider);
+    background: sim-color($background, disabled-button);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-pseudo-checkbox-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-pseudo-checkbox-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

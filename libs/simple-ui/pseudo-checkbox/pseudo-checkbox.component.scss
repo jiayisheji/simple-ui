@@ -1,0 +1,54 @@
+$sim-checkbox-size: 16px;
+
+$sim-checkbox-border-width: 2px;
+
+// 伪复选框内的填充
+$_sim-pseudo-checkbox-padding: $sim-checkbox-border-width * 2;
+
+// 伪复选框中的复选标记的大小
+$_sim-pseudo-checkmark-size: $sim-checkbox-size - (2 * $_sim-pseudo-checkbox-padding);
+
+.sim-pseudo-checkbox {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: $sim-checkbox-size;
+  height: $sim-checkbox-size;
+  vertical-align: middle;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1);
+
+  &::after {
+    position: absolute;
+    border-bottom: $sim-checkbox-border-width solid currentColor;
+    opacity: 0;
+    transition: opacity 90ms cubic-bezier(0, 0, 0.2, 0.1);
+    content: '';
+  }
+}
+
+.sim-pseudo-checkbox-disabled {
+  cursor: default;
+}
+
+.sim-pseudo-checkbox-indeterminate::after {
+  top: ($sim-checkbox-size - $sim-checkbox-border-width) / 2 - $sim-checkbox-border-width + 1;
+  left: $sim-checkbox-border-width / 2 + 1;
+  width: $sim-checkbox-size - 6px;
+  border-radius: 2px;
+  opacity: 1;
+}
+
+.sim-pseudo-checkbox-checked::after {
+  top: ($sim-checkbox-size / 2) - ($_sim-pseudo-checkmark-size / 4) - ($sim-checkbox-size / 10) - 2 + 1;
+  left: $_sim-pseudo-checkbox-padding - $sim-checkbox-border-width * 1.5 + 1;
+  box-sizing: content-box;
+  width: $_sim-pseudo-checkmark-size;
+  height: ($_sim-pseudo-checkmark-size - 2) / 2;
+  border-left: $sim-checkbox-border-width solid currentColor;
+  transform: rotate(-45deg);
+  opacity: 1;
+}
