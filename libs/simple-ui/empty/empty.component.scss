@@ -1,0 +1,35 @@
+.sim-empty {
+  display: block;
+  margin: 0 8px;
+  text-align: center;
+}
+
+.sim-empty-image {
+  height: 100px;
+  margin-bottom: 8px;
+}
+
+.sim-empty-img {
+  height: 100%;
+}
+
+.sim-empty-img-default {
+  height: 100%;
+  margin: auto;
+}
+.sim-empty-img-default-ellipse {
+  fill: #f1f1f1;
+}
+.sim-empty-img-default-g {
+  stroke: #d9d9d9;
+}
+.sim-empty-img-default-path {
+  fill: #f5f5f5;
+}
+
+.sim-empty-description {
+  margin: 0;
+}
+.sim-empty-footer {
+  display: block;
+}

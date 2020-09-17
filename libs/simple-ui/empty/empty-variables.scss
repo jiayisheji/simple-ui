@@ -1,0 +1,8 @@
+// Density configuration for the empty.
+$sim-empty-density-config: (
+  margin: (
+    default: 16px,
+    maximum: 24px,
+    minimum: 16px
+  )
+) !default;

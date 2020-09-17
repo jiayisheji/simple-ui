@@ -1,0 +1,54 @@
+@import './empty-variables';
+
+$sim-empty: unquote(sim-empty);
+
+/// 注册组件
+@include sim-register-component($sim-empty);
+
+/// 主题风格
+@mixin sim-empty-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-empty) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-empty-color($color);
+    }
+    @if $density != null {
+      @include sim-empty-density($density);
+    }
+    @if $typography != null {
+      @include sim-empty-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-empty-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-empty-description {
+    color: sim-color($foreground, secondary-text);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-empty-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-empty {
+    font-size: sim-font-size($config, body2);
+    line-height: sim-line-height($config, body2);
+  }
+}
+
+/// 密度配置
+@mixin sim-empty-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+  .sim-empty-footer {
+    margin-top: sim-density-prop-value($sim-empty-density-config, $density-scale, margin);
+  }
+}
