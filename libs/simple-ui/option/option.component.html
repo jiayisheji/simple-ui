@@ -1,0 +1,9 @@
+<sim-pseudo-checkbox
+  class="sim-option-pseudo-checkbox"
+  *ngIf="multiple"
+  [state]="selected ? 'checked' : ''"
+  [disabled]="disabled"
+></sim-pseudo-checkbox>
+<div class="sim-option-text">
+  <ng-content></ng-content>
+</div>

@@ -13,6 +13,7 @@
 @import '../nprogress/nprogress.component.theme';
 @import '../spinner/spinner.component.theme';
 @import '../empty/empty.component.theme';
+@import '../option/option.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -30,5 +31,6 @@
   @include sim-nprogress-theme($config-or-theme);
   @include sim-spinner-theme($config-or-theme);
   @include sim-empty-theme($config-or-theme);
+  @include sim-option-theme($config-or-theme);
   /// @include component.theme
 }

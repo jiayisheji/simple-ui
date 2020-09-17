@@ -1,0 +1,88 @@
+@import './option-variables';
+
+$sim-option: unquote(sim-option);
+
+/// 注册组件
+@include sim-register-component($sim-option);
+
+/// 主题风格
+@mixin sim-option-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-option) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-option-color($color);
+    }
+    @if $density != null {
+      @include sim-option-density($density);
+    }
+    @if $typography != null {
+      @include sim-option-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-option-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-option {
+    color: sim-color($foreground, text);
+
+    &:hover:not(.sim-option-disabled),
+    &:focus:not(.sim-option-disabled) {
+      background: sim-color($background, hover);
+    }
+
+    &.sim-option-active {
+      color: sim-color($foreground, text);
+      background: sim-color($background, hover);
+    }
+
+    &.sim-option-disabled {
+      color: sim-color($foreground, disabled-text);
+    }
+  }
+
+  .sim-optgroup-label {
+    color: map-get($foreground, secondary-text);
+    background: map-get($background, list-option-group);
+  }
+
+  .sim-optgroup-disabled .sim-optgroup-label {
+    color: map-get($foreground, disabled-text);
+  }
+
+  // 循环获取调色板对象
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-#{$type} {
+      .sim-option.sim-option-selected:not(.sim-option-disabled) {
+        color: sim-color($color);
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-option-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-option {
+    font: {
+      size: sim-font-size($config, body2);
+    }
+  }
+  .sim-optgroup-label {
+    @include sim-typography-level-to-styles($config, subtitle);
+  }
+}
+
+/// 密度配置
+@mixin sim-option-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}
