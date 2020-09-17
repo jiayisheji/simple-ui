@@ -11,6 +11,7 @@
 @import '../alert/alert.component.theme';
 @import '../dialog/dialog.component.theme.scss';
 @import '../nprogress/nprogress.component.theme';
+@import '../spinner/spinner.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -26,5 +27,6 @@
   @include sim-alert-theme($config-or-theme);
   @include sim-dialog-theme($config-or-theme);
   @include sim-nprogress-theme($config-or-theme);
+  @include sim-spinner-theme($config-or-theme);
   /// @include component.theme
 }

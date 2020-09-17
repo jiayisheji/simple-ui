@@ -1,0 +1,102 @@
+.sim-spinner {
+  display: block;
+}
+
+.sim-spinner-content {
+  position: relative;
+}
+
+.sim-spinner-blur {
+  overflow: hidden;
+  transform: translateZ(0);
+  opacity: 0.7;
+  filter: blur(0.5px);
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background: #fff;
+    opacity: 0.3;
+    transition: all 0.3s;
+    content: '';
+  }
+}
+
+.sim-spinner-indicator {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+.sim-spinner-single .sim-spinner-loading {
+  position: relative;
+  line-height: 0;
+}
+
+.sim-spinner-wrapper {
+  position: relative;
+  .sim-spinner-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    text-align: center;
+  }
+  .sim-spinner-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -20px -10px -10px;
+  }
+  .sim-spinner-placeholder {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    padding-top: 5px;
+    text-shadow: 0 1px 2px #fff;
+  }
+}
+
+.sim-spinner-indicator-svg {
+  width: inherit;
+  height: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: top;
+  transform-origin: center center;
+  animation: rotate 2s linear infinite;
+}
+
+.sim-spinner-indicator-path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

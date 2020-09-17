@@ -1,0 +1,67 @@
+@import './spinner-variables';
+
+$sim-spinner: unquote(sim-spinner);
+
+/// 注册组件
+@include sim-register-component($sim-spinner);
+
+/// 主题风格
+@mixin sim-spinner-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-spinner) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-spinner-color($color);
+    }
+    @if $density != null {
+      @include sim-spinner-density($density);
+    }
+    @if $typography != null {
+      @include sim-spinner-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-spinner-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-#{$type} {
+      .sim-spinner-indicator-path {
+        stroke: sim-color($color);
+      }
+      .sim-spinner-placeholder {
+        color: sim-color($color);
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-spinner-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-spinner-placeholder {
+    font-size: sim-font-size($config, button);
+    line-height: sim-line-height($config, button);
+  }
+}
+
+/// 密度配置
+@mixin sim-spinner-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  @each $size, $scale in (small: minimum, medium: $density-scale, large: maximum) {
+    .sim-#{$size} {
+      .sim-spinner-indicator {
+        font-size: sim-density-prop-value($sim-spinner-density-config, $scale, font-size);
+      }
+    }
+  }
+}

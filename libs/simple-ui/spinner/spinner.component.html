@@ -1,0 +1,24 @@
+<div class="sim-spinner-loading" *ngIf="_isLoading">
+  <ng-template [ngTemplateOutlet]="indicator || defaultIndicatorTemplate"></ng-template>
+  <div class="sim-spinner-placeholder" *ngIf="placeholder && !single">{{ placeholder }}</div>
+</div>
+<div *ngIf="!single" class="sim-spinner-content" [class.sim-spinner-blur]="_isLoading">
+  <ng-content></ng-content>
+</div>
+<ng-template #defaultIndicatorTemplate>
+  <i class="sim-spinner-indicator">
+    <svg
+      class="sim-spinner-indicator-svg"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      width="100%"
+      height="100%"
+      viewBox="25 25 50 50"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <circle class="sim-spinner-indicator-path" cx="50" cy="50" r="20" fill="none" stroke-width="8" stroke-miterlimit="10"></circle>
+    </svg>
+  </i>
+</ng-template>

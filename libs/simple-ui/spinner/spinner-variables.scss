@@ -1,0 +1,8 @@
+// Density configuration for the spinner.
+$sim-spinner-density-config: (
+  font-size: (
+    default: 24px,
+    maximum: 32px,
+    minimum: 16px
+  )
+) !default;
