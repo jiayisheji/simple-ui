@@ -12,7 +12,7 @@ import {
 import { InputBoolean } from '@ngx-simple/core/decorators';
 import { isArray } from '@ngx-simple/core/typeof';
 import { SimSkeletonRow } from '@ngx-simple/simple-ui/skeleton';
-import { CardAnimations } from './card-animations';
+import { simCardAnimations } from './card-animations';
 
 @Component({
   selector: 'sim-card',
@@ -20,7 +20,7 @@ import { CardAnimations } from './card-animations';
   styleUrls: ['./card.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [CardAnimations.translateCard],
+  animations: [simCardAnimations.translateCard],
   host: {
     class: 'sim-card'
   }

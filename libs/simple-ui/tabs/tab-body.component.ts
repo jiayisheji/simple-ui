@@ -17,14 +17,14 @@ import { SafeAny } from '@ngx-simple/core/types';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { TabBodyOriginState, TabBodyPositionState } from './tab.type';
-import { TabsAnimations } from './tabs.animations';
+import { simTabsAnimations } from './tabs.animations';
 
 @Component({
   selector: 'sim-tab-body',
   templateUrl: './tab-body.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [TabsAnimations.translateTab]
+  animations: [simTabsAnimations.translateTab]
 })
 export class SimTabBodyComponent implements OnInit, OnDestroy {
   /** 作为活动选项卡，标签开始朝向中心设置动画时发出的事件。 */

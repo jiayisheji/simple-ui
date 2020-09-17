@@ -13,6 +13,7 @@ export type CanUnsubscribeCtor = Constructor<CanUnsubscribe>;
 /**
  * 用来扩充指令的`simUnsubscribe$`属性 指令销毁自动取消订阅
  * - 在rxjs的`.pipe(..., takeUntil(this.simUnsubscribe$))`使用
+ * - 也可以使用`.pipe(..., untilUnmounted(this))`
  * - 注意：如果在组件需要`ngOnDestroy`钩子，需要调用先调用 `super.ngOnDestroy()`
  */
 export function mixinUnsubscribe<T extends Constructor<{}>>(base: T): CanUnsubscribeCtor & T {

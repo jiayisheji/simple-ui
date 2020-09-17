@@ -1,7 +1,7 @@
 import { animate, AnimationTriggerMetadata, style, transition, trigger } from '@angular/animations';
 
 /** card-reveal动画 */
-export const CardAnimations: {
+export const simCardAnimations: {
   readonly translateCard: AnimationTriggerMetadata;
 } = {
   /** 动画沿着Y轴转运动. */

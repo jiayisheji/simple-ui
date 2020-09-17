@@ -1,7 +1,7 @@
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 
 /** tabs动画 */
-export const TabsAnimations: {
+export const simTabsAnimations: {
   readonly translateTab: AnimationTriggerMetadata;
 } = {
   /** 动画沿着X轴转运动. */
