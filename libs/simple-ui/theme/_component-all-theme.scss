@@ -16,6 +16,7 @@
 @import '../option/option.component.theme';
 @import '../dropdown/dropdown.component.theme';
 @import '../pseudo-checkbox/pseudo-checkbox.component.theme';
+@import '../expansion/expansion.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -36,5 +37,6 @@
   @include sim-option-theme($config-or-theme);
   @include sim-dropdown-theme($config-or-theme);
   @include sim-pseudo-checkbox-theme($config-or-theme);
+  @include sim-expansion-theme($config-or-theme);
   /// @include component.theme
 }

@@ -1,0 +1,14 @@
+<ng-content select="sim-expansion-panel-header"></ng-content>
+<div
+  class="sim-expansion-panel-content"
+  role="region"
+  [@bodyExpansion]="_getExpandedState()"
+  (@bodyExpansion.done)="_bodyAnimationDone.next($event)"
+  [attr.id]="id"
+  #body
+>
+  <div class="sim-expansion-panel-body">
+    <ng-content></ng-content>
+    <ng-template [cdkPortalOutlet]="portal"></ng-template>
+  </div>
+</div>

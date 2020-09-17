@@ -1,0 +1,85 @@
+@import './expansion-variables';
+
+$sim-expansion: unquote(sim-expansion);
+
+/// 注册组件
+@include sim-register-component($sim-expansion);
+
+/// 主题风格
+@mixin sim-expansion-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-expansion) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-expansion-color($color);
+    }
+    @if $density != null {
+      @include sim-expansion-density($density);
+    }
+    @if $typography != null {
+      @include sim-expansion-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-expansion-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-expansion-panel {
+    @include sim-theme-overridable-elevation(2, $config);
+
+    color: map-get($foreground, text);
+    background: map-get($background, card);
+  }
+
+  .sim-expansion-panel-action-row {
+    border-top-color: map-get($foreground, divider);
+  }
+
+  .sim-expansion-panel-header-title {
+    color: map-get($foreground, text);
+  }
+
+  .sim-expansion-panel-header-description,
+  .sim-expansion-indicator::after {
+    color: map-get($foreground, secondary-text);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-expansion-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-expansion-panel-header {
+    font: {
+      family: sim-font-family($config, subheading);
+      size: sim-font-size($config, subheading);
+      weight: sim-font-weight($config, subheading);
+    }
+  }
+
+  .sim-expansion-panel-content {
+    @include sim-typography-level-to-styles($config, body1);
+  }
+}
+
+/// 密度配置
+@mixin sim-expansion-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  $expanded-height: sim-density-prop-value($sim-expansion-density-config, $density-scale, expanded-height);
+  $collapsed-height: sim-density-prop-value($sim-expansion-density-config, $density-scale, collapsed-height);
+
+  .sim-expansion-panel-header {
+    height: $collapsed-height;
+
+    &.sim-expanded {
+      height: $expanded-height;
+    }
+  }
+}

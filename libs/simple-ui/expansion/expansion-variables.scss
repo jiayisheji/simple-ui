@@ -1,0 +1,13 @@
+// Density configuration for the expansion.
+$sim-expansion-density-config: (
+  collapsed-height: (
+    default: 36px,
+    maximum: 48px,
+    minimum: 36px
+  ),
+  expanded-height: (
+    default: 48px,
+    maximum: 64px,
+    minimum: 48px
+  )
+) !default;
