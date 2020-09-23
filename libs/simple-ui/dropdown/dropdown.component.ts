@@ -26,6 +26,7 @@ export class SimDropdownComponent implements AfterContentInit {
   overlayClass: string | string[] | Set<string> | { [key: string]: boolean };
   overlayVisible$ = new BehaviorSubject<boolean>(false);
   dismissOverlay$ = new BehaviorSubject<boolean>(false);
+  inputVisible$ = new BehaviorSubject<boolean>(false);
   _visibility: DropdownVisibility = 'bottom';
 
   @ViewChild(TemplateRef)

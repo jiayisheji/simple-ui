@@ -47,6 +47,7 @@ const _DropdownActionsMixinBase = mixinUnsubscribe(mixinColor(MixinElementRefBas
   }
 })
 export class SimDropdownActionsComponent extends _DropdownActionsMixinBase implements AfterContentInit {
+  /** 选择后自动关闭面板 */
   @Input()
   @InputBoolean<SimDropdownActionsComponent, 'selectable'>()
   selectable: boolean;

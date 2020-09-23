@@ -65,7 +65,7 @@ export class SimDropdownDirective implements OnChanges, AfterViewInit, OnDestroy
   @InputBoolean<SimDropdownDirective, 'disabled'>()
   disabled: boolean;
 
-  @Input('simDropdownTrigger') trigger: triggerType = 'click';
+  @Input('simDropdownTrigger') trigger: triggerType = 'hover';
 
   @Input('simDropdownVisible')
   @InputBoolean<SimDropdownDirective, 'visible'>()
@@ -168,6 +168,7 @@ export class SimDropdownDirective implements OnChanges, AfterViewInit, OnDestroy
         filter((visible: boolean) => {
           if (this.visible !== visible) {
             this.visibleChange.next(visible);
+            this._dropdownInstance.inputVisible$.next(visible);
           }
           this.visible = visible;
           if (!visible) {

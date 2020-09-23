@@ -158,7 +158,7 @@
 .sim-button-group {
   display: inline-flex;
   &:not(.sim-button-group-spaced) {
-    .sim-button-base {
+    .sim-button-base:not(.sim-fab-button) {
       border-radius: 0;
     }
   }

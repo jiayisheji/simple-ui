@@ -80,13 +80,15 @@ $sim-button-toggle: unquote(sim-button-toggle);
       .sim-button-toggle-focus-overlay {
         background-color: sim-color($color);
       }
-      &:hover {
+      &:not(.sim-button-toggle-disabled):hover {
         color: sim-color($color, text);
       }
       &.sim-button-toggle-checked {
         color: sim-color($color, default-contrast);
         background-color: sim-color($color);
-
+        &:not(.sim-button-toggle-disabled):hover {
+          color: sim-color($color, default-contrast);
+        }
         &:not(:first-child)::before {
           background-color: $divider-color;
         }
@@ -119,6 +121,16 @@ $sim-button-toggle: unquote(sim-button-toggle);
   $foreground: map-get($theme, foreground);
   $divider-color: sim-color($foreground, divider);
 
+  .sim-button-toggle-group-vertical & {
+    border-color: $divider-color;
+    border-style: solid;
+    border-width: 0 1px 1px;
+
+    &:first-child {
+      border-top: 1px solid $divider-color;
+    }
+  }
+
   & {
     color: sim-color($foreground, hint-text);
     border-color: $divider-color;
@@ -129,7 +141,7 @@ $sim-button-toggle: unquote(sim-button-toggle);
       border-left: 1px solid $divider-color;
     }
 
-    &:hover {
+    &:not(.sim-button-toggle-disabled):hover {
       color: sim-color($foreground, text);
     }
   }
@@ -157,16 +169,6 @@ $sim-button-toggle: unquote(sim-button-toggle);
           background-color: sim-color($color);
         }
       }
-    }
-  }
-
-  .sim-button-toggle-group-vertical & {
-    border-color: $divider-color;
-    border-style: solid;
-    border-width: 0 1px 1px;
-
-    &:first-child {
-      border-top: 1px solid $divider-color;
     }
   }
 
