@@ -87,5 +87,17 @@
   },
   // typescript
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "cSpell.words": ["PAGINATOR", "echarts", "hljs", "ngneat", "nprogress", "overridable", "stylelint", "tabset"]
+  "cSpell.words": [
+    "PAGINATOR",
+    "autofilled",
+    "datepicker",
+    "datetime",
+    "echarts",
+    "hljs",
+    "ngneat",
+    "nprogress",
+    "overridable",
+    "stylelint",
+    "tabset"
+  ]
 }

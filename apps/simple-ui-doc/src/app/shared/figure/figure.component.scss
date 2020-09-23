@@ -1,0 +1,85 @@
+.doc-figure {
+  display: block;
+  margin-top: 16px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.doc-figure > figure {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+}
+
+.doc-figure-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 120px;
+  padding: 20px;
+  color: #212121;
+  font-weight: 400;
+  background: #e8e8e8;
+}
+
+.doc-figure-media {
+  line-height: 0;
+}
+
+.doc-figure-bordered {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.doc-figcaption {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+.doc-figure-recommend {
+  border-top: 15px solid;
+}
+
+.doc-figure-recommend-label {
+  display: block;
+  margin: 0;
+  padding: 10px 0 2px;
+  font-weight: 500;
+  + p {
+    margin-top: 5px;
+  }
+}
+
+.doc-figcaption-label {
+  display: block;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 25px 0 2px;
+  font-weight: 500;
+}
+
+.doc-figure-recommend-do {
+  border-color: #2e7b32;
+  .doc-figure-recommend-label {
+    color: #2e7b32;
+  }
+}
+
+.doc-figure-recommend-dont {
+  border-color: #d32f2f;
+  .doc-figure-recommend-label {
+    color: #d32f2f;
+  }
+}
+
+.doc-figure-recommend-caution {
+  border-color: #f57f17;
+  .doc-figure-recommend-label {
+    color: #f57f17;
+  }
+}

@@ -1,0 +1,9 @@
+<ng-container [ngSwitch]="recommend">
+  <span class="doc-figure-recommend-label" *ngSwitchCase="'do'">推荐</span>
+  <span class="doc-figure-recommend-label" *ngSwitchCase="'dont'">禁止</span>
+  <span class="doc-figure-recommend-label" *ngSwitchCase="'caution'">警告</span>
+</ng-container>
+<ng-content select="doc-figcaption-label"></ng-content>
+<p>
+  <ng-content></ng-content>
+</p>
