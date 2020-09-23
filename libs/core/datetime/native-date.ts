@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SafeAny } from '@ngx-simple/core/types';
-import { SimDateAdapter, SimDateStyleName, SimDateUnitName } from './date-adapter';
+import { SimDateAdapter, SimDateStyleName } from './date-adapter';
+import { startOfDay, startOfMonth, startOfYear } from './operators';
 
 /**
  * 月份
@@ -64,6 +65,16 @@ export class SimNativeDate extends SimDateAdapter<Date> {
     return date;
   }
 
+  clampDatetime(date: Date, min?: Date | null, max?: Date | null): Date {
+    if (min && this.compareDatetime(date, min) < 0) {
+      return min;
+    }
+    if (max && this.compareDatetime(date, max) > 0) {
+      return max;
+    }
+    return date;
+  }
+
   clone(date: Date): Date {
     return new Date(date.getTime());
   }
@@ -72,11 +83,12 @@ export class SimNativeDate extends SimDateAdapter<Date> {
     return (
       this.getYear(first) - this.getYear(second) ||
       this.getMonth(first) - this.getMonth(second) ||
-      this.getDate(first) - this.getDate(second) ||
-      this.getHours(first) - this.getHours(second) ||
-      this.getMinutes(first) - this.getMinutes(second) ||
-      this.getSeconds(first) - this.getSeconds(second)
+      this.getDate(first) - this.getDate(second)
     );
+  }
+
+  compareDatetime(first: Date, second: Date): number {
+    return first.getTime() - second.getTime();
   }
 
   createDate(
@@ -124,9 +136,33 @@ export class SimNativeDate extends SimDateAdapter<Date> {
   }
 
   deserialize(value: SafeAny) {
+    // 如果是数字，那么就是时间戳 直接处理返回
+    // NaN也是数字 它有个特性自己不等于自己
+    if (typeof value === 'number' && value === value) {
+      const date = new Date(value);
+      if (this.isValid(date)) {
+        return date;
+      }
+    }
     if (typeof value === 'string') {
+      // 如果是字符串
+      // 1. 可能是字符串数字
+      // 2. 可能是简单时间格式 2019-01-10 or 2019/01/10
+      // 3. 可能是复杂格式
+      value = value.trim();
+
       if (!value) {
         return null;
+      }
+
+      // 处理时间戳字符串
+      const parsedNumber = +value;
+      // 任何只包含数字的字符串，如“1234”，但不包括“1234hello”
+      if (!isNaN(((value as unknown) as number) - parsedNumber)) {
+        const date = new Date(value);
+        if (this.isValid(date)) {
+          return date;
+        }
       }
 
       if (ISO_8601_REGEX.test(value)) {
@@ -139,65 +175,144 @@ export class SimNativeDate extends SimDateAdapter<Date> {
     return super.deserialize(value);
   }
 
-  endOf(date: Date, unit: SimDateUnitName): Date {
-    let month = 11;
-    let day = 31;
-    let hour = 23;
-    let minute = 59;
-    let second = 59;
-
-    switch (unit) {
-      case 'quarter':
-        const newDate = this.clone(date);
-        // "1 2 3 4 5 6 7 8 9 10 11 12".split(' ').map(i => +i + 3 - (i % 3 || 3) - 1)
-        // [2, 2, 2, 5, 5, 5, 8, 8, 8, 11, 11, 11]
-        month = this.getMonth(date) + 1;
-        month = month + 3 - (month % 3 || 3) - 1;
-        // 把获取季度最后一个设置给拷贝的时间
-        newDate.setMonth(month);
-        // 重新获取月份和日期
-        month = this.getMonth(newDate);
-        day = this.getNumDaysInMonth(newDate);
-        break;
-      case 'month':
-        month = this.getMonth(date);
-        day = this.getNumDaysInMonth(date);
-        break;
-      case 'week':
-        month = this.getMonth(date);
-        day = this.getDate(date) + ((this.getFirstDayOfWeek() + 6 - this.getDayOfWeek(date) + 7 * 1) % 7);
-        break;
-      case 'day':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        break;
-      case 'hour':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        hour = this.getHours(date);
-        break;
-      case 'minute':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        hour = this.getHours(date);
-        minute = this.getMinutes(date);
-        break;
-      case 'second':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        hour = this.getHours(date);
-        minute = this.getMinutes(date);
-        second = this.getSeconds(date);
-        break;
-    }
-
-    return this._createDateWithOverflow(this.getYear(date), month, day, hour, minute, second, 999);
-  }
-
   format(date: Date, displayFormat: string = 'yyyy-MM-dd'): string {
     if (!this.isValid(date)) {
       throw Error('NativeDateAdapter: Cannot format invalid date.');
     }
+    return this._format(date, displayFormat || 'yyyy-MM-dd');
+  }
+
+  getDate(date: Date): number {
+    return date.getDate();
+  }
+
+  getDayOfWeek(date: Date): number {
+    const weekEnd = this.getFirstDayOfWeek() ? 7 : 0;
+    return (date.getDay() || weekEnd) - (weekEnd ? 1 : 0);
+  }
+
+  getDayOfWeekNames(style: SimDateStyleName): string[] {
+    return DEFAULT_DAY_OF_WEEK_NAMES[style];
+  }
+
+  getFirstDayOfWeek(): number {
+    // 原生JS日期的第一天默认是星期天。
+    // 一般中国日历星期一是一周第一天
+    return 1;
+  }
+
+  getFirstDayOfWeekInMonth(date: Date): number {
+    return this.getDayOfWeek(startOfMonth(date));
+  }
+
+  getHours(date: Date): number {
+    return date.getHours();
+  }
+
+  getMinutes(date: Date): number {
+    return date.getMinutes();
+  }
+
+  getMonth(date: Date): number {
+    return date.getMonth();
+  }
+
+  getSeconds(date: Date): number {
+    return date.getSeconds();
+  }
+
+  getMonthNames(style: SimDateStyleName): string[] {
+    return DEFAULT_MONTH_NAMES[style];
+  }
+
+  getNumDaysInMonth(date: Date): number {
+    return this.getDate(this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
+  }
+
+  getNumWeekInYear(date: Date): number {
+    const firstDayOfYear = startOfYear(date).getTime() + this.getFirstDayOfWeek() * ONE_DAY_MILLISECONDS;
+    const toDay = startOfDay(date).getTime() + this.getFirstDayOfWeek() * ONE_DAY_MILLISECONDS;
+    return Math.ceil((toDay - firstDayOfYear) / (ONE_DAY_MILLISECONDS * 7));
+  }
+
+  getYear(date: Date): number {
+    return date.getFullYear();
+  }
+
+  invalid(): Date {
+    return new Date(NaN);
+  }
+
+  isDateInstance(obj: SafeAny): obj is Date {
+    return obj instanceof Date;
+  }
+
+  isValid(date: Date): boolean {
+    return !isNaN(date.getTime());
+  }
+
+  parse(value: string | number): Date | null {
+    if (typeof value === 'number') {
+      return new Date(value);
+    }
+    return value ? new Date(Date.parse(value)) : null;
+  }
+
+  sameDate(first: Date | null, second: Date | null): boolean {
+    if (first && second) {
+      const firstValid = this.isValid(first);
+      const secondValid = this.isValid(second);
+      if (firstValid && secondValid) {
+        return !this.compareDate(first, second);
+      }
+      return firstValid === secondValid;
+    }
+    return first === second;
+  }
+
+  sameDatetime(first: Date | null, second: Date | null): boolean {
+    if (first && second) {
+      const firstValid = this.isValid(first);
+      const secondValid = this.isValid(second);
+      if (firstValid && secondValid) {
+        return !this.compareDatetime(first, second);
+      }
+      return firstValid === secondValid;
+    }
+    return first === second;
+  }
+
+  toIso8601(date: Date): string {
+    return [date.getUTCFullYear(), this._2digit(date.getUTCMonth() + 1), this._2digit(date.getUTCDate())].join('-');
+  }
+
+  today(): Date {
+    return new Date();
+  }
+
+  private _2digit(n: number) {
+    return ('00' + n).slice(-2);
+  }
+
+  private _createDateWithOverflow(
+    year: number,
+    month: number,
+    date: number,
+    hours: number = 0,
+    minutes: number = 0,
+    seconds: number = 0,
+    milliseconds: number = 0
+  ) {
+    const result = new Date(year, month, date, hours, minutes, seconds, milliseconds);
+
+    /** JS new Date() 将[0，99]范围内的年份视为19xx的缩写 */
+    if (year >= 0 && year < 100) {
+      result.setFullYear(this.getYear(result) - 1900);
+    }
+    return result;
+  }
+
+  private _format(date: Date, displayFormat: string) {
     const makeReg = (value: number | string): RegExp => new RegExp(`(${value})`);
     const keys: string[] = ['M+', 'd+', 'H+', 'm+', 's+', 'q+', 'S'];
     const values: number[] = [
@@ -226,175 +341,5 @@ export class SimNativeDate extends SimDateAdapter<Date> {
       len++;
     }
     return displayFormat;
-  }
-
-  getDate(date: Date): number {
-    return date.getDate();
-  }
-
-  getDayOfWeek(date: Date): number {
-    const weekEnd = this.getFirstDayOfWeek() ? 7 : 0;
-    return (date.getDay() || weekEnd) - (weekEnd ? 1 : 0);
-  }
-
-  getDayOfWeekNames(style: SimDateStyleName): string[] {
-    return DEFAULT_DAY_OF_WEEK_NAMES[style];
-  }
-
-  getFirstDayOfWeek(): number {
-    // 中国星期一是一周第一天
-    return 1;
-  }
-
-  getFirstDayOfWeekInMonth(date: Date): number {
-    return this.getDayOfWeek(this.startOf(date, 'month'));
-  }
-
-  getHours(date: Date): number {
-    return date.getHours();
-  }
-
-  getMinutes(date: Date): number {
-    return date.getMinutes();
-  }
-
-  getMonth(date: Date): number {
-    return date.getMonth();
-  }
-
-  getSeconds(date: Date): number {
-    return date.getSeconds();
-  }
-
-  getMonthNames(style: SimDateStyleName): string[] {
-    return DEFAULT_MONTH_NAMES[style];
-  }
-
-  getNumDaysInMonth(date: Date): number {
-    return this.getDate(this._createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
-  }
-
-  getNumWeekInYear(date: Date): number {
-    const firstDayOfYear = this.startOf(date, 'year').getTime() + this.getFirstDayOfWeek() * ONE_DAY_MILLISECONDS;
-    const toDay = this.startOf(date, 'day').getTime() + this.getFirstDayOfWeek() * ONE_DAY_MILLISECONDS;
-    return Math.ceil((toDay - firstDayOfYear) / (ONE_DAY_MILLISECONDS * 7));
-  }
-
-  getValidDateOrNull(obj: SafeAny): Date | null {
-    return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
-  }
-
-  getYear(date: Date): number {
-    return date.getFullYear();
-  }
-
-  invalid(): Date {
-    return new Date(NaN);
-  }
-
-  isDateInstance(obj: SafeAny): obj is Date {
-    return obj instanceof Date;
-  }
-
-  isValid(date: Date): boolean {
-    return !isNaN(date.getTime());
-  }
-
-  parse(value: SafeAny): Date | null {
-    if (typeof value === 'number') {
-      return new Date(value);
-    }
-    return value ? new Date(Date.parse(value)) : null;
-  }
-
-  sameDate(first: Date | null, second: Date | null): boolean {
-    if (first && second) {
-      const firstValid = this.isValid(first);
-      const secondValid = this.isValid(second);
-      if (firstValid && secondValid) {
-        return !this.compareDate(first, second);
-      }
-      return firstValid === secondValid;
-    }
-    return first === second;
-  }
-
-  startOf(date: Date, unit: SimDateUnitName): Date {
-    let month = 0;
-    let day = 1;
-    let hour = 0;
-    let minute = 0;
-    let second = 0;
-
-    switch (unit) {
-      case 'quarter':
-        // "1 2 3 4 5 6 7 8 9 10 11 12".split(' ').map(i => +i - (i % 3 || 3))
-        // [0, 0, 0, 3, 3, 3, 6, 6, 6, 9, 9, 9]
-        month = this.getMonth(date) + 1;
-        month = month - (month % 3 || 3);
-        break;
-      case 'month':
-        month = this.getMonth(date);
-        break;
-      case 'week':
-        month = this.getMonth(date);
-        // 一周七天 getFirstDayOfWeek =》 一周从哪天开始 js默认0 周日 获取当前星期
-        day = this.getDate(date) + ((this.getFirstDayOfWeek() - this.getDayOfWeek(date) + 7 * -1) % 7);
-        break;
-      case 'day':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        break;
-      case 'hour':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        hour = this.getHours(date);
-        break;
-      case 'minute':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        hour = this.getHours(date);
-        minute = this.getMinutes(date);
-        break;
-      case 'second':
-        month = this.getMonth(date);
-        day = this.getDate(date);
-        hour = this.getHours(date);
-        minute = this.getMinutes(date);
-        second = this.getSeconds(date);
-        break;
-    }
-
-    return this._createDateWithOverflow(this.getYear(date), month, day, hour, minute, second);
-  }
-
-  toDate(obj: SafeAny): Date | null {
-    return this.getValidDateOrNull(obj);
-  }
-
-  today(): Date {
-    return new Date();
-  }
-
-  private _2digit(n: number) {
-    return ('00' + n).slice(-2);
-  }
-
-  private _createDateWithOverflow(
-    year: number,
-    month: number,
-    date: number,
-    hours: number = 0,
-    minutes: number = 0,
-    seconds: number = 0,
-    milliseconds: number = 0
-  ) {
-    const result = new Date(year, month, date, hours, minutes, seconds, milliseconds);
-
-    /** JS new Date() 将[0，99]范围内的年份视为19xx的缩写 */
-    if (year >= 0 && year < 100) {
-      result.setFullYear(this.getYear(result) - 1900);
-    }
-    return result;
   }
 }

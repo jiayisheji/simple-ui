@@ -7,18 +7,6 @@ import { SafeAny } from '@ngx-simple/core/types';
  * - narrow 更短的
  */
 export type SimDateStyleName = 'long' | 'short' | 'narrow';
-/**
- * 给定日期单位标识
- * - year 年
- * - quarter 季
- * - month 月
- * - week 周
- * - day 日
- * - hour 时
- * - minute 分
- * -second 秒
- */
-export type SimDateUnitName = 'year' | 'quarter' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second';
 
 export abstract class SimDateAdapter<D> {
   /**
@@ -57,6 +45,15 @@ export abstract class SimDateAdapter<D> {
   abstract clampDate(date: D, min?: D | null, max?: D | null): D;
 
   /**
+   * 将给定日期限制在最小日期时间和最大日期之间时间
+   * @param date 要确定的日期时间
+   * @param min 允许的最小值。如果为空或省略，则不执行最小值
+   * @param max 允许的最大值。如果为空或省略，则不执行最大值
+   * @returns 如果`date`小于`min`，则为`min`；如果`date`大于`max`，则为`max`，否则为`date`。
+   */
+  abstract clampDatetime(date: D, min?: D | null, max?: D | null): D;
+
+  /**
    * 克隆给定的日期
    * @param date 克隆日期
    * @returns 等于给定日期的新日期
@@ -70,6 +67,14 @@ export abstract class SimDateAdapter<D> {
    * @returns 如果日期相等，则为0；如果第一个日期较早，则小于0；如果第一个日期较晚，则大于0。
    */
   abstract compareDate(first: D, second: D): number;
+
+  /**
+   * 比较两个日期时间
+   * @param first 比较的第一个日期时间
+   * @param second 比较的第二个日期时间
+   * @returns 如果日期时间相等，则为0；如果第一个日期时间较早，则小于0；如果第一个日期时间较晚，则大于0。
+   */
+  abstract compareDatetime(first: D, second: D): number;
 
   /**
    * 使用给定的年，月，日，时，分，秒，毫秒创建日期
@@ -104,22 +109,6 @@ export abstract class SimDateAdapter<D> {
     }
     return this.invalid();
   }
-
-  /**
-   * 获取给定时间给定单位的结束时间
-   * @param date 给定时间
-   * @param unit 给定单位 'year' | 'quarter' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'
-   * - year 本年一月1日上午 00:00
-   * - quarter 本季度最后一个月最后一日上午 00:00
-   * - month 本月最后一日上午 00:00
-   * - week 本周最后一天上午 00:00 取决getFirstDayOfWeek方法
-   * - day 当日上午 00:00
-   * - hour 当前时间，0 分、0 秒、0 毫秒
-   * - minute 当前时间，0 秒、0 毫秒
-   * - second 当前时间，0 毫秒
-   * @returns 给定时间给定单位的结束时间
-   */
-  abstract endOf(date: D, unit: SimDateUnitName): D;
 
   /**
    * 根据给定的格式将日期格式化为字符串
@@ -210,11 +199,14 @@ export abstract class SimDateAdapter<D> {
   abstract getSeconds(date: D): number;
 
   /**
-   * 获取给定日期返回有效日期或者null
-   * @param obj 给定日期
-   * @returns 有效日期直接返回，无效日期返回null
+   * 给定一个潜在的日期对象，如果存在则返回相同的有效日期，如果不是有效日期，则为null。
+   * @param obj 要检查的对象
+   * @returns 返回有效日期或null
    */
-  abstract getValidDateOrNull(obj: SafeAny): D | null;
+  getValidDateOrNull(obj: unknown): D | null {
+    return this.isDateInstance(obj) && this.isValid(obj as D) ? (obj as D) : null;
+  }
+
   /**
    * 取给定日期的年份
    * @param date 给定日期
@@ -245,9 +237,9 @@ export abstract class SimDateAdapter<D> {
   /**
    * 根据用户提供的值解析日期
    * @param value 要解析的值
-   * @returns 解析日期
+   * @returns 解析的日期
    */
-  abstract parse(value: SafeAny): D | null;
+  abstract parse(value: string | number | D): D | null;
 
   /**
    * 检查两个日期是否相等
@@ -258,27 +250,19 @@ export abstract class SimDateAdapter<D> {
   abstract sameDate(first: D, second: D): boolean;
 
   /**
-   * 获取给定时间给定单位的开始时间
-   * @param date 给定时间
-   * @param unit 给定单位 'year' | 'quarter' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'
-   * - year 本年一月1日上午 00:00
-   * - quarter 本季度第一个月1日上午 00:00
-   * - month 本月1日上午 00:00
-   * - week 本周一上午 00:00 取决getFirstDayOfWeek方法
-   * - day 当日上午 00:00
-   * - hour 当前时间，0 分、0 秒、0 毫秒
-   * - minute 当前时间，0 秒、0 毫秒
-   * - second 当前时间，0 毫秒
-   * @returns 给定时间给定单位的开始时间
+   * 检查两个日期时间是否相等
+   * @param first 检查的第一次日期时间
+   * @param second 检查的第二次日期时间
+   * @returns 两个日期时间是否相等。空日期时间被认为等于其他空日期时间
    */
-  abstract startOf(date: D, unit: SimDateUnitName): D;
+  abstract sameDatetime(first: D, second: D): boolean;
 
   /**
-   * 尝试任意值转换成时间对象
-   * @param obj 任意值 string number Date
-   * @returns 时间对象或null
+   * 获取给定日期的 RFC 3339 (https://tools.ietf.org/html/rfc3339) 兼容字符串
+   * @param date 获取ISO日期字符串的日期
+   * @returns ISO日期字符串日期字符串
    */
-  abstract toDate(obj: SafeAny): D | null;
+  abstract toIso8601(date: D): string;
 
   /**
    * 获取今天的日期
