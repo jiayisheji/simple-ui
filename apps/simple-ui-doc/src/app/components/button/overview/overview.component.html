@@ -15,18 +15,24 @@
   <h2>三种不同的类型</h2>
   <p>按钮允许应用程序传达操作并指导用户意图。</p>
   <div class="doc-three-different-types">
-    <dl>
-      <dt><button sim-flat-button color="primary">填充按钮</button></dt>
-      <dd>填充按钮看起来很厚重。它们将用户的注意力转移到应用程序建议用户执行的主要操作上。</dd>
-    </dl>
-    <dl>
-      <dt><button sim-stroked-button color="primary">轮廓按钮</button></dt>
-      <dd>轮廓按钮提供了一种更轻的按钮样式。当页面上有许多同等重要的动作时，它们被用来表示一个次要操作或辅助主要操作，以减少视觉干扰。</dd>
-    </dl>
-    <dl>
-      <dt><button sim-button color="primary">文字按钮</button></dt>
-      <dd>文字按钮用于多种场景，它们被用作第三级按钮。它们还可以内联使用，因为它们在样式上与内容不同，可以作为内容旁边的按钮来识别。</dd>
-    </dl>
+    <doc-figure>
+      <button sim-flat-button color="primary">填充按钮</button>
+      <figcaption>
+        填充按钮看起来很厚重。它们将用户的注意力转移到应用程序建议用户执行的主要操作上。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-stroked-button color="primary">轮廓按钮</button>
+      <figcaption>
+        轮廓按钮提供了一种更轻的按钮样式。当页面上有许多同等重要的动作时，它们被用来表示一个次要操作或辅助主要操作，以减少视觉干扰。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-button color="primary">文字按钮</button>
+      <figcaption>
+        文字按钮用于多种场景，它们被用作第三级按钮。它们还可以内联使用，因为它们在样式上与内容不同，可以作为内容旁边的按钮来识别。
+      </figcaption>
+    </doc-figure>
   </div>
   <blockquote>
     <p><strong>文字按钮 VS 链接按钮</strong></p>
@@ -38,24 +44,20 @@
   <h2>摆放位置</h2>
   <p>关于按钮的放置，有两种不同的模式。</p>
   <div class="doc-placement">
-    <dl>
-      <dt>
-        <img src="assets/images/z_pattern.svg" alt="z_pattern" />
-      </dt>
-      <dd>
-        <h3>Z 模式</h3>
-        <p>Z模式是用户浏览受限容器中内容的自然方式，并且当任务从左上角定向并以容器的右下侧的主要号召性用语结束时。常用于对话框、向导等。</p>
-      </dd>
-    </dl>
-    <dl>
-      <dt><img src="assets/images/f_pattern.svg" alt="f_pattern" /></dt>
-      <dd>
-        <h3>F 模式</h3>
-        <p>
-          F模式是在不受限制的容器（例如页面本身上的表单）中浏览内容的自然方法。用户将逐行浏览内容，最后到达一个操作调用。常用于表单、卡片等。
-        </p>
-      </dd>
-    </dl>
+    <doc-figure media>
+      <img width="360px" height="250px" src="assets/images/z_pattern.svg" alt="z_pattern" />
+      <figcaption>
+        <doc-figcaption-label>Z 模式</doc-figcaption-label>
+        填充按钮看起来很厚重。它们将用户的注意力转移到应用程序建议用户执行的主要操作上。
+      </figcaption>
+    </doc-figure>
+    <doc-figure media>
+      <img width="360px" height="250px" src="assets/images/f_pattern.svg" alt="f_pattern" />
+      <figcaption>
+        <doc-figcaption-label>F 模式</doc-figcaption-label>
+        F模式是在不受限制的容器（例如页面本身上的表单）中浏览内容的自然方法。用户将逐行浏览内容，最后到达一个操作调用。常用于表单、卡片等。
+      </figcaption>
+    </doc-figure>
   </div>
   <h2>颜色和排版</h2>
   <p>一致的按钮样式使用户更容易识别在整个应用程序中采取操作的区域。</p>
@@ -64,18 +66,24 @@
   <h2>三种按钮尺寸</h2>
   <p>按钮的高度会和输入框、选择框相关联，当它们同时出现在表单中时。</p>
   <div class="doc-three-different-types">
-    <dl>
-      <dt><button sim-flat-button color="primary" size="large">较大按钮</button></dt>
-      <dd>较大按钮一般都是相对独立使用，用来增强号召性用语的内容区域。</dd>
-    </dl>
-    <dl>
-      <dt><button sim-flat-button color="primary">默认按钮</button></dt>
-      <dd>默认按钮一般用主要操作。</dd>
-    </dl>
-    <dl>
-      <dt><button sim-flat-button color="primary" size="small">较小按钮</button></dt>
-      <dd>小型按钮一般用比较次级操作，用来减少号召性用语的内容区域。</dd>
-    </dl>
+    <doc-figure>
+      <button sim-flat-button color="primary" size="large">较大按钮</button>
+      <figcaption>
+        较大按钮一般都是相对独立使用，用来增强号召性用语的内容区域。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="primary">默认按钮</button>
+      <figcaption>
+        默认按钮一般用主要操作。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="primary" size="small">较小按钮</button>
+      <figcaption>
+        小型按钮一般用比较次级操作，用来减少号召性用语的内容区域。
+      </figcaption>
+    </doc-figure>
   </div>
   <p>
     当
@@ -90,20 +98,28 @@
     主题色提供了应用程序之间的一致性。它训练用户在寻找操作时寻找那个颜色。这个操作主题色可以在所有类型的按钮、选项卡和其他与操作相关的组件中找到。
   </p>
   <div class="doc-colors">
-    <button sim-flat-button sim-raised-button>默认按钮</button>
-    <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
-    <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
-    <button sim-flat-button sim-raised-button color="info">信息按钮</button>
-    <button sim-flat-button sim-raised-button color="success">成功按钮</button>
-    <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
-    <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
-    <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
+    <doc-figure>
+      <sim-button-group spaced>
+        <button sim-flat-button sim-raised-button>默认按钮</button>
+        <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
+        <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
+        <button sim-flat-button sim-raised-button color="info">信息按钮</button>
+        <button sim-flat-button sim-raised-button color="success">成功按钮</button>
+        <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
+        <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
+        <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
+      </sim-button-group>
+    </doc-figure>
   </div>
   <p>如果在一组按钮中使用颜色强调操作，将主要操作安排在左侧，其次是次要操作，并将警告操作作为组中的最后一个按钮。</p>
   <div class="doc-colors">
-    <button sim-flat-button sim-raised-button color="primary">添加</button>
-    <button sim-flat-button sim-raised-button color="warning">修改</button>
-    <button sim-flat-button sim-raised-button color="danger">删除</button>
+    <doc-figure>
+      <sim-button-group spaced>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="warning">修改</button>
+        <button sim-flat-button sim-raised-button color="danger">删除</button>
+      </sim-button-group>
+    </doc-figure>
   </div>
   <h2>图标按钮</h2>
   <p>
@@ -111,27 +127,21 @@
   </p>
   <p>选择一个最能描述用户将要执行的操作的图标。用户可以避免使用未知或抽象的图标按钮。</p>
   <div class="doc-three-different-types">
-    <dl>
-      <dt>
-        <button sim-icon-button title="添加" sim-flat-button color="primary">
-          <sim-icon svgIcon="puls"></sim-icon>
-        </button>
-      </dt>
-    </dl>
-    <dl>
-      <dt>
-        <button sim-icon-button title="添加" sim-stroked-button color="primary">
-          <sim-icon svgIcon="puls"></sim-icon>
-        </button>
-      </dt>
-    </dl>
-    <dl>
-      <dt>
-        <button sim-icon-button title="添加" color="primary">
-          <sim-icon svgIcon="puls"></sim-icon>
-        </button>
-      </dt>
-    </dl>
+    <doc-figure>
+      <button sim-icon-button title="添加" sim-flat-button color="primary">
+        <sim-icon svgIcon="puls"></sim-icon>
+      </button>
+    </doc-figure>
+    <doc-figure>
+      <button sim-icon-button title="添加" sim-stroked-button color="primary">
+        <sim-icon svgIcon="puls"></sim-icon>
+      </button>
+    </doc-figure>
+    <doc-figure>
+      <button sim-icon-button title="添加" color="primary">
+        <sim-icon svgIcon="puls"></sim-icon>
+      </button>
+    </doc-figure>
   </div>
   <p></p>
   <p>
@@ -141,30 +151,24 @@
   </p>
   <p>如果有足够的空间，添加文本可帮助用户理解操作。使用图标启动图标按钮，然后输入文本。</p>
   <div class="doc-three-different-types">
-    <dl>
-      <dt>
-        <button sim-flat-button color="primary">
-          <sim-icon svgIcon="puls"></sim-icon>
-          添加
-        </button>
-      </dt>
-    </dl>
-    <dl>
-      <dt>
-        <button sim-stroked-button color="primary">
-          <sim-icon svgIcon="puls"></sim-icon>
-          添加
-        </button>
-      </dt>
-    </dl>
-    <dl>
-      <dt>
-        <button sim-flat-button color="danger">
-          <sim-icon svgIcon="delete"></sim-icon>
-          删除
-        </button>
-      </dt>
-    </dl>
+    <doc-figure>
+      <button sim-flat-button color="primary">
+        <sim-icon svgIcon="puls"></sim-icon>
+        添加
+      </button>
+    </doc-figure>
+    <doc-figure>
+      <button sim-stroked-button color="primary">
+        <sim-icon svgIcon="puls"></sim-icon>
+        添加
+      </button>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="danger">
+        <sim-icon svgIcon="delete"></sim-icon>
+        删除
+      </button>
+    </doc-figure>
   </div>
   <p></p>
   <h2>辅助功能样式</h2>
@@ -185,32 +189,4 @@
   <h2>可交互状态加载中</h2>
   <p>默认按钮是没有交互行为，给按钮扩充加载状态，当按钮进行异步操作时，加载状态很好给用户一个提示交互效果</p>
   <button sim-flat-button [loading]="loading$ | async" (click)="setLoading()" color="primary">加载中</button>
-  <h2>按钮分组</h2>
-  <p>默认按钮无间隙</p>
-  <sim-button-group>
-    <button sim-flat-button sim-raised-button>默认按钮</button>
-    <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
-    <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
-    <button sim-flat-button sim-raised-button color="info">信息按钮</button>
-    <button sim-flat-button sim-raised-button color="success">成功按钮</button>
-    <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
-    <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
-    <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
-  </sim-button-group>
-  <p></p>
-  <p>
-    通过添加
-    <code>spaced</code>
-    属性增加间隙
-  </p>
-  <sim-button-group spaced>
-    <button sim-flat-button sim-raised-button>默认按钮</button>
-    <button sim-flat-button sim-raised-button color="primary">主要按钮</button>
-    <button sim-flat-button sim-raised-button color="secondary">次要按钮</button>
-    <button sim-flat-button sim-raised-button color="info">信息按钮</button>
-    <button sim-flat-button sim-raised-button color="success">成功按钮</button>
-    <button sim-flat-button sim-raised-button color="warning">警告按钮</button>
-    <button sim-flat-button sim-raised-button color="danger">危险按钮</button>
-    <button sim-flat-button sim-raised-button disabled>禁用按钮</button>
-  </sim-button-group>
 </doc-viewer>

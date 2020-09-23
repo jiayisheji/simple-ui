@@ -1,0 +1,259 @@
+<doc-viewer>
+  <h2>何时使用</h2>
+  <p>
+    按钮组遵循正常的按钮设计准则。 有关类别和大小的所有
+    <code>Button</code>
+    选项都适用于
+    <code>Button Groups</code>
+    。 以下所有功能均可提供标准尺寸和小尺寸的填充，轮廓和文字。
+  </p>
+  <h2>三种不同的类型</h2>
+  <div class="doc-three-different-types">
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button color="primary">填充按钮</button>
+        <button sim-flat-button color="primary">填充按钮</button>
+      </sim-button-group>
+      <figcaption>
+        填充按钮看起来很厚重。它们将用户的注意力转移到应用程序建议用户执行的主要操作上。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-stroked-button color="primary">轮廓按钮</button>
+        <button sim-stroked-button color="primary">轮廓按钮</button>
+      </sim-button-group>
+      <figcaption>
+        轮廓按钮提供了一种更轻的按钮样式。当页面上有许多同等重要的动作时，它们被用来表示一个次要操作或辅助主要操作，以减少视觉干扰。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-button color="primary">文字按钮</button>
+        <button sim-button color="primary">文字按钮</button>
+      </sim-button-group>
+      <figcaption>
+        文字按钮用于多种场景，它们被用作第三级按钮。它们还可以内联使用，因为它们在样式上与内容不同，可以作为内容旁边的按钮来识别。
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>混合状态</h2>
+  <h3>按钮排列操作主次顺序</h3>
+  <div class="doc-placement">
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="warning">修改</button>
+        <button sim-flat-button sim-raised-button color="danger">删除</button>
+      </sim-button-group>
+      <figcaption recommend="do">
+        将主要操作安排在左侧，其次是次要操作，并将警告操作作为组中的最后一个按钮。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="danger">删除</button>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="warning">修改</button>
+      </sim-button-group>
+      <figcaption recommend="dont">
+        将警告操作安排为组中的第一个按钮，或者在主要操作之前有次要操作。
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h3>按钮组风格统一</h3>
+  <div class="doc-placement">
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="primary">修改</button>
+        <button sim-flat-button sim-raised-button color="primary" disabled>删除</button>
+      </sim-button-group>
+      <figcaption recommend="do">
+        使用状态颜色混合在一起以满足解决方案的需要时，要使用统一类型。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="primary">修改</button>
+        <button sim-flat-button sim-stroked-button color="primary" disabled>删除</button>
+      </sim-button-group>
+      <figcaption recommend="dont">
+        将类型混合在一起，例如填充按钮和轮廓按钮。
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>Icons</h2>
+  <h3>Icons组使用</h3>
+  <div class="doc-three-different-types">
+    <doc-figure>
+      <sim-button-group>
+        <button sim-icon-button title="添加" sim-flat-button color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+        <button sim-icon-button title="添加" sim-flat-button color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+        <button sim-icon-button title="添加" sim-flat-button color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+      </sim-button-group>
+      <figcaption recommend="do">
+        在icon按钮选择上，推荐选择
+        <code>sim-icon-button</code>
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-fab-button title="添加" sim-flat-button color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+        <button sim-fab-button title="添加" sim-flat-button color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+        <button sim-fab-button title="添加" sim-flat-button color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+      </sim-button-group>
+      <figcaption recommend="dont">
+        在icon按钮选择上，禁止选择填充按钮和轮廓按钮类型的
+        <code>sim-fab-button</code>
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-fab-button title="添加" color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+        <button sim-fab-button title="添加" color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+        <button sim-fab-button title="添加" color="primary">
+          <sim-icon svgIcon="puls"></sim-icon>
+        </button>
+      </sim-button-group>
+      <figcaption recommend="caution">
+        在icon按钮选择上，禁止选择文字按钮类型的
+        <code>sim-fab-button</code>
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>容纳不下的按钮</h2>
+  <p>
+    当按钮组大于其容纳空间时使用溢出，或用于保留空间。溢出是可配置的，因此我们可以将按钮操作分配给
+    <a sim-link-button [routerLink]="['/components/dropdown']">下拉菜单(Dropdown)</a>
+    。
+  </p>
+  <div class="doc-colors">
+    <doc-figure>
+      <sim-button-group spaced>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="primary">修改</button>
+        <button sim-flat-button sim-raised-button color="primary" [simDropdown]="dropdown" simDropdownPosition="bottomStart">
+          更多...
+        </button>
+        <sim-dropdown #dropdown>
+          <sim-dropdown-actions selectable (selectionChange)="selectionChange($event)">
+            <sim-option value="1">
+              操作按钮 1
+            </sim-option>
+            <sim-option value="2">
+              操作按钮 2
+            </sim-option>
+            <sim-option value="3">
+              操作按钮 3
+            </sim-option>
+          </sim-dropdown-actions>
+        </sim-dropdown>
+      </sim-button-group>
+    </doc-figure>
+  </div>
+  <h2>多个按钮组</h2>
+  <div class="doc-placement">
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="primary">修改</button>
+      </sim-button-group>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="danger">修改</button>
+        <button sim-flat-button sim-raised-button color="danger">删除</button>
+      </sim-button-group>
+      <figcaption recommend="do">
+        首先采取主要操作，然后采取次要操作。
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="danger">修改</button>
+        <button sim-flat-button sim-raised-button color="danger">删除</button>
+      </sim-button-group>
+      <sim-button-group>
+        <button sim-flat-button sim-raised-button color="primary">添加</button>
+        <button sim-flat-button sim-raised-button color="primary">修改</button>
+      </sim-button-group>
+      <figcaption recommend="dont">
+        先进行次要操作，再进行主要操作。
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>Checkbox</h2>
+  <p>
+    当可以从中选择一小部分选项时使用，类似于
+    <a sim-link-button [routerLink]="['/components/checkbox']">Checkbox</a>
+    组件
+  </p>
+  <ul>
+    <li>默认外观填充表示已选择一个选项，轮廓表示未选择的选项</li>
+    <li>用户可以单击按钮进行选择，然后再次单击以取消选择</li>
+    <li>可以配置预选选项</li>
+  </ul>
+  <div class="doc-colors">
+    <doc-figure>
+      <sim-button-toggle-group multiple color="primary">
+        <sim-button-toggle value="left">
+          format_align_left
+        </sim-button-toggle>
+        <sim-button-toggle value="center">
+          format_align_center
+        </sim-button-toggle>
+        <sim-button-toggle value="right">
+          format_align_right
+        </sim-button-toggle>
+        <sim-button-toggle value="justify" disabled>
+          format_align_justify
+        </sim-button-toggle>
+      </sim-button-toggle-group>
+    </doc-figure>
+  </div>
+  <h2>Radio</h2>
+  <p>
+    当从一个小的选项列表中选择一个选项时使用，类似于
+    <a sim-link-button [routerLink]="['/components/radio']">Radio</a>
+    组件
+  </p>
+  <ul>
+    <li>默认外观填充表示已选择一个选项，轮廓表示未选择的选项</li>
+    <li>用户可以单击按钮进行选择，然后再次单击同样的选项无法取消选择</li>
+    <li>可以配置预选选项</li>
+  </ul>
+  <div class="doc-colors">
+    <doc-figure>
+      <sim-button-toggle-group color="primary">
+        <sim-button-toggle value="left">
+          format_align_left
+        </sim-button-toggle>
+        <sim-button-toggle value="center">
+          format_align_center
+        </sim-button-toggle>
+        <sim-button-toggle value="right">
+          format_align_right
+        </sim-button-toggle>
+        <sim-button-toggle value="justify" disabled>
+          format_align_justify
+        </sim-button-toggle>
+      </sim-button-toggle-group>
+    </doc-figure>
+  </div>
+</doc-viewer>

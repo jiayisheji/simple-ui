@@ -15,6 +15,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: '按钮'
       },
       {
+        path: 'button-group',
+        name: '按钮组'
+      },
+      {
         path: 'divider',
         name: '分割线'
       }
@@ -27,6 +31,16 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
   {
     path: '',
     name: '数据展示',
+    children: [
+      // {
+      //   path: 'tabs',
+      //   name: '标签页'
+      // }
+    ]
+  },
+  {
+    path: '',
+    name: '表单控件',
     children: [
       // {
       //   path: 'tabs',
