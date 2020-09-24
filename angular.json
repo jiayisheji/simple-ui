@@ -28,15 +28,24 @@
                 "glob": "**/*",
                 "input": "apps/simple-ui-doc/src/app/examples",
                 "output": "/assets/examples",
-                "ignore": ["**/index.ts"]
+                "ignore": [
+                  "**/index.ts"
+                ]
               }
             ],
-            "styles": ["apps/simple-ui-doc/src/styles.scss", "./node_modules/highlight.js/styles/github.css"],
+            "styles": [
+              "apps/simple-ui-doc/src/styles.scss",
+              "./node_modules/highlight.js/styles/github.css"
+            ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/simple-ui-doc/src/styles"]
+              "includePaths": [
+                "apps/simple-ui-doc/src/styles"
+              ]
             },
-            "allowedCommonJsDependencies": ["highlight.js"]
+            "allowedCommonJsDependencies": [
+              "highlight.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,8 +98,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/simple-ui-doc/tsconfig.app.json", "apps/simple-ui-doc/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/simple-ui-doc/**/*"]
+            "tsConfig": [
+              "apps/simple-ui-doc/tsconfig.app.json",
+              "apps/simple-ui-doc/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/simple-ui-doc/**/*"
+            ]
           }
         },
         "test": {
@@ -125,8 +140,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/simple-ui-doc-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/simple-ui-doc-e2e/**/*"]
+            "tsConfig": [
+              "apps/simple-ui-doc-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/simple-ui-doc-e2e/**/*"
+            ]
           }
         }
       }
@@ -152,14 +172,22 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/simple-ui/tsconfig.lib.json", "libs/simple-ui/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/simple-ui/**/*"]
+            "tsConfig": [
+              "libs/simple-ui/tsconfig.lib.json",
+              "libs/simple-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/simple-ui/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "testPathPattern": ["libs/simple-ui"],
+            "testPathPattern": [
+              "libs/simple-ui"
+            ],
             "jestConfig": "libs/simple-ui/jest.config.js",
             "tsConfig": "libs/simple-ui/tsconfig.spec.json",
             "passWithNoTests": true,
@@ -198,8 +226,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/highlight/tsconfig.lib.json", "libs/highlight/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/highlight/**/*"]
+            "tsConfig": [
+              "libs/highlight/tsconfig.lib.json",
+              "libs/highlight/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/highlight/**/*"
+            ]
           }
         },
         "test": {
@@ -239,8 +273,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/core/tsconfig.lib.json", "libs/core/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/core/**/*"]
+            "tsConfig": [
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core/**/*"
+            ]
           }
         },
         "test": {
@@ -249,7 +289,7 @@
             "jestConfig": "libs/core/jest.config.js",
             "tsConfig": "libs/core/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "libs/core/src/test-setup.ts"
+            "setupFile": "libs/core/test-setup.ts"
           }
         }
       },
