@@ -19,3 +19,10 @@
     }
   }
 }
+
+// 确保溢出容器的行将隐藏溢出并使用省略号整齐地截断。
+@mixin sim-truncate-line() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

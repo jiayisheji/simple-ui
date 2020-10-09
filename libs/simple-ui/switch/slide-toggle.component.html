@@ -1,0 +1,42 @@
+<label class="sim-switch-label" #label [attr.for]="inputId">
+  <div class="sim-switch-bar" [class.sim-switch-bar-no-side-margin]="!labelContent.textContent || !labelContent.textContent.trim()">
+    <input
+      #input
+      class="sim-switch-input cdk-visually-hidden"
+      type="checkbox"
+      role="switch"
+      [attr.id]="inputId"
+      [required]="required"
+      [tabIndex]="tabIndex"
+      [checked]="checked"
+      [disabled]="disabled"
+      [attr.name]="name"
+      (change)="onChangeEvent($event)"
+      (click)="onInputClick($event)"
+    />
+    <div class="sim-switch-thumb-container" #thumbContainer>
+      <div class="sim-switch-thumb"></div>
+      <div class="sim-switch-loading-icon" *ngIf="loading && !disabled">
+        <svg
+          preserveAspectRatio="xMidYMid meet"
+          height="1em"
+          width="1em"
+          fill="none"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="currentColor"
+        >
+          <g fill-rule="evenodd" stroke-width="2">
+            <circle opacity=".3" cx="12" cy="12" r="11"></circle>
+            <path d="M12 1c2.8 0 5.6 1.1 7.8 3.2 4.3 4.3 4.3 11.3 0 15.6s-11.3 4.3-15.6 0"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <span class="sim-switch-content" #labelContent (cdkObserveContent)="_onLabelTextChange()">
+    <!-- Add an invisible span so JAWS can read the label -->
+    <span style="display: none;">&nbsp;</span>
+    <ng-content></ng-content>
+  </span>
+</label>

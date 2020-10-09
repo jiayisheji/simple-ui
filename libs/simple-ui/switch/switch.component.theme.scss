@@ -1,0 +1,116 @@
+@import './switch-variables';
+
+$sim-switch: unquote(sim-switch);
+
+/// 注册组件
+@include sim-register-component($sim-switch);
+
+/// 主题风格
+@mixin sim-switch-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-switch) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-switch-color($color);
+    }
+    @if $density != null {
+      @include sim-switch-density($density);
+    }
+    @if $typography != null {
+      @include sim-switch-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-switch-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  $thumb-checked-hue: default;
+  $thumb-unchecked-hue: if($is-dark, 400, 50);
+  $bar-unchecked-color: sim-color($foreground, disabled);
+
+  .sim-switch-loading-icon {
+    color: $bar-unchecked-color;
+  }
+
+  .sim-slide-toggle {
+    // 循环获取调色板对象
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $palette: map-get($config, $type);
+      &.sim-#{$type} {
+        @include _sim-switch-outset-checked($palette, $thumb-checked-hue);
+      }
+    }
+
+    &.sim-switch-checked {
+      .sim-switch-loading-icon {
+        color: sim-color(map-get($config, grays), $thumb-unchecked-hue);
+      }
+    }
+  }
+
+  .sim-switch-toggle {
+    // 循环获取调色板对象
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $palette: map-get($config, $type);
+      &.sim-#{$type} {
+        @include _sim-switch-inset-checked($palette, $thumb-checked-hue);
+      }
+    }
+  }
+
+  .sim-switch-children {
+    color: sim-color($background, raised-button);
+  }
+
+  .sim-switch-bar {
+    background: $bar-unchecked-color;
+  }
+
+  .sim-switch-thumb {
+    @include sim-theme-elevation(1, $config);
+
+    background-color: sim-color(map-get($config, grays), $thumb-unchecked-hue);
+  }
+}
+
+@mixin _sim-switch-outset-checked($palette, $thumb-checked-hue) {
+  &.sim-switch-checked {
+    .sim-switch-thumb {
+      background-color: sim-color($palette, $thumb-checked-hue);
+    }
+    .sim-switch-bar {
+      background-color: sim-color($palette, $thumb-checked-hue, 0.54);
+    }
+    .sim-switch-children {
+      color: sim-color($palette, default-contrast);
+    }
+  }
+}
+
+@mixin _sim-switch-inset-checked($palette, $thumb-checked-hue) {
+  &.sim-switch-checked {
+    .sim-switch-bar {
+      background-color: sim-color($palette, $thumb-checked-hue);
+    }
+    .sim-switch-loading-icon {
+      color: sim-color($palette, $thumb-checked-hue);
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-switch-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-switch-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

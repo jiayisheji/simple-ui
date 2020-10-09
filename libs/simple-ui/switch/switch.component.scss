@@ -1,0 +1,146 @@
+@import '../theme/abstracts/mixins';
+
+.sim-switch {
+  display: inline-block;
+  height: 24px;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sim-switch-label {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  height: inherit;
+  cursor: pointer;
+}
+
+.sim-switch-content {
+  @include sim-truncate-line();
+}
+
+.sim-switch-thumb-container {
+  position: absolute;
+  z-index: 1;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.36s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.sim-switch-thumb {
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+  border-radius: 50%;
+}
+
+.sim-switch-loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1em;
+  height: 1em;
+  transform: translate(-50%, -50%);
+  svg {
+    vertical-align: text-top;
+    animation: loadingCircle 1s linear infinite;
+  }
+}
+
+.sim-switch-bar {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 44px;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 100px;
+  transition: all 0.36s;
+  user-select: none;
+}
+
+.sim-slide-toggle {
+  .sim-switch-thumb-container {
+    top: -5px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+  }
+
+  .sim-switch-bar {
+    height: 14px;
+    margin-right: 8px;
+    margin-left: 0;
+  }
+}
+
+.sim-switch-toggle {
+  .sim-switch-thumb-container {
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+  }
+  &.sim-switch-checked {
+    .sim-switch-thumb-container {
+      margin-left: -2px;
+    }
+  }
+
+  .sim-switch-bar {
+    height: 22px;
+  }
+}
+
+.sim-switch-bar.sim-switch-bar-no-side-margin {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.sim-switch-label-before {
+  .sim-switch-content {
+    order: 1;
+  }
+  .sim-switch-bar {
+    order: 2;
+    margin-right: 0;
+    margin-left: 8px;
+  }
+}
+
+.sim-switch.sim-switch-checked {
+  .sim-switch-thumb-container {
+    left: 100%;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.sim-switch-children {
+  display: block;
+  margin-right: 6px;
+  margin-left: 24px;
+  font-size: 12px;
+}
+
+.sim-switch-checked .sim-switch-children {
+  margin-right: 24px;
+  margin-left: 6px;
+}
+
+.sim-switch-disabled,
+.sim-switch-loading {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@keyframes loadingCircle {
+  to {
+    transform: rotate(360deg);
+  }
+}

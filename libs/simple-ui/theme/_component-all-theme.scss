@@ -18,6 +18,7 @@
 @import '../pseudo-checkbox/pseudo-checkbox.component.theme';
 @import '../expansion/expansion.component.theme';
 @import '../status/status.component.theme';
+@import '../switch/switch.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -40,5 +41,6 @@
   @include sim-pseudo-checkbox-theme($config-or-theme);
   @include sim-expansion-theme($config-or-theme);
   @include sim-status-theme($config-or-theme);
+  @include sim-switch-theme($config-or-theme);
   /// @include component.theme
 }

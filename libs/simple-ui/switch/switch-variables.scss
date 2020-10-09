@@ -1,0 +1,8 @@
+// Density configuration for the switch.
+$sim-switch-density-config: (
+  height: (
+    default: 16px,
+    maximum: 24px,
+    minimum: 16px
+  )
+) !default;
