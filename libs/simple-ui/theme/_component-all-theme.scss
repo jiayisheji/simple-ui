@@ -19,6 +19,7 @@
 @import '../expansion/expansion.component.theme';
 @import '../status/status.component.theme';
 @import '../switch/switch.component.theme';
+@import '../sort/sort.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -42,5 +43,6 @@
   @include sim-expansion-theme($config-or-theme);
   @include sim-status-theme($config-or-theme);
   @include sim-switch-theme($config-or-theme);
+  @include sim-sort-theme($config-or-theme);
   /// @include component.theme
 }

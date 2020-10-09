@@ -1,0 +1,61 @@
+@import './sort-variables';
+
+$sim-sort: unquote(sim-sort);
+
+/// 注册组件
+@include sim-register-component($sim-sort);
+
+/// 主题风格
+@mixin sim-sort-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-sort) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-sort-color($color);
+    }
+    @if $density != null {
+      @include sim-sort-density($density);
+    }
+    @if $typography != null {
+      @include sim-sort-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-sort-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-sort-header:not(.sim-sort-header-disabled):hover {
+    background: map-get($background, hover);
+  }
+
+  .sim-sort-header-arrow {
+    color: sim-color($foreground, hint-text);
+  }
+
+  // 循环获取调色板对象
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-#{$type} {
+      .sim-sort-header-arrow-active {
+        color: sim-color($color, text);
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-sort-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-sort-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

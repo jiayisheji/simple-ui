@@ -1,0 +1,41 @@
+.sim-sort-header-container {
+  display: flex;
+  align-items: center;
+  letter-spacing: normal;
+  outline: 0;
+  cursor: pointer;
+
+  .sim-sort-header-disabled & {
+    cursor: default;
+  }
+}
+
+.sim-sort-header {
+  transition: background 0.3s ease;
+}
+
+.sim-sort-header-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.sim-sort-header-position-before {
+  flex-direction: row-reverse;
+}
+
+.sim-sort-header-arrow {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 8px;
+  .sim-sort-header-disabled & {
+    display: none;
+  }
+}
+
+.sim-sort-header-arrow-icon {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 0;
+}
