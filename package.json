@@ -44,6 +44,7 @@
     "@nrwl/angular": "10.0.10",
     "highlight.js": "^10.1.2",
     "rxjs": "~6.5.5",
+    "sast": "^0.8.1",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.2"
   },
@@ -58,7 +59,7 @@
     "@ngneat/spectator": "^5.13.0",
     "@nrwl/cypress": "10.0.10",
     "@nrwl/jest": "10.0.10",
-    "@nrwl/nx-cloud": "latest",
+    "@nrwl/nx-cloud": "^10.1.1",
     "@nrwl/workspace": "10.0.10",
     "@types/jest": "25.1.4",
     "@types/node": "~8.9.4",
@@ -91,17 +92,5 @@
   },
   "engines": {
     "node": ">=12.16.0"
-  },
-  "lint-staged": {
-    "{apps,libs}/**/*.{ts,json,md,scss,html}": [
-      "npx nx affected:lint --uncommitted --parallel --fix=true",
-      "npx nx format:write --uncommitted"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
   }
 }
