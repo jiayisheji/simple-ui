@@ -1,0 +1,8 @@
+// Density configuration for the status.
+$sim-status-density-config: (
+  margin: (
+    default: 16px,
+    maximum: 24px,
+    minimum: 16px
+  )
+) !default;

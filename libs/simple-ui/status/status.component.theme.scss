@@ -1,0 +1,70 @@
+@import './status-variables';
+
+$sim-status: unquote(sim-status);
+
+/// 注册组件
+@include sim-register-component($sim-status);
+
+/// 主题风格
+@mixin sim-status-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-status) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-status-color($color);
+    }
+    @if $density != null {
+      @include sim-status-density($density);
+    }
+    @if $typography != null {
+      @include sim-status-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-status-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-status,
+  .sim-status-default {
+    @include _sim-status-dot-color(map-get($background, status-bar));
+  }
+
+  .sim-status-success {
+    @include _sim-status-dot-color(sim-color(map-get($config, success)));
+  }
+  .sim-status-warning {
+    @include _sim-status-dot-color(sim-color(map-get($config, warning)));
+  }
+  .sim-status-error {
+    @include _sim-status-dot-color(sim-color(map-get($config, danger)));
+  }
+  .sim-status-processing {
+    @include _sim-status-dot-color(sim-color(map-get($config, info)));
+    .sim-status-dot::after {
+      border-color: sim-color(map-get($config, info));
+    }
+  }
+}
+
+@mixin _sim-status-dot-color($color) {
+  & .sim-status-dot {
+    background-color: $color;
+  }
+}
+
+/// 字体排版配置
+@mixin sim-status-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-status-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

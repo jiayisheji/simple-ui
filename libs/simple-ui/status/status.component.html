@@ -1,0 +1,12 @@
+<label class="sim-status-label" #label>
+  <div
+    class="sim-status-dot"
+    [style.background-color]="color"
+    [class.sim-status-dot-no-side-margin]="!labelContent.textContent || !labelContent.textContent.trim()"
+  ></div>
+  <span class="sim-status-content" #labelContent>
+    <!-- Add an invisible span so JAWS can read the label -->
+    <span style="display: none;">&nbsp;</span>
+    <ng-content></ng-content>
+  </span>
+</label>

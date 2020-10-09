@@ -1,0 +1,55 @@
+.sim-status {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.sim-status-dot {
+  $status-dot-size: 8px;
+
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  width: $status-dot-size;
+  height: $status-dot-size;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.sim-status-dot-no-side-margin {
+  margin: 0;
+}
+
+.sim-status-processing .sim-status-dot::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: {
+    width: 1px;
+    style: solid;
+    radius: 50%;
+  }
+
+  animation: simStatusProcessing 1.2s ease-in-out infinite;
+  content: '';
+}
+
+@keyframes simStatusProcessing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
