@@ -2,7 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { environment } from '@doc/env/environment';
+import { environment } from '@doc/env';
+import { SimEventModule } from '@ngx-simple/core/events';
 import { SIM_HIGHLIGHT_OPTIONS } from '@ngx-simple/highlight';
 import { SimButtonModule } from '@ngx-simple/simple-ui/button';
 import { SimIconService } from '@ngx-simple/simple-ui/icon';
@@ -16,6 +17,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SimEventModule,
     AppRoutingModule,
     SimButtonModule,
     SimNprogressModule,
