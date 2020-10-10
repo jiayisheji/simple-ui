@@ -4,6 +4,25 @@
     "angular.ng-template",
     "ms-vscode.vscode-typescript-tslint-plugin",
     "esbenp.prettier-vscode",
-    "knisterpeter.vscode-commitizen"
+    "knisterpeter.vscode-commitizen",
+    "mikael.angular-beastcode",
+    "coenraads.bracket-pair-colorizer-2",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "mhutchie.git-graph",
+    "donjayamanne.githistory",
+    "eamodio.gitlens",
+    "eamodio.gitlens",
+    "eamodio.gitlens",
+    "shd101wyy.markdown-preview-enhanced",
+    "davidanson.vscode-markdownlint",
+    "ionutvmi.path-autocomplete",
+    "ionutvmi.path-autocomplete",
+    "cssho.vscode-svgviewer",
+    "xabikos.javascriptsnippets",
+    "formulahendry.auto-close-tag",
+    "steoates.autoimport",
+    "formulahendry.auto-rename-tag",
+    "ecmel.vscode-html-css"
   ]
 }

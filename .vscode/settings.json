@@ -87,9 +87,15 @@
   },
   // typescript
   "typescript.tsdk": "node_modules\\typescript\\lib",
+  // commitizen
+  "commitizen.subjectLength": 150,
+  // stylelint
+  "stylelint.syntax": "scss",
+  "stylelint.validate": ["sass", "scss"],
   "cSpell.words": [
     "PAGINATOR",
     "autofilled",
+    "autosize",
     "datepicker",
     "datetime",
     "echarts",
@@ -97,6 +103,7 @@
     "ngneat",
     "nprogress",
     "overridable",
+    "readonly",
     "stylelint",
     "tabset"
   ]

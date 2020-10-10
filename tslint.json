@@ -11,7 +11,7 @@
         "limit": 140,
         "check-strings": true,
         "check-regex": true,
-        "ignore-pattern": "//\\s+https?://"
+        "ignore-pattern": "//\\s+https?:// | ^data:image"
       }
     ],
     "arrow-return-shorthand": true,
@@ -24,13 +24,9 @@
     "import-blacklist": [true, "rxjs/Rx"],
     "interface-over-type-literal": true,
     "member-access": [true, "no-public"],
+    "prefer-literal": [true, "object"],
     "ordered-imports": false,
-    "member-ordering": [
-      true,
-      {
-        "order": ["static-field", "instance-field", "static-method", "instance-method"]
-      }
-    ],
+    "member-ordering": false,
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
@@ -41,6 +37,17 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type", "check-preblock"],
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-shadowed-variable": true,
@@ -55,7 +62,8 @@
     "radix": true,
     "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
-    "variable-name": false,
+    "quotemark": [true, "single", "avoid-escape"],
+    "one-line": [true, "check-catch", "check-else", "check-open-brace", "check-whitespace"],
     "nx-enforce-module-boundaries": [
       true,
       {
