@@ -1,0 +1,18 @@
+<p>基本分页</p>
+<sim-paginator [pageIndex]="pageIndex" [pageTotal]="500" (pageChange)="pageIndex = $event.pageIndex"></sim-paginator>
+<p>自定义数据提示</p>
+<sim-paginator [pageIndex]="pageIndex" [pageTotal]="500" (pageChange)="pageIndex = $event.pageIndex">
+  <ng-template #simPaginatorTotal let-total let-range="range">{{ range[0] }}-{{ range[1] }} of {{ total }} items</ng-template>
+</sim-paginator>
+<p>自定义页码</p>
+<sim-paginator [pageIndex]="2" [pageTotal]="500">
+  <ng-template #simPaginatorItem let-page>
+    <ng-container [ngSwitch]="page.type">
+      <ng-container *ngSwitchCase="'page'">{{ page.text }}</ng-container>
+      <ng-container *ngSwitchCase="'prev'">Previous</ng-container>
+      <ng-container *ngSwitchCase="'next'">Next</ng-container>
+      <ng-container *ngSwitchCase="'prev_5'">«</ng-container>
+      <ng-container *ngSwitchCase="'next_5'">»</ng-container>
+    </ng-container>
+  </ng-template>
+</sim-paginator>

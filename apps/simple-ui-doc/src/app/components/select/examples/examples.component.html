@@ -1,0 +1,6 @@
+<sim-select color="primary">
+  <sim-option>--</sim-option>
+  <sim-option *ngFor="let item of ['北京', '上海', '深圳']" [value]="item">
+    {{ item }}
+  </sim-option>
+</sim-select>
