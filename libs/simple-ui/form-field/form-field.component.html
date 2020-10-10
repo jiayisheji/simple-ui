@@ -1,0 +1,26 @@
+<ng-content select="sim-form-label"></ng-content>
+<div class="sim-form-field-control-wrapper">
+  <div class="sim-form-field-control" #connectionContainer (click)="_control.onContainerClick && _control.onContainerClick($event)">
+    <div class="sim-form-field-prefix" *ngIf="_prefixChildren.length">
+      <ng-content select="[simPrefix],[sim-prefix]"></ng-content>
+    </div>
+    <div class="sim-form-field-infix" #inputContainer>
+      <ng-content></ng-content>
+    </div>
+    <div class="sim-form-field-suffix" *ngIf="_suffixChildren.length">
+      <ng-content select="[simSuffix],[sim-suffix]"></ng-content>
+    </div>
+  </div>
+  <ng-container *ngIf="_errorChildren.length || _hintChildren.length">
+    <div class="sim-form-field-subscript" [ngSwitch]="_getDisplayedMessages()">
+      <div *ngSwitchCase="'error'" [@transitionMessages]="subscriptAnimationState">
+        <ng-content select="sim-error"></ng-content>
+      </div>
+      <div class="sim-form-field-hint" *ngSwitchCase="'hint'" [@transitionMessages]="subscriptAnimationState">
+        <ng-content select="sim-hint:not([align='end'])"></ng-content>
+        <div class="sim-form-field-hint-spacer"></div>
+        <ng-content select="sim-hint[align='end']"></ng-content>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,131 @@
+@import '../theme/abstracts/variables';
+
+.sim-form-field {
+  position: relative;
+  display: flex;
+  margin: 0 0 24px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.sim-form-label {
+  display: inline-block;
+  flex-grow: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.sim-form-field-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  font-size: 14px;
+  &::after {
+    position: relative;
+    top: -0.5px;
+    margin: 0 8px 0 2px;
+    content: ':';
+  }
+}
+
+.sim-form-field-required-marker {
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+}
+
+.sim-form-field-control-wrapper {
+  position: relative;
+  display: block;
+  flex: auto;
+  min-width: 0;
+}
+
+.sim-form-field-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.sim-form-field-prefix,
+.sim-form-field-suffix {
+  position: relative;
+  flex: none;
+  white-space: nowrap;
+}
+
+.sim-form-field-infix {
+  position: relative;
+  display: block;
+  flex: auto;
+  min-width: 0;
+}
+
+.sim-form-field-subscript {
+  position: absolute;
+  width: 100%;
+  margin-top: 0.2em;
+  font-size: 75%;
+  line-height: 1.5;
+}
+
+.sim-form-field-hint {
+  display: flex;
+}
+
+.sim-form-field-hint-spacer {
+  flex: 1 0 1em;
+}
+
+.sim-form {
+  &-vertical {
+    .sim-form-field {
+      flex-direction: column;
+    }
+    .sim-form-label {
+      display: block;
+      margin: 0;
+      padding: 0 0 8px;
+      line-height: 1.5;
+      text-align: left;
+    }
+  }
+
+  &-inline {
+    display: flex;
+    flex-wrap: wrap;
+    .sim-form-field {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 24px;
+    }
+
+    .sim-form-label {
+      white-space: nowrap;
+      text-align: left;
+    }
+  }
+}
+
+.sim-form-field-type-sim-radio,
+.sim-form-field-type-sim-checkbox {
+  align-items: center;
+}
+
+.sim-form-field-type-sim-input .sim-form-field-control {
+  border: {
+    width: 1px;
+    style: solid;
+    radius: 4px;
+  }
+
+  transition: border-color 0.3s $sim-swift-ease-in-out-timing-function, color 0.3s $sim-swift-ease-in-out-timing-function;
+}

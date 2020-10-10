@@ -1,0 +1,21 @@
+@import './form-field-variables';
+
+/// 主题颜色配置
+@mixin sim-form-field-outline-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  $danger: map-get($config, danger);
+}
+
+/// 字体排版配置
+@mixin sim-form-field-outline-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-form-field-outline-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

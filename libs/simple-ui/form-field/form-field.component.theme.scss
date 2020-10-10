@@ -1,0 +1,114 @@
+@import './form-field-variables';
+@import './form-field.component-standard.theme';
+@import './form-field.component-outline.theme';
+@import './form-field.component-underline.theme';
+@import './form-field.component-fill.theme';
+
+$sim-form-field: unquote(sim-form-field);
+
+/// 注册组件
+@include sim-register-component($sim-form-field);
+
+/// 主题风格
+@mixin sim-form-field-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-form-field) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-form-field-color($color);
+    }
+    @if $density != null {
+      @include sim-form-field-density($density);
+    }
+    @if $typography != null {
+      @include sim-form-field-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-form-field-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  $danger: map-get($config, danger);
+
+  .sim-form-field {
+    color: map-get($foreground, text);
+    background: map-get($foreground, background);
+  }
+  .sim-error {
+    color: sim-color($danger);
+  }
+
+  $label-color: map-get($foreground, secondary-text);
+
+  .sim-form-field-required .sim-form-field-required-marker {
+    color: sim-color($danger);
+  }
+
+  .sim-form-field-label,
+  .sim-hint {
+    color: $label-color;
+  }
+
+  .sim-form-field-type-sim-input {
+    @include _sim-form-field-type-sim-input($config);
+  }
+
+  @include sim-form-field-standard-color($config-or-theme);
+  @include sim-form-field-outline-color($config-or-theme);
+  @include sim-form-field-underline-color($config-or-theme);
+  @include sim-form-field-fill-color($config-or-theme);
+}
+
+@mixin _sim-form-field-type-sim-input($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  $primary: map-get($theme, primary);
+  $danger: map-get($theme, danger);
+  & .sim-form-field-control {
+    color: sim-color($foreground, text);
+    background-color: sim-color($background, card);
+    border-color: map-get($foreground, divider);
+  }
+  &.sim-form-field-focused .sim-form-field-control {
+    border-color: sim-color($primary);
+  }
+  &.sim-form-field-disabled .sim-form-field-control {
+    color: sim-color($foreground, disabled-text);
+    background-color: sim-color($background, disabled-button);
+  }
+  &.sim-form-field-invalid .sim-form-field-control {
+    border-color: sim-color($danger);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-form-field-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-form-field {
+    @include sim-typography-level-to-styles($config, button);
+  }
+
+  @include sim-form-field-standard-typography($config-or-theme);
+  @include sim-form-field-outline-typography($config-or-theme);
+  @include sim-form-field-underline-typography($config-or-theme);
+  @include sim-form-field-fill-typography($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-form-field-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  @include sim-form-field-standard-density($config-or-theme);
+  @include sim-form-field-outline-density($config-or-theme);
+  @include sim-form-field-underline-density($config-or-theme);
+  @include sim-form-field-fill-density($config-or-theme);
+}
