@@ -30,6 +30,16 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
   },
   {
     path: '',
+    name: '导航',
+    children: [
+      {
+        path: 'paginator',
+        name: '分页器'
+      }
+    ]
+  },
+  {
+    path: '',
     name: '数据展示',
     children: [
       // {
@@ -49,6 +59,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'input',
         name: '输入框'
+      },
+      {
+        path: 'select',
+        name: '选择器'
       }
     ]
   },

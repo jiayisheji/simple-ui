@@ -1,0 +1,95 @@
+@import './paginator-variables';
+
+$sim-paginator: unquote(sim-paginator);
+
+/// 注册组件
+@include sim-register-component($sim-paginator);
+
+/// 主题风格
+@mixin sim-paginator-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-paginator) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-paginator-color($color);
+    }
+    @if $density != null {
+      @include sim-paginator-density($density);
+    }
+    @if $typography != null {
+      @include sim-paginator-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-paginator-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  $primary: sim-color($config, primary);
+  .sim-paginator-item {
+    color: map-get($foreground, text);
+    background: map-get($background, card);
+    border-color: map-get($foreground, divider);
+    &:not(.sim-paginator-item-disabled):hover {
+      color: sim-color($primary);
+      border-color: sim-color($primary);
+    }
+  }
+
+  .sim-paginator-item-active {
+    color: sim-color($primary);
+    border-color: sim-color($primary);
+  }
+
+  .sim-paginator-item-disabled {
+    color: map-get($foreground, disabled-text);
+  }
+
+  .sim-paginator-page-jumper-input {
+    color: map-get($foreground, text);
+    background: map-get($background, card);
+    border-color: map-get($foreground, divider);
+    &:focus,
+    &:hover {
+      border-color: sim-color($primary);
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-paginator-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-paginator {
+    font: {
+      size: sim-font-size($config, body2);
+    }
+  }
+}
+
+/// 密度配置
+@mixin sim-paginator-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  .sim-paginator {
+    @each $size, $scale in (small: minimum, medium: $density-scale, large: maximum) {
+      &.sim-#{$size} {
+        $height: sim-density-prop-value($sim-paginator-density-config, $scale, height);
+        .sim-paginator-label {
+          height: $height;
+          line-height: $height;
+        }
+        .sim-paginator-item {
+          min-width: $height;
+          height: $height;
+          line-height: $height;
+        }
+      }
+    }
+  }
+}

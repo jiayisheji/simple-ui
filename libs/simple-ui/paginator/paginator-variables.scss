@@ -1,0 +1,8 @@
+// Density configuration for the paginator.
+$sim-paginator-density-config: (
+  height: (
+    default: 32px,
+    maximum: 40px,
+    minimum: 24px
+  )
+) !default;
