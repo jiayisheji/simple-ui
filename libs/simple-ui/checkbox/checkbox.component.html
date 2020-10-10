@@ -1,0 +1,29 @@
+<label [attr.for]="inputId" class="sim-checkbox-label" #label>
+  <div
+    class="sim-checkbox-container"
+    [class.sim-checkbox-label-before]="labelPosition == 'before'"
+    [class.sim-checkbox-container-no-label]="!checkboxLabel.textContent || !checkboxLabel.textContent.trim()"
+  >
+    <input
+      #input
+      class="sim-checkbox-input cdk-visually-hidden"
+      type="checkbox"
+      [id]="inputId"
+      [required]="required"
+      [checked]="checked"
+      [attr.value]="value"
+      [disabled]="disabled"
+      [attr.name]="name"
+      [tabIndex]="tabIndex"
+      (change)="_onInputChange($event)"
+      (click)="_onInputClick($event)"
+    />
+    <div class="sim-checkbox-background">
+      <div class="sim-checkbox-mixedmark"></div>
+    </div>
+  </div>
+  <span class="sim-checkbox-label-content" #checkboxLabel (cdkObserveContent)="_onLabelTextChange()">
+    <span style="display: none;">&nbsp;</span>
+    <ng-content></ng-content>
+  </span>
+</label>

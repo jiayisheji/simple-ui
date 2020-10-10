@@ -1,0 +1,155 @@
+@import '../theme/abstracts/variables';
+@import '../theme/abstracts/mixins';
+
+$_sim-checkbox-mark-path-length: 22.910259;
+$_sim-checkbox-indeterminate-checked-easing-function: cubic-bezier(0.14, 0, 0, 1);
+$_sim-checkbox-mark-stroke-size: 2 / 15 * 16px !default;
+
+.sim-checkbox {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  .sim-checkbox-group & {
+    margin-right: 8px;
+  }
+}
+
+.sim-checkbox-label {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: inherit;
+}
+
+.sim-checkbox-container {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  order: 0;
+  margin: auto;
+  margin-right: 8px;
+  line-height: 0;
+  white-space: nowrap;
+  vertical-align: middle;
+  .sim-checkbox-checked &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: {
+      width: 1px;
+      style: solid;
+      radius: 2px;
+    }
+
+    visibility: hidden;
+    animation: 0.36s ease-in-out both simRadioEffect;
+    content: '';
+  }
+  .sim-checkbox:hover &::after {
+    visibility: visible;
+  }
+}
+
+.sim-checkbox-inner-container-no-label {
+  margin: {
+    right: 0;
+    left: 0;
+  }
+}
+
+%sim-checkbox-outer-box {
+  @include sim-fill;
+
+  box-sizing: border-box;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.sim-checkbox-background {
+  @extend %sim-checkbox-outer-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 90ms $sim-linear-out-slow-in-timing-function, background-color 90ms $sim-linear-out-slow-in-timing-function,
+    opacity 90ms $sim-linear-out-slow-in-timing-function;
+  border: {
+    width: 1px;
+    style: solid;
+  }
+
+  .sim-checkbox & {
+    background: none;
+  }
+}
+
+.sim-checkbox-mixedmark {
+  box-sizing: border-box;
+  width: 5.71428571px;
+  height: 9.14285714px;
+  margin: 0;
+  transform: rotate(45deg) scale(0) translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+  border: {
+    width: 2px;
+    style: solid;
+  }
+}
+
+.sim-checkbox-label-before {
+  order: 1;
+  margin: {
+    right: auto;
+    left: 8px;
+  }
+}
+
+.sim-checkbox-checked {
+  .sim-checkbox-mixedmark {
+    margin-top: 8px;
+    margin-left: -2px;
+    border-top: 0;
+    border-left: 0;
+    transform: rotate(45deg) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  }
+}
+
+.sim-checkbox-indeterminate {
+  .sim-checkbox-mixedmark {
+    width: 0;
+    height: 0;
+    margin-top: 8px;
+    margin-left: 8px;
+    overflow: hidden;
+    border-width: 4px;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.sim-checkbox-disabled {
+  cursor: default;
+}
+
+.sim-checkbox-input {
+  bottom: 0;
+  left: 50%;
+}
+
+@keyframes simRadioEffect {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}

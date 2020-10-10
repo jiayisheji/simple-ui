@@ -1,0 +1,129 @@
+@import './checkbox-variables';
+
+$sim-checkbox: unquote(sim-checkbox);
+
+/// 注册组件
+@include sim-register-component($sim-checkbox);
+
+/// 主题风格
+@mixin sim-checkbox-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-checkbox) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-checkbox-color($color);
+    }
+    @if $density != null {
+      @include sim-checkbox-density($density);
+    }
+    @if $typography != null {
+      @include sim-checkbox-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-checkbox-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-checkbox-background {
+    border-color: sim-color($foreground, secondary-text);
+  }
+
+  .sim-checkbox-mixedmark {
+    border-color: sim-color($background, background);
+  }
+
+  .sim-checkbox {
+    // 循环获取调色板对象
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($config, $type);
+      &.sim-#{$type} {
+        @include _sim-checkbox-color($color);
+      }
+    }
+
+    &.sim-checkbox-disabled {
+      @include _sim-checkbox-disabled($foreground);
+    }
+  }
+}
+
+@mixin _sim-checkbox-color($palette) {
+  &.sim-checkbox-indeterminate,
+  &.sim-checkbox-checked {
+    .sim-checkbox-container::after {
+      border-color: sim-color($palette);
+    }
+  }
+
+  &.sim-checkbox-checked {
+    .sim-checkbox-background {
+      background-color: sim-color($palette);
+      border-color: sim-color($palette);
+    }
+  }
+
+  &.sim-checkbox-indeterminate {
+    .sim-checkbox-background {
+      background-color: transparent;
+      border-color: sim-color($palette);
+    }
+    .sim-checkbox-mixedmark {
+      border-color: sim-color($palette);
+    }
+  }
+
+  &:not(.sim-checkbox-disabled) .sim-checkbox-container:hover .sim-checkbox-background {
+    border-color: sim-color($palette);
+  }
+}
+
+@mixin _sim-checkbox-disabled($foreground) {
+  &.sim-checkbox-checked,
+  &.sim-checkbox-indeterminate {
+    .sim-checkbox-background {
+      background-color: sim-color($foreground, disabled);
+      border-color: sim-color($foreground, disabled);
+    }
+    .sim-checkbox-mixedmark {
+      border-color: sim-color($foreground, disabled);
+    }
+  }
+
+  &:not(.sim-checkbox-checked) {
+    .sim-checkbox-background {
+      border-color: sim-color($foreground, disabled);
+    }
+  }
+
+  .sim-checkbox-label-content {
+    color: sim-color($foreground, secondary-text);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-checkbox-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-checkbox {
+    font: {
+      family: sim-font-family($config, body2);
+      size: sim-font-size($config, body2);
+    }
+  }
+}
+
+/// 密度配置
+@mixin sim-checkbox-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+  $size: sim-density-prop-value($sim-checkbox-density-config, $density-scale, size);
+  .sim-checkbox-container {
+    width: $size;
+    height: $size;
+  }
+}
