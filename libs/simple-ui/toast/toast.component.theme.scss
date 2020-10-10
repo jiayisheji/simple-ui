@@ -1,0 +1,63 @@
+@import './toast-variables';
+
+$sim-toast: unquote(sim-toast);
+
+/// 注册组件
+@include sim-register-component($sim-toast);
+
+/// 主题风格
+@mixin sim-toast-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-toast) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-toast-color($color);
+    }
+    @if $density != null {
+      @include sim-toast-density($density);
+    }
+    @if $typography != null {
+      @include sim-toast-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-toast-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-toast-content {
+    color: map-get($foreground, secondary-text);
+    background: sim-color($background, dialog);
+
+    @include sim-theme-elevation(12, $config);
+  }
+
+  @each $type in (info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-toast-#{$type} {
+      .sim-icon {
+        color: sim-color($color, text);
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-toast-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-toast {
+    font-size: sim-font-size($config, body2);
+    line-height: sim-line-height($config, body2);
+  }
+}
+
+/// 密度配置
+@mixin sim-toast-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

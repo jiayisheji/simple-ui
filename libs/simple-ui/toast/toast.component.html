@@ -1,0 +1,8 @@
+<div class="sim-toast" [@toast]="state" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <div class="sim-toast-content" [ngClass]="'sim-toast-' + data.type">
+    <sim-icon [svgIcon]="icon" *ngIf="icon"></sim-icon>
+    <ng-container *simStringTemplateOutlet="data.content">
+      <span [innerHTML]="data.content"></span>
+    </ng-container>
+  </div>
+</div>

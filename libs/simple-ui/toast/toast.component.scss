@@ -1,0 +1,18 @@
+.sim-toast {
+  padding: 16px 8px 8px;
+}
+
+.sim-toast-content {
+  display: inline-block;
+  padding: 10px 16px;
+  text-align: center;
+  border-radius: 4px;
+  pointer-events: all;
+}
+
+.sim-toast-content .sim-icon {
+  position: relative;
+  top: 1px;
+  margin-right: 8px;
+  font-size: 16px;
+}

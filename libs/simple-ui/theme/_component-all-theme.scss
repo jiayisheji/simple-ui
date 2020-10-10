@@ -20,6 +20,7 @@
 @import '../status/status.component.theme';
 @import '../switch/switch.component.theme';
 @import '../sort/sort.component.theme';
+@import '../toast/toast.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -44,5 +45,6 @@
   @include sim-status-theme($config-or-theme);
   @include sim-switch-theme($config-or-theme);
   @include sim-sort-theme($config-or-theme);
+  @include sim-toast-theme($config-or-theme);
   /// @include component.theme
 }
