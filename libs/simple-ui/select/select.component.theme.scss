@@ -1,0 +1,111 @@
+@import './select-variables';
+
+$sim-select: unquote(sim-select);
+
+/// 注册组件
+@include sim-register-component($sim-select);
+
+/// 主题风格
+@mixin sim-select-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-select) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-select-color($color);
+    }
+    @if $density != null {
+      @include sim-select-density($density);
+    }
+    @if $typography != null {
+      @include sim-select-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-select-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-select-trigger {
+    // 从前景色对象获取text属性
+    color: sim-color($foreground, text);
+    // 从背景色对象获取background属性
+    background: sim-color($background, card);
+    border-color: sim-color($foreground, divider);
+    // 循环获取调色板对象
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($config, $type);
+      &.sim-#{$type} {
+        &:hover {
+          color: sim-color($color, default-contrast);
+          background-color: sim-color($color, default);
+        }
+        &:active {
+          color: sim-color($color, default-contrast);
+          background-color: sim-color($color, darker);
+        }
+      }
+    }
+  }
+
+  $primary: sim-color($config, 'primary');
+  $danger: sim-color($config, 'danger');
+
+  .sim-select-invalid .sim-select-trigger {
+    border-color: sim-color($danger);
+  }
+
+  .sim-select-value {
+    color: sim-color($foreground, text);
+  }
+
+  .sim-select-disabled .sim-select-trigger {
+    background: sim-color($foreground, disabled-button);
+    .sim-select-value {
+      color: sim-color($foreground, disabled-text);
+    }
+  }
+
+  .sim-select-readonly .sim-select-trigger {
+    background: sim-color($foreground, divider);
+    .sim-select-value {
+      color: sim-color($foreground, secondary-text);
+    }
+  }
+
+  .sim-select-panel {
+    background: sim-color($background, card);
+    @include sim-theme-overridable-elevation(4, $config);
+
+    .sim-option.sim-option-selected:not(.sim-option-multiple) {
+      background: sim-color($background, hover, 0.12);
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-select-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-select {
+    font: {
+      family: sim-font-family($config, body2);
+      size: sim-font-size($config, body2);
+    }
+  }
+}
+
+/// 密度配置
+@mixin sim-select-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  .sim-select-trigger {
+    /// $size-scale-map: (small: minimum, large: maximum);
+    height: sim-density-prop-value($sim-select-density-config, $density-scale, height);
+    line-height: sim-density-prop-value($sim-select-density-config, $density-scale, height);
+  }
+}

@@ -23,6 +23,7 @@
 @import '../toast/toast.component.theme';
 @import '../form-field/form-field.component.theme';
 @import '../input/input.component.theme';
+@import '../select/select.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -50,5 +51,6 @@
   @include sim-toast-theme($config-or-theme);
   @include sim-form-field-theme($config-or-theme);
   @include sim-input-theme($config-or-theme);
+  @include sim-select-theme($config-or-theme);
   /// @include component.theme
 }

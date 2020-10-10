@@ -1,0 +1,55 @@
+<div cdk-overlay-origin class="sim-select-trigger" aria-hidden="true" (click)="toggle()" #origin="cdkOverlayOrigin" #trigger>
+  <div class="sim-select-value" [ngSwitch]="empty">
+    <span class="sim-select-placeholder" *ngSwitchCase="true">{{ placeholder || '\u00A0' }}</span>
+    <span class="sim-select-value-text" *ngSwitchCase="false" [ngSwitch]="!!customTrigger">
+      <span *ngSwitchDefault>{{ triggerValue || '\u00A0' }}</span>
+      <ng-content select="sim-select-trigger" *ngSwitchCase="true"></ng-content>
+    </span>
+  </div>
+
+  <div class="sim-select-arrow-wrapper">
+    <div class="sim-select-arrow"></div>
+  </div>
+</div>
+
+<ng-template
+  cdk-connected-overlay
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="panelOpen"
+  [cdkConnectedOverlayPositions]="_positions"
+  [cdkConnectedOverlayMinWidth]="_triggerRect?.width"
+  [cdkConnectedOverlayOffsetY]="_offsetY"
+  (backdropClick)="close()"
+  (attach)="_onAttached()"
+  (detach)="close()"
+>
+  <div class="mat-select-panel-wrap" [@transformPanelWrap] [ngClass]="panelTheme">
+    <div
+      [attr.id]="id + '-panel'"
+      class="sim-select-panel"
+      [class.sim-multiple-select-panel]="multiple"
+      [ngClass]="panelClass"
+      [@transformPanel]="multiple ? 'showing-multiple' : 'showing'"
+      (@transformPanel.done)="_panelDoneAnimatingStream.next($event.toState)"
+      [style.transformOrigin]="_transformOrigin"
+      (keydown)="_handleKeydown($event)"
+    >
+      <ng-content select="[simSelectHeader], [sim-select-header], sim-select-header"></ng-content>
+      <div class="sim-select-body" #panel>
+        <div class="sim-select-option-empty" *ngIf="searching && options.length === 0">
+          <sim-empty [content]="notFoundContent"></sim-empty>
+        </div>
+        <div class="sim-option sim-option-select-all" *ngIf="multiple" (click)="selectAll($event)">
+          <sim-pseudo-checkbox class="sim-option-pseudo-checkbox" [state]="_selectAllState"></sim-pseudo-checkbox>
+          <div class="sim-option-text">{{ selectAllLabel }}</div>
+        </div>
+        <ng-content></ng-content>
+      </div>
+      <ng-content select="[simSelectFooter], [sim-select-footer], sim-select-footer"></ng-content>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,113 @@
+@import '../theme/abstracts/mixins';
+
+.sim-select {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+}
+
+.sim-select-value-clear {
+  position: absolute;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.sim-select-trigger {
+  position: relative;
+  display: inline-table;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  .sim-select-disabled & {
+    cursor: default;
+    transition: none;
+    user-select: none;
+  }
+
+  .sim-select-readonly & {
+    padding: 1px 11px;
+    border: 0;
+    cursor: default;
+    transition: none;
+  }
+
+  &:hover .sim-select-value-clear {
+    opacity: 1;
+  }
+}
+
+.sim-select-value {
+  display: table-cell;
+  width: 100%;
+  max-width: 0;
+  @include sim-truncate-line();
+}
+
+.sim-select-value-text {
+  @include sim-truncate-line();
+}
+
+.sim-select-arrow {
+  width: 0;
+  height: 0;
+  margin: 0 4px;
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.sim-select-panel-wrap {
+  flex-basis: 100%;
+}
+
+.sim-select-panel {
+  min-width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 4px;
+  .sim-optgroup-label,
+  .sim-option {
+    height: 3em;
+    font-size: inherit;
+    line-height: 3em;
+  }
+}
+
+.sim-select-body {
+  max-height: 256px;
+  overflow: auto;
+  border-radius: 4px;
+}
+
+.sim-select-panel .sim-empty {
+  padding: 30px 0;
+}
+
+.sim-select-header {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #e4e4e4;
+  box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.sim-select-footer {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-top: 1px solid #e4e4e4;
+  box-shadow: 0 -2px 8px #f0f1f2;
+}
