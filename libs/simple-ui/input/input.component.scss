@@ -1,0 +1,64 @@
+@import '../theme/abstracts/mixins';
+
+.sim-input {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  color: currentColor;
+  font: inherit;
+  text-align: inherit;
+  vertical-align: bottom;
+  background: transparent;
+  border: none;
+  outline: none;
+  &:-moz-ui-invalid {
+    box-shadow: none;
+  }
+  &::-ms-clear,
+  &::-ms-reveal {
+    display: none;
+  }
+  &,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+  &::-webkit-contacts-auto-fill-button,
+  &::-webkit-caps-lock-indicator,
+  &::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-calendar-picker-indicator,
+  &::-webkit-clear-button {
+    font-size: 0.75em;
+  }
+
+  &[type='number']::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  @include sim-input-placeholder {
+    @include sim-user-select(none);
+
+    transition: color $swift-ease-out-duration $swift-ease-out-duration / 3 $swift-ease-out-timing-function;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+textarea.sim-input-element {
+  margin: -2px 0;
+  padding: 2px 0;
+  overflow: auto;
+  resize: vertical;
+
+  &.cdk-textarea-autosize {
+    resize: none;
+  }
+}

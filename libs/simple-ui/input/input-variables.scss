@@ -1,0 +1,23 @@
+// Density configuration for the input.
+$sim-input-density-config: (
+  radius: (
+    default: 4px,
+    minimum: 4px,
+    maximum: 6px
+  ),
+  height: (
+    default: 32px,
+    minimum: 24px,
+    maximum: 40px
+  ),
+  padding: (
+    default: 16px,
+    minimum: 8px,
+    maximum: 18px
+  ),
+  font-size: (
+    default: 14px,
+    minimum: 12px,
+    maximum: 16px
+  )
+) !default;
