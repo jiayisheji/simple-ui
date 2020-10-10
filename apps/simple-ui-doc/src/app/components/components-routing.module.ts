@@ -16,7 +16,9 @@ const routes: Routes = [
       // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
       { path: 'form-field', loadChildren: () => import('./form-field/form-field.module').then(m => m.FormFieldModule) },
       { path: 'select', loadChildren: () => import('./select/select.module').then(m => m.SelectModule) },
-  { path: 'paginator', loadChildren: () => import('./paginator/paginator.module').then(m => m.PaginatorModule) }
+      { path: 'paginator', loadChildren: () => import('./paginator/paginator.module').then(m => m.PaginatorModule) },
+      { path: 'radio', loadChildren: () => import('./radio/radio.module').then(m => m.RadioModule) },
+      { path: 'checkbox', loadChildren: () => import('./checkbox/checkbox.module').then(m => m.CheckboxModule) }
     ]
   }
 ];
