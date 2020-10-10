@@ -33,8 +33,8 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     name: '数据展示',
     children: [
       // {
-      //   path: 'tabs',
-      //   name: '标签页'
+      //   path: 'table',
+      //   name: '表格'
       // }
     ]
   },
@@ -42,10 +42,14 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     path: '',
     name: '表单控件',
     children: [
-      // {
-      //   path: 'tabs',
-      //   name: '标签页'
-      // }
+      {
+        path: 'form-field',
+        name: '表单字段'
+      },
+      {
+        path: 'input',
+        name: '输入框'
+      }
     ]
   },
   {

@@ -1,0 +1,17 @@
+<form sim-form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
+  <sim-form-field>
+    <sim-form-label>用户名</sim-form-label>
+    <input simInput required formControlName="username" />
+    <sim-error *simHasError="'minlength'">最小长度是5</sim-error>
+    <sim-error *simHasError="'maxlength'">最大长度是10</sim-error>
+    <sim-error *simHasError="'required'">用户名必填的</sim-error>
+  </sim-form-field>
+  <sim-form-field>
+    <sim-form-label>密码</sim-form-label>
+    <input type="password" simInput required formControlName="password" />
+    <sim-error *simHasError="'required'">密码必填的</sim-error>
+  </sim-form-field>
+  <sim-form-actions>
+    <button type="submit" sim-raised-button color="primary">登录</button>
+  </sim-form-actions>
+</form>

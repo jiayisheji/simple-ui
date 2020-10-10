@@ -1,0 +1,98 @@
+基本使用 三种状态 无 disabled readonly
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <input simInput placeholder="Favorite food" value="Sushi" />
+  </sim-form-field>
+
+  <sim-form-field class="example-full-width">
+    <input simInput placeholder="Favorite food" disabled value="Sushi" />
+  </sim-form-field>
+
+  <sim-form-field class="example-full-width">
+    <input simInput placeholder="Favorite food" readonly value="Sushi" />
+  </sim-form-field>
+</form>
+
+我们为 sim-input 输入框定义了三种尺寸（大、默认、小），高度分别为 40px、32px 和 24px。
+
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <input simInput size="small" placeholder="Favorite food" value="Sushi" />
+  </sim-form-field>
+
+  <sim-form-field class="example-full-width">
+    <input simInput size="medium" placeholder="Favorite food" value="Sushi" />
+  </sim-form-field>
+
+  <sim-form-field class="example-full-width">
+    <input simInput size="large" placeholder="Favorite food" value="Sushi" />
+  </sim-form-field>
+</form>
+
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <textarea simInput placeholder="Leave a comment"></textarea>
+  </sim-form-field>
+
+  <sim-form-field class="example-full-width">
+    <textarea simInput sim-autosize readonly placeholder="Leave a comment"></textarea>
+  </sim-form-field>
+</form>
+
+<sim-form-field class="example-form-field">
+  <input simInput type="text" placeholder="Clearable input" [(ngModel)]="value" />
+  <button sim-button *ngIf="value" simSuffix sim-icon-button aria-label="Clear" (click)="value = ''">
+    <sim-icon svgIcon="close"></sim-icon>
+  </button>
+</sim-form-field>
+
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <input simInput #message maxlength="256" placeholder="Message" />
+    <sim-hint align="start"><strong>Don't disclose personal info</strong></sim-hint>
+    <sim-hint align="end">{{ message.value.length }} / 256</sim-hint>
+  </sim-form-field>
+</form>
+
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <span simPrefix>&nbsp;￥</span>
+    <input type="number" simInput placeholder="money" />
+    <span simSuffix>RMB&nbsp;</span>
+  </sim-form-field>
+</form>
+
+密码框
+
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <input [type]="passwordVisible ? 'text' : 'password'" #password simInput placeholder="password" />
+    <button sim-button simSuffix sim-icon-button (click.stop)="passwordVisible = !passwordVisible">
+      <sim-icon [svgIcon]="passwordVisible ? 'eye-invisible' : 'eye'"></sim-icon>
+    </button>
+  </sim-form-field>
+</form>
+
+带有搜索按钮的输入框
+
+<form class="example-form">
+  <sim-form-field class="example-full-width">
+    <input type="text" simInput placeholder="input search text" />
+    <span simSuffix>
+      <sim-icon svgIcon="search"></sim-icon>
+      &nbsp;&nbsp;
+    </span>
+  </sim-form-field>
+  <sim-form-field class="example-full-width">
+    <input type="text" #search simInput placeholder="input search text" />
+    <button simSuffix color="primary" sim-flat-button sim-icon-button (click.stop)="onSearch(search.value)">
+      <sim-icon svgIcon="search"></sim-icon>
+    </button>
+  </sim-form-field>
+  <sim-form-field class="example-full-width">
+    <input type="text" #clear simInput placeholder="input search text" />
+    <button simSuffix color="primary" sim-flat-button (click.stop)="clear.value = ''">
+      clear
+    </button>
+  </sim-form-field>
+</form>
