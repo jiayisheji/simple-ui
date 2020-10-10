@@ -1,0 +1,24 @@
+<label [attr.for]="inputId" class="sim-radio-label">
+  <div class="sim-radio-container">
+    <div class="sim-radio-outer-circle"></div>
+    <div class="sim-radio-inner-circle"></div>
+    <input
+      #input
+      class="sim-radio-input cdk-visually-hidden"
+      type="radio"
+      [id]="inputId"
+      [checked]="checked"
+      [disabled]="disabled"
+      [tabIndex]="tabIndex"
+      [attr.name]="name"
+      [attr.value]="value"
+      [required]="required"
+      (change)="_onInputChange($event)"
+      (click)="_onInputClick($event)"
+    />
+  </div>
+  <div class="sim-radio-label-content" [class.sim-radio-label-before]="labelPosition == 'before'">
+    <span [style.display]="'none'">&nbsp;</span>
+    <ng-content></ng-content>
+  </div>
+</label>

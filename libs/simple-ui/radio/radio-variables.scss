@@ -1,0 +1,8 @@
+// Density configuration for the radio.
+$sim-radio-density-config: (
+  size: (
+    default: 16px,
+    minimum: 16px,
+    maximum: 16px
+  )
+) !default;

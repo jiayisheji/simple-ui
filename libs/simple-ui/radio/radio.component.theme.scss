@@ -1,0 +1,98 @@
+@import './radio-variables';
+
+$sim-radio: unquote(sim-radio);
+
+/// 注册组件
+@include sim-register-component($sim-radio);
+
+/// 主题风格
+@mixin sim-radio-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-radio) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-radio-color($color);
+    }
+    @if $density != null {
+      @include sim-radio-density($density);
+    }
+    @if $typography != null {
+      @include sim-radio-typography($typography);
+    }
+  }
+}
+
+// 主题风格
+@mixin sim-radio-color($config-or-theme) {
+  $theme: sim-get-color-config($config-or-theme);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  .sim-radio-outer-circle {
+    border-color: sim-color($foreground, secondary-text);
+  }
+
+  .sim-radio {
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($theme, $type);
+      &.sim-#{$type} {
+        @include _sim-radio-color($color);
+      }
+    }
+
+    &.sim-radio-disabled {
+      @include _sim-radio-disabled($foreground);
+    }
+  }
+}
+
+@mixin _sim-radio-color($palette) {
+  &.sim-radio-checked .sim-radio-outer-circle,
+  &:not(.sim-radio-disabled) .sim-radio-container:hover .sim-radio-outer-circle {
+    border-color: sim-color($palette);
+  }
+
+  .sim-radio-checked .sim-radio-container::after {
+    border-color: sim-color($palette);
+  }
+
+  &.sim-radio-checked .sim-radio-inner-circle {
+    background-color: sim-color($palette);
+  }
+}
+
+@mixin _sim-radio-disabled($foreground) {
+  .sim-radio-outer-circle,
+  &.sim-radio-checked .sim-radio-outer-circle {
+    border-color: sim-color($foreground, disabled);
+  }
+
+  .sim-radio-inner-circle,
+  &.sim-radio-checked .sim-radio-inner-circle {
+    background-color: sim-color($foreground, disabled);
+  }
+
+  .sim-radio-label-content {
+    color: sim-color($foreground, disabled);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-radio-typography($config-or-theme) {
+  $typography: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-radio-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+
+  $size: sim-density-prop-value($sim-radio-density-config, $density-scale, size);
+
+  .sim-radio-container {
+    width: $size;
+    height: $size;
+  }
+}

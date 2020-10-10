@@ -1,0 +1,120 @@
+@import '../theme/abstracts/vendor-prefixes';
+
+$sim-toggle-padding: 8px;
+
+.sim-radio {
+  display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+  .sim-radio-group & {
+    margin-right: $sim-toggle-padding;
+  }
+
+  &-label {
+    @include sim-user-select(none);
+
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &-content {
+      display: inline-block;
+      order: 0;
+      padding-right: 0;
+      padding-left: $sim-toggle-padding;
+      line-height: inherit;
+
+      &.sim-radio-label-before {
+        order: -1;
+        padding-right: $sim-toggle-padding;
+        padding-left: 0;
+      }
+    }
+  }
+
+  &-container {
+    position: relative;
+    // radio容器位于内联-flex元素的内部，如果标签宽且启用文本包装，则可能会收缩。
+    display: inline-block;
+    flex-shrink: 0;
+    box-sizing: border-box;
+
+    .sim-radio-checked &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border: {
+        width: 1px;
+        style: solid;
+        radius: 50%;
+      }
+
+      visibility: hidden;
+      animation: 0.36s ease-in-out both simRadioEffect;
+      content: '';
+    }
+
+    .sim-radio:hover &::after {
+      visibility: visible;
+    }
+  }
+
+  &-outer-circle,
+  &-inner-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-outer-circle {
+    transition: border-color ease 280ms;
+
+    border: {
+      width: 1px;
+      style: solid;
+      radius: 50%;
+    }
+  }
+
+  &-inner-circle {
+    border-radius: 50%;
+    // 注意:这是从0.001而不是0开始的，因为从0到0.5的转换会导致IE在几帧内闪烁整个圆圈，从而导致整个动画中断。
+    transform: scale(0.001);
+    transition: transform ease 280ms, background-color ease 280ms;
+
+    .sim-radio-checked & {
+      transform: scale(0.5);
+    }
+  }
+}
+
+.sim-radio-disabled,
+.sim-radio-disabled .sim-radio-label {
+  cursor: default;
+}
+
+.sim-radio-input {
+  bottom: 0;
+  left: 50%;
+}
+
+@keyframes simRadioEffect {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}

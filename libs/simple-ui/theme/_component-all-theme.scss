@@ -25,6 +25,7 @@
 @import '../input/input.component.theme';
 @import '../select/select.component.theme';
 @import '../paginator/paginator.component.theme';
+@import '../radio/radio.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -54,5 +55,6 @@
   @include sim-input-theme($config-or-theme);
   @include sim-select-theme($config-or-theme);
   @include sim-paginator-theme($config-or-theme);
+  @include sim-radio-theme($config-or-theme);
   /// @include component.theme
 }
