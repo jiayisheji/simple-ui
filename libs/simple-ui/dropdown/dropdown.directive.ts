@@ -9,6 +9,7 @@ import {
   VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   Directive,
@@ -26,7 +27,7 @@ import {
 import { InputBoolean } from '@ngx-simple/core/decorators';
 import { POSITION_MAP } from '@ngx-simple/core/overlay';
 import { NgClassInterface, SafeAny } from '@ngx-simple/core/types';
-import { BehaviorSubject, EMPTY, fromEvent, merge, Subject } from 'rxjs';
+import { BehaviorSubject, EMPTY, fromEvent, merge, Subject, SubscriptionLike } from 'rxjs';
 import { auditTime, distinctUntilChanged, filter, mapTo, switchMap, takeUntil } from 'rxjs/operators';
 import { SimDropdownComponent } from './dropdown.component';
 import { DropdownPosition, triggerType } from './dropdown.typings';
@@ -90,12 +91,14 @@ export class SimDropdownDirective implements OnChanges, AfterViewInit, OnDestroy
   private _trigger$: BehaviorSubject<triggerType> = new BehaviorSubject<triggerType>(this.trigger);
   private _inputVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _overlayClose$ = new Subject<boolean>();
+  private _locationSubscribe: SubscriptionLike;
 
   constructor(
     private _overlay: Overlay,
     private _elementRef: ElementRef,
     private _viewContainerRef: ViewContainerRef,
-    private _scrollDispatcher: ScrollDispatcher
+    private _scrollDispatcher: ScrollDispatcher,
+    private _location: Location
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -127,6 +130,9 @@ export class SimDropdownDirective implements OnChanges, AfterViewInit, OnDestroy
     if (this._overlayRef) {
       this._overlayRef.dispose();
       this._overlayRef = null;
+    }
+    if (this._locationSubscribe) {
+      this._locationSubscribe.unsubscribe();
     }
   }
 
@@ -160,6 +166,11 @@ export class SimDropdownDirective implements OnChanges, AfterViewInit, OnDestroy
     const hostVisible$ = merge(visibleTrigger$, this._dropdownInstance.dismissOverlay$, this._overlayClose$).pipe(
       filter(() => !this.disabled)
     );
+
+    // 切换前进/后退 关闭面板
+    this._locationSubscribe = this._location.subscribe(() => {
+      this.toggle(false);
+    });
 
     merge(this._inputVisible$, hostVisible$)
       .pipe(
@@ -220,7 +231,6 @@ export class SimDropdownDirective implements OnChanges, AfterViewInit, OnDestroy
       minWidth: element.getBoundingClientRect().width,
       hasBackdrop: this.trigger === 'click',
       backdropClass: '',
-      disposeOnNavigation: true,
       positionStrategy: strategy,
       panelClass: 'sim-dropdown-panel',
       scrollStrategy: this._overlay.scrollStrategies.reposition()
