@@ -79,7 +79,15 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'checkbox',
         name: '多选框'
+      },
+      {
+        path: 'switch',
+        name: '开关'
       }
+      // {
+      //   path: 'datepicker',
+      //   name: '日期选择器'
+      // }
     ]
   },
   {

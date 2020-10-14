@@ -30,11 +30,11 @@ $doc-topbar: 56px;
   align-items: center;
   padding: 8px 16px;
   color: #fff;
-  svg {
-    display: inline-block;
-    margin: 0 4px 3px 0;
-    vertical-align: middle;
-  }
+}
+
+.doc-angular-logo {
+  height: 26px;
+  margin: 0 4px 3px 0;
 }
 
 .doc-flex-spacer {

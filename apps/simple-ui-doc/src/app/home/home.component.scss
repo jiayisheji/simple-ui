@@ -7,6 +7,19 @@ $doc-primary: map-get($doc-palette, primary);
   height: 420px;
   overflow: hidden;
   background: rgb(63, 81, 181);
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('../../assets/images/angular-white-transparent.svg');
+    background-repeat: no-repeat;
+    background-position: 80% 20px;
+    background-size: 600px;
+    opacity: 0.2;
+    content: '';
+  }
 }
 
 .doc-header-section {

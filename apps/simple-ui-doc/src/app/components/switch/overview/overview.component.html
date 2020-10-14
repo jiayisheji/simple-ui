@@ -1,0 +1,222 @@
+<doc-viewer>
+  <h2>何时使用</h2>
+  <p>需要表示开关状态/两种状态之间的切换时；</p>
+  <p>和 checkbox 的区别是，切换 switch 会直接触发状态改变，而 checkbox 一般用于状态标记，需要和提交操作配合。</p>
+  <h2>两种不同的类型</h2>
+  <div class="doc-different-types">
+    <doc-figure>
+      <sim-switch></sim-switch>
+      <figcaption>
+        开关切换选择器
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <sim-slide-toggle></sim-slide-toggle>
+      <figcaption>
+        滑块切换选择器
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>不同的状态</h2>
+  <div class="doc-different-types">
+    <doc-figure>
+      <div>
+        <sim-switch></sim-switch>
+        <sim-divider></sim-divider>
+        <sim-slide-toggle></sim-slide-toggle>
+      </div>
+      <figcaption>
+        默认
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch checked></sim-switch>
+        <sim-divider></sim-divider>
+        <sim-slide-toggle checked></sim-slide-toggle>
+      </div>
+      <figcaption>
+        选择
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch loading></sim-switch>
+        <sim-divider></sim-divider>
+        <sim-slide-toggle loading></sim-slide-toggle>
+      </div>
+      <figcaption>
+        默认加载中
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch checked loading></sim-switch>
+        <sim-divider></sim-divider>
+        <sim-slide-toggle checked loading></sim-slide-toggle>
+      </div>
+      <figcaption>
+        选择加载中
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch disabled></sim-switch>
+        <sim-divider></sim-divider>
+        <sim-slide-toggle disabled></sim-slide-toggle>
+      </div>
+      <figcaption>
+        禁用
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch checked disabled></sim-switch>
+        <sim-divider></sim-divider>
+        <sim-slide-toggle checked disabled></sim-slide-toggle>
+      </div>
+      <figcaption>
+        禁用
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>滑块切换选择器特色</h2>
+  <div class="doc-different-types">
+    <doc-figure>
+      <div>
+        <sim-slide-toggle>slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        默认
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-slide-toggle color="primary">slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        primary
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-slide-toggle color="secondary">slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        secondary
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-slide-toggle color="info">slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        info
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-slide-toggle color="success">slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        success
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-slide-toggle color="warning">slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        warning
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-slide-toggle color="danger">slide</sim-slide-toggle>
+      </div>
+      <figcaption>
+        danger
+      </figcaption>
+    </doc-figure>
+  </div>
+  <h2>开关切换选择器特色</h2>
+  <div class="doc-different-types">
+    <doc-figure>
+      <div>
+        <sim-switch>
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        默认
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch color="primary">
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        primary
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch color="secondary">
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        secondary
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch color="info">
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        info
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch color="success">
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        success
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch color="warning">
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        warning
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <div>
+        <sim-switch color="danger">
+          <sim-witch-checked>checked</sim-witch-checked>
+          <sim-witch-unchecked>unchecked</sim-witch-unchecked>
+        </sim-switch>
+      </div>
+      <figcaption>
+        danger
+      </figcaption>
+    </doc-figure>
+  </div>
+</doc-viewer>

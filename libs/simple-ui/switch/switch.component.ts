@@ -108,7 +108,9 @@ export class SimSwitchComponent extends _SimSwitchMixinBase
   }
   private _checked: boolean;
 
-  @Input() disabled: boolean;
+  @Input()
+  @HostBinding('class.sim-switch-disabled')
+  disabled: boolean;
 
   @Input() color: ThemePalette;
 
