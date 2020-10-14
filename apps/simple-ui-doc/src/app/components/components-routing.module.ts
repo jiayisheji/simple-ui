@@ -13,12 +13,15 @@ const routes: Routes = [
       { path: 'alert', loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule) },
       { path: 'button-group', loadChildren: () => import('./button-group/button-group.module').then(m => m.ButtonGroupModule) },
       { path: 'input', loadChildren: () => import('./input/input.module').then(m => m.InputModule) },
-      // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
       { path: 'form-field', loadChildren: () => import('./form-field/form-field.module').then(m => m.FormFieldModule) },
       { path: 'select', loadChildren: () => import('./select/select.module').then(m => m.SelectModule) },
       { path: 'paginator', loadChildren: () => import('./paginator/paginator.module').then(m => m.PaginatorModule) },
       { path: 'radio', loadChildren: () => import('./radio/radio.module').then(m => m.RadioModule) },
-      { path: 'checkbox', loadChildren: () => import('./checkbox/checkbox.module').then(m => m.CheckboxModule) }
+      { path: 'checkbox', loadChildren: () => import('./checkbox/checkbox.module').then(m => m.CheckboxModule) },
+      { path: 'toast', loadChildren: () => import('./toast/toast.module').then(m => m.ToastModule) }
+      // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
+      // { path: 'tree', loadChildren: () => import('./tree/tree.module').then(m => m.TreeModule) },
+      // { path: 'data-grid', loadChildren: () => import('./data-grid/data-grid.module').then(m => m.DataGridModule) },
     ]
   }
 ];

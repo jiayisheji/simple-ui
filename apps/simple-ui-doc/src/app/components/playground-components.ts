@@ -45,6 +45,14 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       // {
       //   path: 'table',
       //   name: '表格'
+      // },
+      // {
+      //   path: 'data-grid',
+      //   name: '数据表格'
+      // },
+      // {
+      //   path: 'tree',
+      //   name: '树'
       // }
     ]
   },
@@ -81,6 +89,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'alert',
         name: '警告提示'
+      },
+      {
+        path: 'toast',
+        name: '全局提示'
       }
     ]
   }

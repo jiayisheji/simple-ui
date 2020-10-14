@@ -1,0 +1,38 @@
+<doc-viewer>
+  <h2>何时使用</h2>
+  <p>可提供成功、警告和错误等反馈信息。</p>
+  <p>顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。</p>
+  <h2>五种不同的类型</h2>
+  <div class="doc-different-types">
+    <doc-figure>
+      <button sim-flat-button (click)="openToast('空白提示', 'blank')">空白提示</button>
+      <figcaption>
+        无icon提醒反馈
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="info" (click)="openToast('信息提示', 'info')">信息提示</button>
+      <figcaption>
+        信息提醒反馈
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="success" (click)="openToast('成功提示', 'success')">成功提示</button>
+      <figcaption>
+        成功提醒反馈
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="warning" (click)="openToast('警告提示', 'warning')">警告提示</button>
+      <figcaption>
+        警告提醒反馈
+      </figcaption>
+    </doc-figure>
+    <doc-figure>
+      <button sim-flat-button color="danger" (click)="openToast('错误提示', 'danger')">错误提示</button>
+      <figcaption>
+        危险/错误提醒反馈
+      </figcaption>
+    </doc-figure>
+  </div>
+</doc-viewer>
