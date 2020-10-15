@@ -4,6 +4,7 @@ export * from './mapper.pipe';
 export * from './pipes.module';
 export * from './safe-html.pipe';
 export * from './strategy.pipe';
+export * from './time-ago.pipe';
 export * from './time-range.pipe';
 export * from './times.pipe';
 export * from './week.pipe';

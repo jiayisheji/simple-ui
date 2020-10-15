@@ -4,8 +4,8 @@ import { SimFallbackPipe } from './fallback.pipe';
 import { SimFilterPipe } from './filter.pipe';
 import { SimMapperPipe } from './mapper.pipe';
 import { SimSafeHtmlPipe } from './safe-html.pipe';
-import { SimSecretPipe } from './secret.pipe';
 import { StrategyPipe } from './strategy.pipe';
+import { SimTimeAgoPipe } from './time-ago.pipe';
 import { SimTimeRangePipe } from './time-range.pipe';
 import { SimTimesPipe } from './times.pipe';
 import { SimWeekPipe } from './week.pipe';
@@ -17,10 +17,10 @@ import { SimWeekPipe } from './week.pipe';
     SimMapperPipe,
     SimFallbackPipe,
     SimSafeHtmlPipe,
-    SimSecretPipe,
     SimTimeRangePipe,
     SimTimesPipe,
-    SimWeekPipe
+    SimWeekPipe,
+    SimTimeAgoPipe
   ],
   imports: [CommonModule],
   exports: [
@@ -29,10 +29,10 @@ import { SimWeekPipe } from './week.pipe';
     SimMapperPipe,
     SimFallbackPipe,
     SimSafeHtmlPipe,
-    SimSecretPipe,
     SimTimeRangePipe,
     SimTimesPipe,
-    SimWeekPipe
+    SimWeekPipe,
+    SimTimeAgoPipe
   ]
 })
 export class SimPipesModule {}

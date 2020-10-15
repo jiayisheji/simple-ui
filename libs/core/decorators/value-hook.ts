@@ -45,10 +45,10 @@ export function ValueHook<T, K extends keyof T>(setter?: ValueHookSetter<T, K>, 
   return (target: T, propertyKey: K) => {
     const { oGetter, oSetter } = checkDescriptor(target, propertyKey);
 
-    const symbol = Symbol();
+    const symbol = `_$$_${propertyKey}`;
 
     type Mixed = T & {
-      [symbol]: T[K];
+      symbol: T[K];
     };
 
     Object.defineProperty(target, propertyKey, {

@@ -42,8 +42,19 @@ function cloneRegExp(regexp: SafeAny): RegExp {
   return result;
 }
 
-function initCloneObject(object: SafeAny) {
+export function initCloneObject(object: SafeAny) {
   return isFunction(object.constructor) && !isPrototype(object) ? Object.create(Object.getPrototypeOf(object)) : {};
+}
+
+export function copyArray(source: SafeAny) {
+  let index = -1;
+  const length = source.length;
+
+  const array = new Array(length);
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
 }
 
 function initCloneArray(array: SafeAny) {

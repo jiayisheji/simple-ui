@@ -3,7 +3,8 @@ import { isFunction } from './function';
 import { isNumber } from './number';
 
 /**
- * 最大安全的整数
+ * 最大安全的整数 对应于`Number.MAX_SAFE_INTEGER`。
+ * 由于不稳定的浏览器支持，以及没有在闭包类型中定义值，因此移出到这里的变量中。
  */
 export const MAX_SAFE_INTEGER = 9007199254740991;
 
