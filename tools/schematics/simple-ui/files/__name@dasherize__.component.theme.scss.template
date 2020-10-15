@@ -70,6 +70,6 @@ $sim-<%= dasherize(name) %>: unquote(sim-<%= dasherize(name) %>);
 
   .sim-<%= dasherize(name) %> {
     /// $size-scale-map: (small: minimum, large: maximum);
-    margin: sim-density-prop-value($sim-card-density-config, $density-scale, margin);
+    margin: sim-density-prop-value($sim-<%= dasherize(name) %>-density-config, $density-scale, margin);
   }
 }

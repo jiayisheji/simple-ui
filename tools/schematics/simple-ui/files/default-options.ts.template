@@ -1,0 +1,14 @@
+import { InjectionToken } from '@angular/core';
+
+/**
+ * 表示可配置的默认选项
+ * using the `SIM_<%= underscore(name).toLocaleUpperCase() %>_DEFAULT_OPTIONS` injection token.
+ */
+export interface Sim<%= classify(name) %>DefaultOptions {
+  test: string;
+}
+
+/**
+ * 注入令牌，可用于配置应用程序中所有 `<%= dasherize(name) %>` 的默认选项。
+ */
+export const SIM_<%= underscore(name).toLocaleUpperCase() %>_DEFAULT_OPTIONS = new InjectionToken<Sim<%= classify(name) %>DefaultOptions>('SIM_<%= underscore(name).toLocaleUpperCase() %>_DEFAULT_OPTIONS');

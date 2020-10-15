@@ -46,6 +46,16 @@
       "type": "boolean",
       "default": true,
       "description": "标志是否应该生成加载组件主题到component-all-theme文件里"
+    },
+    "defaultOptions": {
+      "type": "boolean",
+      "default": true,
+      "description": "标志是否应该生成defaultOptions注入令牌"
+    },
+    "animations": {
+      "type": "boolean",
+      "default": true,
+      "description": "标志是否应该生成animations动画文件"
     }
   },
   "required": ["name"]

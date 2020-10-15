@@ -6,6 +6,8 @@ export interface SimpleOptions {
   theme?: boolean;
   directive?: boolean;
   types?: boolean;
+  animations?: boolean;
+  defaultOptions?: boolean;
   folderName?: string;
   fileName?: string;
   projectRoot?: string;

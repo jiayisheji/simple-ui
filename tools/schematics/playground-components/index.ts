@@ -12,9 +12,9 @@ import {
   url
 } from '@angular-devkit/schematics';
 import { InsertChange, toFileName } from '@nrwl/workspace';
-import { addRouteDeclarationToModule } from '@schematics/angular/utility/ast-utils';
 import { applyLintFix } from '@schematics/angular/utility/lint-fix';
 import * as ts from 'typescript';
+import { addRoutesToModule } from '../utility/ast-utils';
 import { PlaygroundComponentOptions } from './schema';
 
 export default function (schema: PlaygroundComponentOptions): Rule {
@@ -70,7 +70,7 @@ function addRouteDeclarationToNgModule(options: PlaygroundComponentOptions): Rul
     }
 
     const sourceText = text.toString();
-    const addDeclaration = addRouteDeclarationToModule(
+    const addDeclaration = addRoutesToModule(
       ts.createSourceFile(path, sourceText, ts.ScriptTarget.Latest, true),
       path,
       buildRoute(options)
