@@ -84,6 +84,11 @@
   flex: 1 0 1em;
 }
 
+.sim-form-field-type-sim-radio,
+.sim-form-field-type-sim-checkbox {
+  align-items: center;
+}
+
 .sim-form {
   &-vertical {
     .sim-form-field {
@@ -95,6 +100,11 @@
       padding: 0 0 8px;
       line-height: 1.5;
       text-align: left;
+    }
+
+    .sim-form-field-type-sim-radio,
+    .sim-form-field-type-sim-checkbox {
+      align-items: start;
     }
   }
 
@@ -112,12 +122,12 @@
       white-space: nowrap;
       text-align: left;
     }
-  }
-}
 
-.sim-form-field-type-sim-radio,
-.sim-form-field-type-sim-checkbox {
-  align-items: center;
+    .sim-form-field-type-sim-radio .sim-radio-group,
+    .sim-form-field-type-sim-checkbox .sim-checkbox-group {
+      display: inline-flex;
+    }
+  }
 }
 
 .sim-form-field-type-sim-input .sim-form-field-control {

@@ -75,6 +75,9 @@ const _ButtonMixinBase = mixinColor(mixinDisabled(mixinSize(MixinElementRefBase,
 export class SimButtonComponent extends _ButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable, CanColor, CanSize {
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_loading: BooleanInput;
+  static ngAcceptInputType_fluid: BooleanInput;
+  static ngAcceptInputType_dashed: BooleanInput;
+  static ngAcceptInputType_pilled: BooleanInput;
 
   /**
    * 是否加载中
@@ -207,6 +210,8 @@ export class SimAnchorComponent extends SimButtonComponent implements OnInit {
   }
 })
 export class SimLinkComponent extends SimAnchorComponent implements OnInit {
+  static ngAcceptInputType_disabled: BooleanInput;
+
   /** 按钮的tabIndex */
   @Input() tabIndex: number;
 

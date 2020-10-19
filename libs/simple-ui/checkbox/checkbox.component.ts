@@ -222,8 +222,7 @@ export class SimCheckboxGroupDirective extends _SimCheckboxGroupMixinBase
     if (this._value !== newValue) {
       // 在继续进行之前设置此选项，以确保在进行选择时不会出现循环。
       this._value = newValue;
-      // this._updateSelectedRadioFromValue();
-      // this._checkSelectedRadioButton();
+      this._updateSelectedCheckboxFromValue();
     }
   }
   private _value: CheckboxValue;
@@ -340,8 +339,8 @@ export class SimCheckboxGroupDirective extends _SimCheckboxGroupMixinBase
 
   ngAfterContentInit() {
     // 在AfterContentInit中将这个组件标记为初始化，
-    // 因为在SimRadioGroup上，NgModel可能会设置初始值，
-    // 而且NgModel的OnInit可能会在SimRadioGroup的OnInit之后发生。
+    // 因为在SimCheckboxGroup上，NgModel可能会设置初始值，
+    // 而且NgModel的OnInit可能会在SimCheckboxGroup的OnInit之后发生。
     this._isInitialized = true;
     this._disabledCheckboxes = [];
     this._checkValueLength();
@@ -455,6 +454,16 @@ export class SimCheckboxGroupDirective extends _SimCheckboxGroupMixinBase
   _emitChangeEvent(): void {
     if (this._isInitialized) {
       this.change.emit(new SimCheckboxGroupChange(this, this._value));
+    }
+  }
+
+  /** 从内部_value状态更新selected多选框。 */
+  private _updateSelectedCheckboxFromValue(): void {
+    if (this._checkboxes) {
+      this._checkboxes.forEach(checkbox => {
+        checkbox.checked = this.value.includes(checkbox.value);
+        checkbox._markForCheck();
+      });
     }
   }
 
