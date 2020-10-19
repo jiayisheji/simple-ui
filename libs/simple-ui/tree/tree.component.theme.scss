@@ -1,0 +1,56 @@
+@import './tree-variables';
+
+$sim-tree: unquote(sim-tree);
+
+/// 注册组件
+@include sim-register-component($sim-tree);
+
+/// 主题风格
+@mixin sim-tree-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-tree) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-tree-color($color);
+    }
+    @if $density != null {
+      @include sim-tree-density($density);
+    }
+    @if $typography != null {
+      @include sim-tree-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-tree-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  $primary: map-get($config, primary);
+
+  .sim-tree-node-content:hover {
+    background: sim-color($background, hover);
+  }
+
+  .sim-tree-node-content.sim-tree-node-selected {
+    background: sim-color($primary, 0.24);
+    &:hover {
+      background: sim-color($primary, 0.24);
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-tree-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-tree-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}

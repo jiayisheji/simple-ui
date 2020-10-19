@@ -1,0 +1,8 @@
+// Density configuration for the tree.
+$sim-tree-density-config: (
+  height: (
+    default: 24px,
+    maximum: 48px,
+    minimum: 24px
+  )
+) !default;

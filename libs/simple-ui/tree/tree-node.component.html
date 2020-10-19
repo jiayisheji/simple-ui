@@ -1,0 +1,16 @@
+<sim-tree-node-padding [level]="node.level"></sim-tree-node-padding>
+<sim-tree-node-expander
+  (click)="onExpandChange($event)"
+  [expandable]="node.expandable"
+  [expanded]="treeModel.isExpanded(node)"
+></sim-tree-node-expander>
+<sim-pseudo-checkbox
+  class="sim-tree-node-checkbox"
+  [class.sim-pseudo-checkbox-checked]="treeModel.isChecked(node)"
+  [class.sim-pseudo-checkbox-indeterminate]="treeModel.isIndeterminate(node)"
+  [class.sim-pseudo-checkbox-disabled]="disableCheckbox"
+  (click)="onCheckboxChange($event)"
+></sim-pseudo-checkbox>
+<div class="sim-tree-node-content" [class.sim-tree-node-selected]="treeModel.isSelected(node)" (click)="onSelectChange($event)">
+  {{ node.display }}
+</div>
