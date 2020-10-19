@@ -40,7 +40,7 @@ export class SimIconService implements OnDestroy {
   private _svgIconAssets: Map<string, { path: string; options?: IconOptions }> = new Map();
 
   /** svgIcon的文件夹目录地址默认别名 */
-  private _defaultAssetsByAlias: string = 'sim-icon';
+  private _defaultAssetsByAlias: string = 'sim-icon-svg';
 
   /** 如果用户使用图标字体集，需要设置一个图标字体集 */
   private _defaultFontSetClass: string = 'sim-icon';
@@ -235,9 +235,9 @@ export class SimIconService implements OnDestroy {
 
       // 假装存在，并让它去发生http请求获取图标，如果可以获取到把它添加的字体图标的缓存里面
       return this.getSvgIconFromUrl(svgUrl).pipe(
-        tap(() => {
+        tap(svg => {
           // 如果带命名空间 就把别名和命名空间设为一个，这样可以防止冲突
-          this.addSvgIconInNamespace(namespace, name, svgUrl, svgIconAssets.options);
+          this.addSvgIconInNamespace(namespace, name, svg, svgIconAssets.options);
         })
       );
     }

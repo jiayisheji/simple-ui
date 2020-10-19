@@ -13,10 +13,10 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  Renderer2,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { BooleanInput } from '@ngx-simple/core/coercion';
 import { CanColor, mixinColor, MixinElementRefBase, ThemePalette } from '@ngx-simple/core/common-behaviors';
 import { InputBoolean } from '@ngx-simple/core/decorators';
 import { take } from 'rxjs/operators';
@@ -81,9 +81,15 @@ export function SIM_ICON_LOCATION_FACTORY(): SimIconLocation {
   template: '',
   styleUrls: ['./icon.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'sim-icon',
+    role: 'img'
+  }
 })
 export class SimIconComponent extends _IconMixinBase implements OnChanges, OnInit, AfterViewChecked, OnDestroy, CanColor {
+  static ngAcceptInputType_inline: BooleanInput;
+
   /** 字体集中图标的名称 */
   @Input()
   get fontIcon(): string {
@@ -136,14 +142,11 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
 
   constructor(
     elementRef: ElementRef,
-    private renderer: Renderer2,
     private simIconService: SimIconService,
     @Inject(SIM_ICON_LOCATION) private _location: SimIconLocation,
     private readonly _errorHandler: ErrorHandler
   ) {
     super(elementRef);
-    renderer.addClass(elementRef.nativeElement, 'sim-icon');
-    renderer.setAttribute(elementRef.nativeElement, 'role', 'img');
   }
 
   ngAfterViewChecked() {
