@@ -1,0 +1,17 @@
+<sim-tree
+  [treeControl]="treeControl"
+  [multiple]="multiple"
+  checkable
+  draggable
+  #tree
+  [dataSource]="dataSource"
+  (selectChange)="onSelectChange($event)"
+  (checkedChange)="onCheckedChange($event)"
+  (expandChange)="onExpandChange($event)"
+></sim-tree>
+
+<br />
+<button sim-raised-button (click)="expandAll()">ExpandAll</button>
+<button sim-raised-button (click)="collapseAll()">CollapseAll</button>
+<button sim-raised-button (click)="setCheckedNodes()">勾选节点</button>
+<button sim-raised-button (click)="setSelectMode()">选择模式</button>

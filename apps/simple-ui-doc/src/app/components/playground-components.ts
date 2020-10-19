@@ -50,10 +50,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       //   path: 'data-grid',
       //   name: '数据表格'
       // },
-      // {
-      //   path: 'tree',
-      //   name: '树'
-      // }
+      {
+        path: 'tree',
+        name: '树'
+      }
     ]
   },
   {
@@ -87,6 +87,14 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       // {
       //   path: 'datepicker',
       //   name: '日期选择器'
+      // },
+      // {
+      //   path: 'timepicker',
+      //   name: '时间选择器'
+      // },
+      // {
+      //   path: 'colorpicker',
+      //   name: '颜色选择器'
       // }
     ]
   },
@@ -102,6 +110,16 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         path: 'toast',
         name: '全局提示'
       }
+    ]
+  },
+  {
+    path: '',
+    name: '集成组件',
+    children: [
+      // {
+      //   path: 'echarts',
+      //   name: '图表组件'
+      // }
     ]
   }
 ];

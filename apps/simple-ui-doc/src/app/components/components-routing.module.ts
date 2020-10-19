@@ -19,11 +19,14 @@ const routes: Routes = [
       { path: 'radio', loadChildren: () => import('./radio/radio.module').then(m => m.RadioModule) },
       { path: 'checkbox', loadChildren: () => import('./checkbox/checkbox.module').then(m => m.CheckboxModule) },
       { path: 'toast', loadChildren: () => import('./toast/toast.module').then(m => m.ToastModule) },
-      { path: 'switch', loadChildren: () => import('./switch/switch.module').then(m => m.SwitchModule) }
-      // { path: 'datepicker', loadChildren: () => import('./datepicker/datepicker.module').then(m => m.DatepickerModule) },
-      // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
-      // { path: 'tree', loadChildren: () => import('./tree/tree.module').then(m => m.TreeModule) },
-      // { path: 'data-grid', loadChildren: () => import('./data-grid/data-grid.module').then(m => m.DataGridModule) },
+      { path: 'switch', loadChildren: () => import('./switch/switch.module').then(m => m.SwitchModule) },
+      { path: 'tree', loadChildren: () => import('./tree/tree.module').then(m => m.TreeModule) }
+      //   { path: 'datepicker', loadChildren: () => import('./datepicker/datepicker.module').then(m => m.DatepickerModule) },
+      //   { path: 'timepicker', loadChildren: () => import('./timepicker/timepicker.module').then(m => m.TimepickerModule) },
+      //   { path: 'colorpicker', loadChildren: () => import('./colorpicker/colorpicker.module').then(m => m.ColorpickerModule) },
+      //   { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
+      //   { path: 'data-grid', loadChildren: () => import('./data-grid/data-grid.module').then(m => m.DataGridModule) },
+      //   { path: 'echarts', loadChildren: () => import('./echarts/echarts.module').then(m => m.EchartsModule) }
     ]
   }
 ];
