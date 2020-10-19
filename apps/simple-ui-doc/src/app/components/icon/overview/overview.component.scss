@@ -1,0 +1,61 @@
+.doc-icon-list {
+  margin: 10px 0;
+  overflow: hidden;
+  list-style: none;
+  .sim-icon {
+    margin: 12px 0 8px;
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+  }
+  li {
+    position: relative;
+    float: left;
+    width: 16.66%;
+    height: 100px;
+    margin: 3px 0;
+    padding: 10px 0 0;
+    overflow: hidden;
+    color: #555;
+    text-align: center;
+    list-style: none;
+    background-color: inherit;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    &:hover {
+      color: #fff;
+      background-color: #1890ff;
+      .sim-icon {
+        transform: scale(1.4);
+      }
+    }
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      line-height: 110px;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      content: 'Copied!';
+    }
+    &.doc-copied::after {
+      top: -10px;
+      opacity: 1;
+    }
+    &.doc-copied:hover {
+      color: hsla(0, 0%, 100%, 0.2);
+    }
+  }
+
+  span {
+    display: block;
+    white-space: nowrap;
+    text-align: center;
+    transform: scale(0.83);
+  }
+}

@@ -1,0 +1,6 @@
+<ul class="doc-icon-list">
+  <li *ngFor="let item of items" [cdkCopyToClipboard]="clipboard(item)" #dom (cdkCopyToClipboardCopied)="copied($event, dom)">
+    <sim-icon [svgIcon]="item"></sim-icon>
+    <span>{{ item }}</span>
+  </li>
+</ul>
