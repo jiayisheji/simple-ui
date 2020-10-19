@@ -30,7 +30,8 @@ function throwSimDialogContentAlreadyAttachedError() {
   template: '<ng-template cdkPortalOutlet></ng-template>',
   styleUrls: ['./dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // 如果使用`OnPush` 会导致子组件不会自动更新，需要手动`ChangeDetectorRef.markForCheck()`
+  changeDetection: ChangeDetectionStrategy.Default,
   animations: [simDialogAnimations.slideDialog],
   host: {
     class: 'sim-dialog',
