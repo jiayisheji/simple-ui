@@ -1,0 +1,725 @@
+{
+	// Place your simple-ui 工作区 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	/// Pipe
+	"Simple Week Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-week",
+		"body": ["{{ ${variable} | week }}$0"],
+		"description": "Simple Week pipe"
+	},
+	"Simple Fallback Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-fallback",
+		"body": ["{{ ${variable} | fallback }}$0"],
+		"description": "Simple Fallback pipe"
+	},
+	"Simple Safe Html Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-safe-html",
+		"body": ["{{ ${variable} | safeHtml }}$0"],
+		"description": "Simple Safe Html pipe"
+	},
+	"Simple Times Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-times",
+		"body": ["*ngFor=\"let index of ${variable} | times\"$0"],
+		"description": "Simple Times pipe"
+	},
+	"Simple TimeAgo Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-time-ago",
+		"body": ["{{ ${variable} | timeAgo }}$0"],
+		"description": "Simple TimeAgo pipe"
+	},
+	"Simple Time Range Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-time-range",
+		"body": ["{{ ${variable} | timeRange }}$0"],
+		"description": "Simple Time Range pipe"
+	},
+	"Simple Strategy Pipe With String": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-status-str",
+		"body": ["{{ ${variable} | strategy: ${statusMap} }}$0"],
+		"description": "Simple Strategy Pipe With String"
+	},
+	"Simple Strategy Pipe With Number": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-status-num",
+		"body": ["{{ ${variable} | strategy: ${statusMapOrArray} }}$0"],
+		"description": "Simple Strategy Pipe With Number"
+	},
+	"Simple Strategy Pipe With Boolean": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-status-bool",
+		"body": ["{{ ${variable} | strategy: ${statusMapOrArray} }}$0"],
+		"description": "Simple Strategy Pipe With Boolean"
+	},
+	"Simple Mask Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-mask",
+		"body": ["{{ ${variable} | mask }}$0"],
+		"description": "Simple Mask Pipe"
+	},
+	"Angular Custom Mask Pipe": {
+		"prefix": "su-pipe-mask-custom",
+		"description": "Mask pipe - See String.substring()",
+		"scope": "typescript, html",
+		"body": [
+			"{{ ${variable} | mask:\"${start}\":\"${end}\" }}$0"
+		]
+	},
+	"Simple Name Mask Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-mask-name",
+		"body": ["{{ ${variable} | mask:name }}$0"],
+		"description": "Simple Name Mask Pipe"
+	},
+	"Simple Mobile Mask Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-mask-mobile",
+		"body": ["{{ ${variable} | mask:mobile }}$0"],
+		"description": "Simple Mobile Mask Pipe"
+	},
+	"Simple Email Mask Pipe": {
+		"scope": "typescript, html",
+		"prefix": "su-pipe-mask-email",
+		"body": ["{{ ${variable} | mask:email }}$0"],
+		"description": "Simple Email Mask Pipe"
+	},
+	/// Component
+	"Simple Button": {
+		"prefix": "su-button",
+		"description": "Rectangular Simple button w/ no elevation.",
+		"scope": "typescript, html",
+		"body": [
+			"<button sim-button>${text}</button>$0"
+		]
+	},
+	"Simple Raised Button": {
+		"prefix": "su-button-raised",
+		"description": "Rectangular Simple button w/ elevation.",
+		"scope": "typescript, html",
+		"body": [
+			"<button sim-raised-button>${text}</button>$0"
+		]
+	},
+	"Simple Round Button": {
+		"prefix": "su-button-fab",
+		"description": "Circular Simple button with a transparent background",
+		"scope": "typescript, html",
+		"body": [
+			"<button sim-fab-button>${text}</button>$0"
+		]
+	},
+	"Simple Icon Button": {
+		"prefix": "su-button-icon",
+		"description": "Circular Simple button with a transparent background",
+		"scope": "typescript, html",
+		"body": [
+			"<button sim-icon-button><sim-icon svgIcon=\"${icon_name}\"></sim-icon></button>$0"
+		]
+	},
+	"Simple Basic Card": {
+		"prefix": "su-card",
+		"description": "Simple Basic Card",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-card>",
+			"\t$1",
+			"</sim-card>$0"
+		]
+	},
+	"Simple Card": {
+		"prefix": "su-card-full",
+		"description": "Simple Card",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-card>",
+			"\t<sim-card-header>",
+			"\t\t<sim-card-title>${title}</sim-card-title>",
+			"\t\t<sim-card-subtitle>${subtitle}</sim-card-subtitle>",
+			"\t</sim-card-header>",
+			"\t<sim-card-content>",
+			"\t$1",
+			"\t</sim-card-content>",
+			"\t<sim-card-actions>",
+			"\t\t<button sim-button>${Ok}</button>",
+			"\t</sim-card-actions>",
+			"</sim-card>$0"
+		]
+	},
+	"Simple Divider": {
+		"prefix": "su-divider",
+		"description": "Simple Divider",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-divider></sim-divider>$0",
+		]
+	},
+	"Simple Inset Divider": {
+		"prefix": "su-divider-inset",
+		"description": "Simple Divider Inset",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-divider [inset]=\"true\"></sim-divider>$0",
+		]
+	},
+	"Simple Outer Divider": {
+		"prefix": "su-divider-outer",
+		"description": "Simple Divider Outer",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-divider [outer]=\"true\"></sim-divider>$0",
+		]
+	},
+	"Simple Vertical Divider": {
+		"prefix": "su-divider-vertical",
+		"description": "Simple Divider Vertical",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-divider [vertical]=\"true\"></sim-divider>$0",
+		]
+	},
+	"Simple Divider Text": {
+		"prefix": "su-divider-text",
+		"description": "Simple Divider Text",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-divider>",
+			"\t<sim-divider-inner-text>${text}</sim-divider-inner-text>",
+			"</sim-divider>$0"
+		]
+	},
+	"Simple SVG Icon": {
+		"prefix": "su-icon-svg",
+		"description": "Simple SVG Icon",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-icon svgIcon=\"${src}\"></sim-icon>$0"
+		]
+	},
+	"Simple From": {
+		"prefix": "su-form",
+		"description": "Simple From",
+		"scope": "typescript, html",
+		"body": [
+			"<form sim-form [formGroup]=\"validateForm\" (ngSubmit)=\"onSubmit()\">",
+			"\t<sim-form-field>",
+			"\t\t<sim-form-label>${label}</sim-form-label>",
+			"\t\t<input simInput placeholder=\"${placeholder}\" formControlName=\"${formControlName}\" />$0",
+			"\t\t<sim-error *simHasError=\"'${rule}'\">${message}</sim-error>",
+			"\t\t<sim-hint>${hint}</sim-hint>",
+			"\t</sim-form-field>",
+			"\t<sim-form-actions>",
+			"\t<button type=\"submit\" sim-raised-button color=\"primary\">${Submit}</button>",
+			"\t</sim-form-actions>",
+			"</form>"
+		]
+	},
+	"Simple From Layout": {
+		"prefix": "su-form-layout",
+		"description": "Simple From Layout",
+		"scope": "typescript, html",
+		"body": [
+			"layout=\"${1|horizontal,vertical,inline|}\"$0"
+		]
+	},
+	"Simple From With Layout": {
+		"prefix": "su-form-with-layout",
+		"description": "Simple From with Layout",
+		"scope": "typescript, html",
+		"body": [
+			"<form sim-form layout=\"${1|horizontal,vertical,inline|}\" [formGroup]=\"validateForm\" (ngSubmit)=\"onSubmit()\">",
+			"\t<sim-form-field>",
+			"\t\t<sim-form-label>${label}</sim-form-label>",
+			"\t\t<input simInput placeholder=\"${placeholder}\" formControlName=\"${formControlName}\" />$0",
+			"\t\t<sim-error *simHasError=\"'${rule}'\">${message}</sim-error>",
+			"\t\t<sim-hint>${hint}</sim-hint>",
+			"\t</sim-form-field>",
+			"\t<sim-form-actions>",
+			"\t<button type=\"submit\" sim-raised-button color=\"primary\">${Submit}</button>",
+			"\t</sim-form-actions>",
+			"</form>"
+		]
+	},
+	"Simple From Field": {
+		"prefix": "su-form-field",
+		"description": "Simple From Field",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<sim-form-label>${label}</sim-form-label>",
+			"\t<input simInput placeholder=\"${placeholder}\" formControlName=\"${formControlName}\" />$0",
+			"</sim-form-field>",
+		]
+	},
+	"Simple From Field With Error": {
+		"prefix": "su-form-field-error",
+		"description": "Simple From Field with error",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<sim-form-label>${label}</sim-form-label>",
+			"\t<input simInput placeholder=\"${placeholder}\" formControlName=\"${formControlName}\" />$0",
+			"\t<sim-error *simHasError=\"'${rule}'\">${message}</sim-error>",
+			"</sim-form-field>",
+		]
+	},
+	"Simple From Field With Hint": {
+		"prefix": "su-form-field-hint",
+		"description": "Simple From Field with Hint",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<sim-form-label>${label}</sim-form-label>",
+			"\t<input simInput placeholder=\"${placeholder}\" formControlName=\"${formControlName}\" />$0",
+				"\t<sim-hint>${hint}</sim-hint>",
+			"</sim-form-field>",
+		]
+	},
+	"Simple From Field With Error And Hint": {
+		"prefix": "su-form-field-full",
+		"description": "Simple From Field with error and hint",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<sim-form-label>${label}</sim-form-label>",
+			"\t<input simInput placeholder=\"${placeholder}\" formControlName=\"${formControlName}\" />$0",
+			"\t<sim-error *simHasError=\"'${rule}'\">${message}</sim-error>",
+			"\t<sim-hint>${hint}</sim-hint>",
+			"</sim-form-field>",
+		]
+	},
+	"Simple From Field Error": {
+		"prefix": "su-form-error",
+		"description": "Simple From Field Error",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-error *simHasError=\"'${rule}'\">${message}</sim-error>$0"
+		]
+	},
+	"Simple From Field Hint": {
+		"prefix": "su-form-hint",
+		"description": "Simple From Field Hint",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-hint>${hint}</sim-hint>$0"
+		]
+	},
+	"Simple From Field Hint Align End": {
+		"prefix": "su-form-hint-end",
+		"description": "Simple From Field Hint Align End",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-hint align=\"end\">${hint}</sim-hint>$0"
+		]
+	},
+	"Simple Radio": {
+		"prefix": "su-radio",
+		"description": "Simple Radio",
+		"scope": "typescript, html",
+		"body": [
+			"<mat-radio-group [value]=\"${radioValue}\" (change)=\"radioChange($event)\">",
+			"\t<mat-radio value=\"${value1}\">${Option1}</mat-radio>",
+			"\t<mat-radio value=\"${value2}\">${Option2}</mat-radio>",
+			"</mat-radio-group>$0"
+		]
+	},
+	"Simple Radio ngmodel": {
+		"prefix": "su-radio-model",
+		"description": "Simple Radio ngmodel",
+		"scope": "typescript, html",
+		"body": [
+			"<mat-radio-group [(ngModel)]=\"${radioValue}\">",
+			"\t<mat-radio value=\"${value1}\">${Option1}</mat-radio>",
+			"\t<mat-radio value=\"${value2}\">${Option2}</mat-radio>",
+			"</mat-radio-group>$0"
+		]
+	},
+	"Simple Radio ReactiveForms": {
+		"prefix": "su-radio-form",
+		"description": "Simple Radio ReactiveForms",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-radio-group formControlName=\"${formControlName}\">",
+			"\t<sim-radio value=\"${value1}\">${Option1}</sim-radio>",
+			"\t<sim-radio value=\"${value2}\">${Option2}</sim-radio>",
+			"</sim-radio-group>$0"
+		]
+	},
+	"Simple Radio Option": {
+		"prefix": "su-radio-option",
+		"description": "Simple Radio Option",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-radio value=\"${value}\">${Option}</sim-radio>$0"
+		]
+	},
+	"Simple Radio Option with *ngFor": {
+		"prefix": "su-radio-for",
+		"description": "Simple Radio Option with *ngFor",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-radio *ngFor=\"let ${item} of ${items}\" [value]=\"${item}.value\">{{${item}.viewValue}}</sim-radio>$0"
+		]
+	},
+	"Simple Checkbox Option": {
+		"prefix": "su-checkbox-option",
+		"description": "Simple Checkbox Option",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox value=\"${value}\">${Option}</sim-checkbox>$0"
+		]
+	},
+	"Simple Checkbox Option with *ngFor": {
+		"prefix": "su-checkbox-for",
+		"description": "Simple Checkbox with *ngFor",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox *ngFor=\"let ${item} of ${items}\" [value]=\"${item}.value\">{{${item}.viewValue}}</sim-checkbox>$0"
+		]
+	},
+	"Simple Checkbox ngModel": {
+		"prefix": "su-checkbox-model",
+		"description": "Simple Checkbox ngModel",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox [(ngModel)]=\"${property.checkedOrUnchecked}\">${text}</sim-checkbox>$0"
+		]
+	},
+	"Simple Checkbox ReactiveForms": {
+		"prefix": "su-checkbox-form",
+		"description": "Simple Checkbox ReactiveForms",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox formControlName=\"${formControlName}\">${text}</sim-checkbox>$0"
+		]
+	},
+	"Simple Checkbox Group": {
+		"prefix": "su-checkboxes",
+		"description": "Simple Checkbox Group",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox-group [value]=\"${checkboxValue}\" (change)=\"checkboxChange($event)\">",
+			"\t<sim-checkbox value=\"${value1}\">${Option1}</sim-checkbox>",
+			"\t<sim-checkbox value=\"${value2}\">${Option2}</sim-checkbox>",
+			"</sim-checkbox-group>$0"
+		]
+	},
+	"Simple Checkbox Group ngmodel": {
+		"prefix": "su-checkboxes-model",
+		"description": "Simple Checkbox Group ngmodel",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox-group [(ngModel)]=\"${checkboxValue}\">",
+			"\t<sim-checkbox value=\"${value1}\">${Option1}</sim-checkbox>",
+			"\t<sim-checkbox value=\"${value2}\">${Option2}</sim-checkbox>",
+			"</sim-checkbox-group>$0"
+		]
+	},
+	"Simple Checkbox Group ReactiveForms": {
+		"prefix": "su-checkboxes-form",
+		"description": "Simple Checkbox Group ReactiveForms",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-checkbox-group formControlName=\"${formControlName}\">",
+			"\t<sim-checkbox value=\"${value1}\">${Option1}</sim-checkbox>",
+			"\t<sim-checkbox value=\"${value2}\">${Option2}</sim-checkbox>",
+			"</sim-checkbox-group>$0"
+		]
+	},
+	"Simple Select": {
+		"prefix": "su-select",
+		"description": "Simple Select",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-select placeholder=\"${Placeholder}\" [(ngModel)]=\"selectedValue\" name=\"${item}\">",
+			"\t<sim-option *ngFor=\"let ${item} of ${items}\" [value]=\"${item}.value\">",
+			"\t\t{{${item}.viewValue}}",
+			"\t</sim-option>",
+			"</sim-select>$0"
+		]
+	},
+	"Simple Select ReactiveForms": {
+		"prefix": "su-select-form",
+		"description": "Simple Select ReactiveForms",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-select placeholder=\"${Placeholder}\" formControlName=\"${formControlName}\">",
+			"\t<sim-option *ngFor=\"let ${item} of ${items}\" [value]=\"${item}.value\">",
+			"\t\t{{${item}.viewValue}}",
+			"\t</sim-option>",
+			"</sim-select>$0"
+		]
+	},
+	"Simple Input": {
+		"prefix": "su-input",
+		"description": "Simple Input Textbox",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<input simInput placeholder=\"${placeholder}\" value=\"${value}\" />",
+			"</sim-form-field>$0"
+		]
+	},
+	"Simple Input Text": {
+		"prefix": "su-input-text",
+		"description": "Simple Input Textbox",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<input type=\"text\" simInput placeholder=\"${label}\" value=\"${value}\" />",
+			"</sim-form-field>$0"
+		]
+	},
+	"Simple Input Number": {
+		"prefix": "su-input-number",
+		"description": "Simple Input Numberbox",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<input type=\"number\" simInput placeholder=\"${label}\" value=\"${value}\" />",
+			"</sim-form-field>$0"
+		]
+	},
+	"Simple Input Hidden": {
+		"prefix": "su-input-hidden",
+		"description": "Simple Input Hiddenbox",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-form-field>",
+			"\t<input type=\"hidden\" simInput formControlName=\"${value}\" />",
+			"$0",
+			"</sim-form-field>"
+		]
+	},
+	"Simple Tooltip": {
+		"prefix": "su-tooltip",
+		"description": "Simple Tooltip",
+		"scope": "typescript, html",
+		"body": [
+			"simTooltip=\"${text}\"$0"
+		]
+	},
+	"Simple Tooltip Position": {
+		"prefix": "su-tooltip-position",
+		"description": "Simple Tooltip position",
+		"scope": "typescript, html",
+		"body": [
+			"simTooltipPosition=\"${1|top,topStart,topEnd,bottom,bottomStart,bottomEnd,left,leftStart,leftEnd,right,rightStart,rightEnd|}\"$0"
+		]
+	},
+	"Simple Tooltip With Position": {
+		"prefix": "su-tooltip-with-position",
+		"description": "Simple Tooltip with position",
+		"scope": "typescript, html",
+		"body": [
+			"simTooltip=\"${text}\" simTooltipPosition=\"${1|top,topStart,topEnd,bottom,bottomStart,bottomEnd,left,leftStart,leftEnd,right,rightStart,rightEnd|}\"$0"
+		]
+	},
+	"Simple Table": {
+		"prefix": "su-table",
+		"description": "Simple Table",
+		"scope": "typescript, html",
+		"body": [
+			"<table sim-table #table [dataSource]=\"${dataSource}\">",
+			"\t<ng-container simColumnDef=\"${column}\">",
+			"\t\t<th sim-header-cell *simHeaderCellDef> ${header} </th>",
+			"\t\t<td sim-cell *simCellDef=\"let row\"> {{row.${column}}} </td>",
+			"\t</ng-container>",
+			"\t<tr sim-header-row *simHeaderRowDef=\"['${column}']\"></tr>",
+			"\t<tr sim-row *simRowDef=\"let row; columns: ['${column}'];\"></tr>",
+			"</table>$0"
+		]
+	},
+	"Simple Table Column": {
+		"prefix": "su-table-column",
+		"description": "Simple Table Column",
+		"scope": "typescript, html",
+		"body": [
+			"<ng-container simColumnDef=\"${column}\">",
+			"\t<th sim-header-cell *simHeaderCellDef> ${header} </th>",
+			"\t<td sim-cell *simCellDef=\"let row\"> {{row.${column}}} </td>",
+			"</ng-container>$0"
+		]
+	},
+	"Simple Table Column Text": {
+		"prefix": "su-table-column-text",
+		"description": "Simple Table Column Text",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-text-column name=\"${name}\" headerText=\"${headerText}\"",
+			"\tdataAccessor=\"dataAccessor\"",
+			"></sim-text-column>$0"
+		]
+	},
+	"Simple Paginator": {
+		"prefix": "su-paginator",
+		"description": "Simple Paginator",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-paginator [pageTotal]=\"${pageTotal}\"",
+			"\t[pageIndex]=\"${pageIndex}\"",
+			"\t[pageSize]=\"${pageSize}\"",
+			"\t[pageSizeOptions]=\"${pageSizeOptions}\"",
+			"\t(pageChange)=\"pageEvent = $${event}\">",
+			"</sim-paginator>$0"
+		]
+	},
+	"Simple Spinner": {
+		"prefix": "su-spinner",
+		"description": "Simple Spinner wrapped contents",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-spinner [loading]=\"${loading}\">",
+			"\t$1",
+			"</sim-spinner>$0"
+		]
+	},
+	"Simple Independent Spinner": {
+		"prefix": "su-spinner-only",
+		"description": "Simple Spinner independent unwrapped contents",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-spinner [single]=\"true\" [loading]=\"${loading}\"></sim-spinner>$0"
+		]
+	},
+	"Simple Slide Toggle": {
+		"prefix": "su-slide-toggle",
+		"description": "Simple Slide toggle",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-slide-toggle>${text}</sim-slide-toggle>$0"
+		]
+	},
+	"Simple Switch": {
+		"prefix": "su-switch",
+		"description": "Simple switch",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-switch></sim-switch>$0"
+		]
+	},
+	"Simple Switch Children": {
+		"prefix": "su-switch-children",
+		"description": "Simple Switch children",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-switch>",
+			"\t<sim-witch-checked>${checked}</sim-witch-checked>",
+			"\t<sim-witch-unchecked>unchecked</sim-witch-unchecked>",
+			"</sim-switch>$0"
+		]
+	},
+	"Simple Empty": {
+		"prefix": "su-empty",
+		"description": "Simple Empty",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-empty content=\"${content}\"></sim-empty>$0"
+		]
+	},
+	"Simple Empty Footer": {
+		"prefix": "su-empty-footer",
+		"description": "Simple Empty Footer",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-empty content=\"${content}\">",
+			"\t<sim-empty-footer>",
+			"\t\t$1",
+			"\t</sim-empty-footer>$0",
+			"</sim-empty>$0"
+		]
+	},
+	"Simple expansion ": {
+		"prefix": "su-expansion",
+		"description": "Simple Expansion",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-expansion>",
+			"\t<sim-expansion-panel>",
+			"\t\t<sim-expansion-panel-header>",
+			"\t\t\t${title}",
+			"\t\t</sim-expansion-panel-header>",
+			"\t\t${content}",
+			"\t</sim-expansion-panel>",
+			"\t<sim-expansion-panel>",
+			"\t\t<sim-expansion-panel-header>",
+			"\t\t\t${title2}",
+			"\t\t</sim-expansion-panel-header>",
+			"\t\t${content2}",
+			"\t</sim-expansion-panel>",
+			"</sim-expansion>$0"
+		]
+	},
+	"Simple Expansion Panel": {
+		"prefix": "su-expansion-panel",
+		"description": "Simple Expansion Panel",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-expansion-panel>",
+			"\t<sim-expansion-panel-header>",
+			"\t\t${title}",
+			"\t</sim-expansion-panel-header>",
+			"\t${content}",
+			"</sim-expansion-panel>$0"
+		]
+	},
+	"Simple Dropdown": {
+		"prefix": "su-dropdown",
+		"description": "Simple Dropdown",
+		"scope": "typescript, html",
+		"body": [
+			"simDropdown=\"${dropdownInstance}\"$0"
+		]
+	},
+	"Simple Dropdown Position": {
+		"prefix": "su-dropdown-position",
+		"description": "Simple Dropdown",
+		"scope": "typescript, html",
+		"body": [
+			"simDropdownPosition=\"${1|top,topStart,topEnd,bottom,bottomStart,bottomEnd|}\"$0"
+		]
+	},
+	"Simple Dropdown With Position": {
+		"prefix": "su-dropdown-position",
+		"description": "Simple Dropdown With Position",
+		"scope": "typescript, html",
+		"body": [
+			"simTooltip=\"${text}\" simDropdownPosition=\"${1|top,topStart,topEnd,bottom,bottomStart,bottomEnd|}\"$0"
+		]
+	},
+	"Simple Dropdown Instance": {
+		"prefix": "su-dropdown-instance",
+		"description": "Simple Dropdown Instance",
+		"scope": "typescript, html",
+		"body": [
+			"<sim-dropdown #${dropdownInstance}>",
+			"\t$1",
+			"</sim-dropdown>$0"
+		]
+	},
+	"Simple Dropdown actions": {
+		"prefix": "su-dropdown-actions",
+		"description": "Simple Dropdown Instance",
+		"scope": "typescript, html",
+		"body": [
+			"<button sim-flat-button sim-raised-button color=\"primary\" [simDropdown]=\"dropdown\" simDropdownPosition=\"bottomStart\">",
+			"\t${Action}",
+			"</button>",
+			"<sim-dropdown #dropdown>",
+			"\t<sim-dropdown-actions selectable (selectionChange)=\"selectionChange($$event)\">",
+			"\t\t<sim-option value=\"${value}\">Action Button 1</sim-option>",
+			"\t\t<sim-option value=\"${value}\">Action Button 2</sim-option>",
+			"\t\t<sim-option value=\"${value}\">Action Button 3</sim-option>",
+			"\t</sim-dropdown-actions>",
+			"</sim-dropdown>$0"
+		]
+	},
+}
