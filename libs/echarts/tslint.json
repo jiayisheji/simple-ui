@@ -1,0 +1,11 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "sim", "camelCase"],
+    "component-selector": [true, "element", "sim", "kebab-case"],
+    "no-host-metadata-property": [false]
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
+  }
+}

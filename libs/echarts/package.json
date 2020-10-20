@@ -1,0 +1,44 @@
+{
+  "name": "@ngx-simple/echarts",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiayisheji/simple-ui.git"
+  },
+  "keywords": [
+    "angular",
+    "simple",
+    "components",
+    "design",
+    "ui",
+    "core",
+    "util",
+    "framework",
+    "frontend",
+    "echarts"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiayisheji/simple-ui/issues"
+  },
+  "homepage": "https://jiayisheji.github.io/simple-ui",
+  "peerDependencies": {
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0",
+    "@angular/animations": "^10.0.0",
+    "@angular/forms": "^10.0.0",
+    "@angular/router": "^10.0.0",
+    "@angular/platform-browser": "^10.0.0",
+    "rxjs": "~6.5.5",
+    "echarts": "^4.9.0",
+    "@types/echarts": "^4.8.1"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0",
+    "@ngx-simple/core": "0.0.3"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -41,6 +41,9 @@
     "core": {
       "tags": ["core"],
       "implicitDependencies": []
+    },
+    "echarts": {
+      "tags": ["echarts"]
     }
   }
 }

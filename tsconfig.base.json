@@ -23,7 +23,8 @@
       "@doc/examples/*": ["apps/simple-ui-doc/src/app/examples/*"],
       "@ngx-simple/core/*": ["libs/core/*"],
       "@ngx-simple/simple-ui/*": ["libs/simple-ui/*"],
-      "@ngx-simple/highlight": ["libs/highlight/src/index.ts"]
+      "@ngx-simple/highlight": ["libs/highlight/src/index.ts"],
+      "@ngx-simple/echarts": ["libs/echarts/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

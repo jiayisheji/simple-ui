@@ -44,7 +44,8 @@
               ]
             },
             "allowedCommonJsDependencies": [
-              "highlight.js"
+              "highlight.js",
+              "echarts"
             ]
           },
           "configurations": {
@@ -290,6 +291,53 @@
             "tsConfig": "libs/core/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/core/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "echarts": {
+      "projectType": "library",
+      "root": "libs/echarts",
+      "sourceRoot": "libs/echarts/src",
+      "prefix": "sim",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/echarts/tsconfig.lib.json",
+            "project": "libs/echarts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/echarts/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/echarts/tsconfig.lib.json",
+              "libs/echarts/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/echarts/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/echarts/jest.config.js",
+            "tsConfig": "libs/echarts/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/echarts/src/test-setup.ts"
           }
         }
       },
