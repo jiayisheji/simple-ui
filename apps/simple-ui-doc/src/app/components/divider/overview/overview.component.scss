@@ -1,0 +1,27 @@
+.doc-examples {
+  width: 300px;
+  margin-bottom: 20px;
+  padding: 20px 0;
+}
+
+.doc-example-item {
+  padding: 10px;
+  h4 {
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+
+.doc-inset-dividers .doc-example-item {
+  position: relative;
+  padding-left: 84px;
+  > div {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 64px;
+    height: 64px;
+    background-color: #e8e8e8;
+    border-radius: 4px;
+  }
+}
