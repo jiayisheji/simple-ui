@@ -8,6 +8,7 @@ import {
   Component,
   ContentChildren,
   Directive,
+  DoCheck,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -16,6 +17,7 @@ import {
   Inject,
   InjectionToken,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Optional,
@@ -25,14 +27,25 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { toBoolean } from '@ngx-simple/core/coercion';
-import { ThemePalette } from '@ngx-simple/core/common-behaviors';
+import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState, ThemePalette } from '@ngx-simple/core/common-behaviors';
 import { OnChangeType, OnTouchedType, SafeAny } from '@ngx-simple/core/types';
+import { SimFormFieldControl } from '@ngx-simple/simple-ui/form-field';
 
 export interface SimRadioDefaultOptions {
   color: ThemePalette;
 }
+
+export class SimRadioGroupBase {
+  constructor(
+    public _defaultErrorStateMatcher: ErrorStateMatcher,
+    public _parentForm: NgForm,
+    public _parentFormGroup: FormGroupDirective,
+    public ngControl: NgControl
+  ) {}
+}
+export const _SimRadioGroupMixinBase = mixinErrorState(SimRadioGroupBase);
 
 export const SIM_RADIO_DEFAULT_OPTIONS = new InjectionToken<SimRadioDefaultOptions>('sim-radio-default-options', {
   providedIn: 'root',
@@ -75,9 +88,16 @@ let nextGroupUniqueId = 0;
     role: 'radiogroup',
     class: 'sim-radio-group',
     '[attr.id]': 'id || name'
-  }
+  },
+  providers: [
+    {
+      provide: SimFormFieldControl,
+      useExisting: SimRadioGroupDirective
+    }
+  ]
 })
-export class SimRadioGroupDirective implements AfterContentInit, ControlValueAccessor {
+export class SimRadioGroupDirective extends _SimRadioGroupMixinBase
+  implements SimFormFieldControl<RadioValue>, AfterContentInit, ControlValueAccessor, OnChanges, DoCheck, OnDestroy, CanUpdateErrorState {
   /** 单选按钮组的名称。这个组中的所有单选按钮都将使用这个名称。 */
   @Input()
   get name(): string {
@@ -153,6 +173,25 @@ export class SimRadioGroupDirective implements AfterContentInit, ControlValueAcc
   /** 单选按钮主题 */
   @Input() color: ThemePalette;
 
+  // Implemented as part of SimFormFieldControl.
+  @Input() id: string = this.name;
+
+  // Implemented as part of SimFormFieldControl.
+  @Input() errorStateMatcher: ErrorStateMatcher;
+
+  // Implemented as part of SimFormFieldControl.
+  placeholder: string = '';
+  // Implemented as part of SimFormFieldControl.
+  focused = false;
+  // Implemented as part of SimFormFieldControl.
+  get empty(): boolean {
+    return this.selected == null;
+  }
+  // Implemented as part of SimFormFieldControl.
+  controlType = 'sim-radio';
+  // Implemented as part of SimFormFieldControl.
+  autofilled = false;
+
   /**
    * 当此单选按钮的选中状态更改时发出的事件。
    * 只有当 value 是由于用户与单选按钮交互而发生更改时才会发出 change 事件(与`<input type="radio">`相同的行为)。
@@ -177,7 +216,14 @@ export class SimRadioGroupDirective implements AfterContentInit, ControlValueAcc
   // Implemented as part of ControlValueAccessor.
   _onTouched: OnTouchedType = () => {};
 
-  constructor(@Optional() @Self() public ngControl: NgControl, private _changeDetector: ChangeDetectorRef) {
+  constructor(
+    _defaultErrorStateMatcher: ErrorStateMatcher,
+    @Optional() _parentForm: NgForm,
+    @Optional() _parentFormGroup: FormGroupDirective,
+    @Optional() @Self() public ngControl: NgControl,
+    private _changeDetector: ChangeDetectorRef
+  ) {
+    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
     if (this.ngControl) {
       // 注意: 我们在这里提供了值访问器，而不是“providers”，以避免`into a circular`错误。
       this.ngControl.valueAccessor = this;
@@ -189,6 +235,22 @@ export class SimRadioGroupDirective implements AfterContentInit, ControlValueAcc
     // 因为在SimRadioGroup上，NgModel可能会设置初始值，
     // 而且NgModel的OnInit可能会在SimRadioGroup的OnInit之后发生。
     this._isInitialized = true;
+  }
+
+  ngOnChanges() {
+    if (this.ngControl) {
+      this.stateChanges.next();
+    }
+  }
+
+  ngDoCheck() {
+    if (this.ngControl) {
+      this.updateErrorState();
+    }
+  }
+
+  ngOnDestroy() {
+    this.stateChanges.complete();
   }
 
   // Implemented as part of ControlValueAccessor.
@@ -212,6 +274,12 @@ export class SimRadioGroupDirective implements AfterContentInit, ControlValueAcc
     this.disabled = isDisabled;
     this._changeDetector.markForCheck();
   }
+
+  // Implemented as part of SimFormFieldControl.
+  onContainerClick() {}
+
+  // Implemented as part of SimFormFieldControl.
+  setDescribedByIds(ids: string[]) {}
 
   _checkSelectedRadioButton() {
     if (this._selected && !this._selected.checked) {

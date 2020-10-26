@@ -1,4 +1,4 @@
 <label class="sim-form-field-label" [attr.for]="_control?.id">
-  <span class="sim-form-field-required-marker" *ngIf="_hideRequiredMarker">*</span>
+  <span class="sim-form-field-required-marker" *ngIf="_hideRequiredMarker && _control.required">*</span>
   <ng-content></ng-content>
 </label>

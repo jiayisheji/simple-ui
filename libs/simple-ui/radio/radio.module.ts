@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SimRadioGroupFormControlDirective } from './radio-group-form-control.directive';
 import { SimRadioComponent, SimRadioGroupDirective } from './radio.component';
 
 @NgModule({
-  declarations: [SimRadioComponent, SimRadioGroupDirective, SimRadioGroupFormControlDirective],
+  declarations: [SimRadioComponent, SimRadioGroupDirective],
   imports: [CommonModule],
-  exports: [SimRadioComponent, SimRadioGroupDirective, SimRadioGroupFormControlDirective]
+  exports: [SimRadioComponent, SimRadioGroupDirective]
 })
 export class SimRadioModule {}

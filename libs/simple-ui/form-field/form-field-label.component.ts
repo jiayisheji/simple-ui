@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { SimFormFieldControl } from './form-field-control';
 
 @Component({
@@ -15,4 +15,10 @@ import { SimFormFieldControl } from './form-field-control';
 export class SimFormFieldLabelComponent {
   _control: SimFormFieldControl<unknown>;
   _hideRequiredMarker: boolean;
+
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+  markForCheck(): void {
+    this._changeDetectorRef.markForCheck();
+  }
 }

@@ -46,7 +46,6 @@ import {
   HasTabIndex,
   mixinColor,
   mixinDisabled,
-  MixinElementRefBase,
   mixinErrorState,
   mixinTabIndex,
   ThemePalette
@@ -483,7 +482,17 @@ export class SimCheckboxGroupDirective extends _SimCheckboxGroupMixinBase
   }
 }
 
-const _SimCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(MixinElementRefBase)));
+export class SimCheckboxBase {
+  constructor(
+    public _defaultErrorStateMatcher: ErrorStateMatcher,
+    public _parentForm: NgForm,
+    public _parentFormGroup: FormGroupDirective,
+    public ngControl: NgControl,
+    public _elementRef: ElementRef
+  ) {}
+}
+
+const _SimCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(mixinErrorState(SimCheckboxBase))));
 
 let nextUniqueId = 0;
 
@@ -497,10 +506,27 @@ let nextUniqueId = 0;
     class: 'sim-checkbox',
     role: 'checkbox',
     '[attr.tabindex]': 'null'
-  }
+  },
+  providers: [
+    {
+      provide: SimFormFieldControl,
+      useExisting: SimCheckboxComponent
+    }
+  ]
 })
 export class SimCheckboxComponent extends _SimCheckboxMixinBase
-  implements ControlValueAccessor, OnInit, AfterViewInit, CanColor, CanDisable, HasTabIndex {
+  implements
+    ControlValueAccessor,
+    OnInit,
+    AfterViewInit,
+    CanColor,
+    CanDisable,
+    HasTabIndex,
+    SimFormFieldControl<string | number>,
+    OnChanges,
+    DoCheck,
+    OnDestroy,
+    CanUpdateErrorState {
   /** 复选框主题 */
   @Input() color: ThemePalette;
   /** tab 键控制次序 */
@@ -593,6 +619,9 @@ export class SimCheckboxComponent extends _SimCheckboxMixinBase
   /** 如果存在，将应用到隐藏input元素name值 */
   @Input() name: string | null = null;
 
+  // Implemented as part of SimFormFieldControl.
+  @Input() errorStateMatcher: ErrorStateMatcher;
+
   /** 当复选框的选中值更改时发出的事件 */
   // tslint:disable-next-line: no-output-native
   @Output() readonly change: EventEmitter<SimCheckboxChange> = new EventEmitter<SimCheckboxChange>();
@@ -608,6 +637,19 @@ export class SimCheckboxComponent extends _SimCheckboxMixinBase
     return `${this.id || this._uniqueId}-input`;
   }
 
+  // Implemented as part of SimFormFieldControl.
+  placeholder: string = '';
+  // Implemented as part of SimFormFieldControl.
+  focused = false;
+  // Implemented as part of SimFormFieldControl.
+  get empty(): boolean {
+    return !this.checked;
+  }
+  // Implemented as part of SimFormFieldControl.
+  controlType = 'sim-checkbox';
+  // Implemented as part of SimFormFieldControl.
+  autofilled = true;
+
   // Implemented as part of ControlValueAccessor.
   _controlValueAccessorChangeFn: OnChangeType = () => {};
   // Implemented as part of ControlValueAccessor.
@@ -620,6 +662,9 @@ export class SimCheckboxComponent extends _SimCheckboxMixinBase
     @Optional()
     checkboxGroup: SimCheckboxGroupDirective,
     _elementRef: ElementRef,
+    _defaultErrorStateMatcher: ErrorStateMatcher,
+    @Optional() _parentForm: NgForm,
+    @Optional() _parentFormGroup: FormGroupDirective,
     private _focusMonitor: FocusMonitor,
     @Optional() @Self() public ngControl: NgControl,
     private _changeDetector: ChangeDetectorRef,
@@ -628,7 +673,7 @@ export class SimCheckboxComponent extends _SimCheckboxMixinBase
     @Inject(SIM_CHECKBOX_DEFAULT_OPTIONS)
     private _options?: SimCheckboxDefaultOptions
   ) {
-    super(_elementRef);
+    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl, _elementRef);
     this.checkboxGroup = checkboxGroup;
     if (this.ngControl) {
       // 注意: 我们在这里提供了值访问器，而不是“providers”，以避免`into a circular`错误。
@@ -673,6 +718,22 @@ export class SimCheckboxComponent extends _SimCheckboxMixinBase
     this._syncIndeterminate(this._indeterminate);
   }
 
+  ngOnChanges() {
+    if (this.ngControl) {
+      this.stateChanges.next();
+    }
+  }
+
+  ngDoCheck() {
+    if (this.ngControl) {
+      this.updateErrorState();
+    }
+  }
+
+  ngOnDestroy() {
+    this.stateChanges.complete();
+  }
+
   // Implemented as part of ControlValueAccessor.
   writeValue(value: boolean) {
     this.checked = !!value;
@@ -692,6 +753,12 @@ export class SimCheckboxComponent extends _SimCheckboxMixinBase
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
+
+  // Implemented as part of SimFormFieldControl.
+  onContainerClick() {}
+
+  // Implemented as part of SimFormFieldControl.
+  setDescribedByIds(ids: string[]) {}
 
   /** 复选框获取焦点 */
   focus(origin: FocusOrigin = 'keyboard', options?: FocusOptions): void {

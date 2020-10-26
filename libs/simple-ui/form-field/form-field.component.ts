@@ -106,6 +106,7 @@ export class SimFormFieldComponent extends _SimFormFieldMixinBase implements OnI
     // 为了同时支持Ivy和ViewEngine，我们需要这个解决方案。
     return this._explicitFormFieldControl || this._controlNonStatic || this._controlStatic;
   }
+
   set _control(value) {
     this._explicitFormFieldControl = value;
   }
@@ -159,6 +160,7 @@ export class SimFormFieldComponent extends _SimFormFieldMixinBase implements OnI
     if (this._labelChild) {
       this._labelChild._control = control;
       this._labelChild._hideRequiredMarker = this._hideRequiredMarker;
+      this._labelChild.markForCheck();
     }
 
     if (control.controlType) {
@@ -169,6 +171,9 @@ export class SimFormFieldComponent extends _SimFormFieldMixinBase implements OnI
     // fix startWith Deprecation warning
     control.stateChanges.pipe(startWith(null as void), takeUntil(this._destroyed)).subscribe(() => {
       this._changeDetectorRef.markForCheck();
+      if (this._labelChild) {
+        this._labelChild.markForCheck();
+      }
     });
 
     // 如果值发生更改，则运行更改检测。
