@@ -1,3 +1,5 @@
 <ng-container *ngIf="hasText">
-  <ng-content select="[simDividerInnerText], sim-divider-inner-text"></ng-content>
+  <span class="sim-divider-inner-text">
+    <ng-container *simStringTemplateOutlet="text">{{ text }}</ng-container>
+  </span>
 </ng-container>

@@ -2,14 +2,16 @@
 $sim-divider-width: 1px;
 $sim-divider-style: solid;
 $sim-divider-dashed-style: dashed;
+$sim-divider-inset-margin: 80px;
 
 .sim-divider {
   display: block;
+  margin: 0;
   border-top-width: $sim-divider-width;
   border-top-style: $sim-divider-style;
 
   &.sim-divider-inset {
-    margin-left: 20%;
+    margin-left: $sim-divider-inset-margin;
   }
 
   &.sim-divider-dashed {
@@ -33,7 +35,12 @@ $sim-divider-dashed-style: dashed;
   }
 }
 
-.sim-divider-text {
+.sim-divider-inner-text {
+  display: inline-block;
+  padding: 0 1em;
+}
+
+.sim-divider-horizontal.sim-divider-text {
   display: table;
   box-sizing: border-box;
   height: 1px;
@@ -42,10 +49,6 @@ $sim-divider-dashed-style: dashed;
   border-top: 0;
   user-select: none;
 
-  .sim-divider-inner-text {
-    display: inline-block;
-    padding: 0 24px;
-  }
   &::before,
   &::after {
     position: relative;

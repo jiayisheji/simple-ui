@@ -46,12 +46,18 @@ $sim-divider: unquote(sim-divider);
 
 @mixin sim-divider-density($config-or-theme) {
   $density-scale: sim-get-density-config($config-or-theme);
-  .sim-divider,
-  .sim-divider-text {
-    margin: sim-density-prop-value($sim-divider-density-config, $density-scale, $property-name: margin) 0;
+
+  $margin: sim-density-prop-value($sim-divider-density-config, $density-scale, $property-name: margin);
+
+  .sim-divider.sim-divider-outset {
+    margin: $margin 0;
   }
+
   .sim-divider.sim-divider-vertical {
-    margin: 0 sim-density-prop-value($sim-divider-density-config, $density-scale, $property-name: margin) / 2;
+    margin: 0 $margin / 2;
+    &.sim-divider-outset {
+      margin: 0 $margin;
+    }
   }
 }
 
@@ -71,4 +77,12 @@ $sim-divider: unquote(sim-divider);
       @include sim-divider-typography($typography);
     }
   }
+}
+
+/// 根据父类的大小为嵌入分隔符提供了正确的偏移量
+@mixin sim-inset-divider-offset($offset, $padding) {
+  $sim-inset-divider-offset: #{(2 * $padding) + $offset};
+
+  width: calc(100% - #{$sim-inset-divider-offset});
+  margin-left: $sim-inset-divider-offset;
 }

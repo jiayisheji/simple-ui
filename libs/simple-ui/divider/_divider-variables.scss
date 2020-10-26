@@ -1,13 +1,8 @@
-// Default minimum and maximum margin for divider.
-$sim-divider-margin: 16px !default;
-$sim-divider-minimum-margin: $sim-divider-margin !default;
-$sim-divider-maximum-margin: 24px !default;
-
 // Density configuration for the divider. Captures the margin for both divider.
 $sim-divider-density-config: (
   margin: (
-    default: $sim-divider-margin,
-    maximum: $sim-divider-maximum-margin,
-    minimum: $sim-divider-minimum-margin
+    default: 16px,
+    maximum: 24px,
+    minimum: 16px
   )
 ) !default;
