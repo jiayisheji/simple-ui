@@ -5,6 +5,7 @@
   [expanded]="treeModel.isExpanded(node)"
 ></sim-tree-node-expander>
 <sim-pseudo-checkbox
+  *ngIf="checkable"
   class="sim-tree-node-checkbox"
   [class.sim-pseudo-checkbox-checked]="treeModel.isChecked(node)"
   [class.sim-pseudo-checkbox-indeterminate]="treeModel.isIndeterminate(node)"

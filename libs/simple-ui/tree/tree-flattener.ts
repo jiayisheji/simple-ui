@@ -1,15 +1,8 @@
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { SimTreeControl } from './tree-control';
-import { SimTreeDefaultTransformer, SimTreeTransformer } from './tree-transformer';
-
-export class TreeFlatNode<T> {
-  key: string | number;
-  display: string;
-  level: number;
-  expandable: boolean;
-  data: T;
-}
+import { SimTreeNode, SimTreeNodeOptions } from './tree-node.model';
+import { SimTreeTransformer } from './tree-transformer';
 
 export class SimTreeFlattener<T, F> {
   /** 从嵌套节点映射到扁平节点。这有助于我们保持相同的对象进行选择 */
@@ -21,11 +14,11 @@ export class SimTreeFlattener<T, F> {
 
   getChildren: (node: T) => Observable<T[]> | T[] | undefined | null;
 
-  getKey: (node: T) => string | number;
+  getKey: (node: T) => string;
 
   getDisplay: (node: T) => string;
 
-  constructor(transformer: SimTreeTransformer<T> = new SimTreeDefaultTransformer<T>()) {
+  constructor(transformer: SimTreeTransformer<T & SimTreeNodeOptions> = new SimTreeTransformer<T & SimTreeNodeOptions>()) {
     this.isExpandable = transformer.isExpandable;
     this.getChildren = transformer.getChildren;
     this.getKey = transformer.getKey;
@@ -80,16 +73,21 @@ export class SimTreeFlattener<T, F> {
   /**
    * 转换嵌套节点到平面节点。在映射中记录节点，以便以后使用。
    * @param node 节点
-   * @param level 等级
+   * @param level 深度
    */
   private _transformer(node: T, level: number): F {
     const key = this.getKey(node);
-    const existingNode = (this.nestedNodeMap.get(node) as unknown) as TreeFlatNode<T>;
-    const flatNode = existingNode && existingNode.key === key ? existingNode : new TreeFlatNode<T>();
-    flatNode.display = this.getDisplay(node);
+    const existingNode = (this.nestedNodeMap.get(node) as unknown) as SimTreeNode;
+    const flatNode = existingNode && existingNode.key === key ? existingNode : new SimTreeNode();
+    // 节点唯一标识
     flatNode.key = key;
+    // 节点显示内容
+    flatNode.display = this.getDisplay(node);
+    // 节点深度
     flatNode.level = level;
+    // 节点可展开
     flatNode.expandable = this.isExpandable(node);
+    // 自定义原始数据
     flatNode.data = node;
     this.flatNodeMap.set((flatNode as unknown) as F, node);
     this.nestedNodeMap.set(node, (flatNode as unknown) as F);

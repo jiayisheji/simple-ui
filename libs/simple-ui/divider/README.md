@@ -2,11 +2,6 @@
 
 区隔内容的分割线。
 
-## Getting Started
-
-- 对不同章节的文本段落进行分割。
-- 对行内文字/链接进行分割，例如表格的操作列。
-
 ## Dependencies
 
 ```ts
@@ -37,3 +32,5 @@ text
 <sim-divider></sim-divider>
 text
 ```
+
+请参阅详细文档 [https://jiayisheji.github.io/simple-ui/components/dropdown](https://jiayisheji.github.io/simple-ui/components/dropdown)

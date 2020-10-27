@@ -170,6 +170,10 @@ export class SimTreeComponent<T extends SimTreeNode> implements OnChanges, OnIni
   ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit(): void {
+    // treeControl 是必须存在，如果不存在强制抛出异常
+    if (!this.treeControl) {
+      throw Error(`SimTree: No provider found for SimTreeControl. You must binding one @Input() of the treeControl`);
+    }
     this.treeControl.setSelectMode(this.multiple);
   }
 
