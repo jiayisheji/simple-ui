@@ -1,0 +1,84 @@
+<sim-drawer-container class="example-container" hasBackdrop>
+  <sim-drawer #drawer mode="stack" [position]="stackPosition">
+    <div class="example-drawer">
+      <button (click)="drawer.close()">close drawer</button>
+      <button (click)="drawer1.open()">open drawer1</button>
+    </div>
+  </sim-drawer>
+  <sim-drawer #drawer1 mode="stack" [position]="stackPosition">
+    <div class="example-drawer">
+      <button (click)="drawer1.close()">close drawer1</button>
+      <button (click)="drawer2.open()">open drawer2</button>
+    </div>
+  </sim-drawer>
+  <sim-drawer #drawer2 mode="stack" [position]="stackPosition">
+    <div class="example-drawer">
+      <button (click)="drawer2.close()">close drawer2</button>
+    </div>
+  </sim-drawer>
+  <sim-drawer-content>
+    <h3>stack drawer</h3>
+    <ul>
+      <li>可以同时支持多个drawer</li>
+      <li>只支持left/right方向</li>
+      <li>多个drawer保证方向一致</li>
+    </ul>
+    <button (click)="drawer.open()">open drawer</button>
+    <sim-select color="primary" [(value)]="stackPosition">
+      <sim-option *ngFor="let item of ['right', 'left']" [value]="item">
+        {{ item }}
+      </sim-option>
+    </sim-select>
+  </sim-drawer-content>
+</sim-drawer-container>
+
+<sim-drawer-container class="example-container" hasBackdrop>
+  <sim-drawer #drawer3 mode="over" [position]="overPosition">
+    <div class="example-drawer">
+      <button (click)="drawer3.close()">close drawer</button>
+    </div>
+  </sim-drawer>
+  <sim-drawer-content>
+    <h3>over drawer</h3>
+    <ul>
+      <li>可以一个drawer</li>
+      <li>支持left/right/top/bottom方向</li>
+    </ul>
+    <button (click)="drawer3.open()">drawer</button>
+    <sim-select color="primary" [(value)]="overPosition">
+      <sim-option *ngFor="let item of ['top', 'right', 'bottom', 'left']" [value]="item">
+        {{ item }}
+      </sim-option>
+    </sim-select>
+  </sim-drawer-content>
+</sim-drawer-container>
+
+<sim-drawer-container class="example-container" [hasBackdrop]="mode === 'push'" (backdropClick)="drawerOpen = false">
+  <sim-drawer [mode]="mode" [position]="position" [opened]="drawerOpen">
+    <div class="example-drawer">
+      <button (click)="drawerOpen = false">close drawer</button>
+    </div>
+  </sim-drawer>
+  <sim-drawer-content>
+    <h3>side and push drawer</h3>
+    <ul>
+      <li>可以一个drawer</li>
+      <li>支持left/right方向</li>
+    </ul>
+    <p>
+      抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到到原任务。
+    </p>
+    <p>drawerOpen: {{ drawerOpen }}</p>
+    <button (click)="drawerOpen = !drawerOpen">drawer</button>
+    <sim-select color="primary" [(value)]="position">
+      <sim-option *ngFor="let item of ['left', 'right']" [value]="item">
+        {{ item }}
+      </sim-option>
+    </sim-select>
+    <sim-select color="primary" [(value)]="mode">
+      <sim-option *ngFor="let item of ['side', 'push']" [value]="item">
+        {{ item }}
+      </sim-option>
+    </sim-select>
+  </sim-drawer-content>
+</sim-drawer-container>

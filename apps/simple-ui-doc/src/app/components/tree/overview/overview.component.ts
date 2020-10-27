@@ -103,26 +103,11 @@ const nodes = [
 ];
 
 class TreeTransformer extends SimTreeTransformer<any> {
-  getKey(node) {
-    return node.key;
-  }
   /**
    * 获取显示内容，用于显示其内容的节点字段的值
    */
   getDisplay(node): string {
     return node.title;
-  }
-  /**
-   * 获取子元素，用于递归子元素
-   */
-  getChildren(node) {
-    return node.children;
-  }
-  /**
-   * 是否有子元素，如果存在标识节点，不存在标识叶子
-   */
-  isExpandable(node) {
-    return !!node.children?.length;
   }
 }
 

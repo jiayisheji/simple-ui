@@ -21,11 +21,11 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'divider',
         name: '分割线'
+      },
+      {
+        path: 'icon',
+        name: '图标'
       }
-      // {
-      //   path: 'icon',
-      //   name: '图标'
-      // }
     ]
   },
   {
@@ -87,7 +87,7 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       // {
       //   path: 'datepicker',
       //   name: '日期选择器'
-      // },
+      // }
       // {
       //   path: 'timepicker',
       //   name: '时间选择器'
@@ -109,6 +109,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'toast',
         name: '全局提示'
+      },
+      {
+        path: 'drawer',
+        name: '抽屉'
       }
     ]
   },
