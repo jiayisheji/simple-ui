@@ -28,6 +28,7 @@
 @import '../radio/radio.component.theme';
 @import '../checkbox/checkbox.component.theme';
 @import '../tree/tree.component.theme';
+@import '../drawer/drawer.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -60,5 +61,6 @@
   @include sim-radio-theme($config-or-theme);
   @include sim-checkbox-theme($config-or-theme);
   @include sim-tree-theme($config-or-theme);
+  @include sim-drawer-theme($config-or-theme);
   /// @include component.theme
 }

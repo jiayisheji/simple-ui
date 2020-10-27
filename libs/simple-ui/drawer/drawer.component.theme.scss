@@ -1,0 +1,103 @@
+@import './drawer-variables';
+
+$sim-drawer: unquote(sim-drawer);
+
+/// 注册组件
+@include sim-register-component($sim-drawer);
+
+/// 主题风格
+@mixin sim-drawer-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-drawer) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-drawer-color($color);
+    }
+    @if $density != null {
+      @include sim-drawer-density($density);
+    }
+    @if $typography != null {
+      @include sim-drawer-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-drawer-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  $drawer-background-color: sim-color($background, dialog);
+  $drawer-container-background-color: sim-color($background, background);
+  $drawer-push-background-color: sim-color($background, dialog);
+  $drawer-side-border: solid 1px sim-color($foreground, divider);
+
+  .sim-drawer-container {
+    color: sim-color($foreground, text);
+    background-color: $drawer-container-background-color;
+  }
+
+  .sim-drawer {
+    color: sim-color($foreground, text);
+    background-color: $drawer-background-color;
+
+    &.sim-drawer-push {
+      background-color: $drawer-push-background-color;
+    }
+
+    &:not(.sim-drawer-side) {
+      @include sim-theme-elevation(16, $config);
+    }
+  }
+
+  .sim-drawer-side {
+    border-right: $drawer-side-border;
+
+    &.sim-drawer-end {
+      border-right: none;
+      border-left: $drawer-side-border;
+    }
+  }
+
+  .sim-drawer-stack.sim-drawer-end:not(:last-of-type) {
+    border-right: none;
+    border-left: $drawer-side-border;
+  }
+
+  .sim-drawer-stack.sim-drawer-start:not(:last-of-type) {
+    border-right: $drawer-side-border;
+    border-left: none;
+  }
+
+  .sim-drawer-backdrop.sim-drawer-shown {
+    $opacity: 0.38;
+    $backdrop-color: sim-color($background, card, $opacity);
+
+    @if (type-of($backdrop-color) == color) {
+      background-color: invert($backdrop-color);
+    } @else {
+      background-color: $backdrop-color;
+      opacity: $opacity;
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-drawer-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-drawer {
+    font: {
+      family: sim-font-family($config, body2);
+      size: sim-font-size($config, body2);
+    }
+  }
+}
+
+/// 密度配置
+@mixin sim-drawer-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}
