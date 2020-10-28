@@ -56,16 +56,23 @@ const BUTTON_HOST_ATTRIBUTES = [
   'sim-outlined-button',
   'sim-raised-button',
   'sim-stroked-button',
-  'sim-fab-button',
   'sim-icon-button'
 ];
+
+/**
+ * 按钮类型
+ * 1. sim-button 文本按钮 文本按钮通常用于不太重要的操作
+ * 2. sim-stroked-button 描边按钮 由于描边的关系，概括的按钮比文本按钮用于更多的强调。
+ * 3. sim-outlined-button 轮廓按钮 由于轮廓的关系，概括的按钮比文本按钮用于更多的强调。
+ * 3. sim-flat-button 填充按钮 填充的按钮使用颜色填充和阴影，因此更加强调。
+ * 4. sim-icon-button 图标按钮 填充的按钮使用颜色填充和阴影，因此更加强调。
+ */
 
 const _ButtonMixinBase = mixinColor(mixinDisabled(mixinSize(MixinElementRefBase, 'medium')));
 
 @Component({
   selector: `button[sim-button], button[sim-flat-button], button[sim-icon-button],
-  button[sim-stroked-button], button[sim-outlined-button],
-  button[sim-fab-button], button[sim-raised-button]`,
+  button[sim-stroked-button], button[sim-outlined-button], button[sim-raised-button]`,
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -96,7 +103,7 @@ export class SimButtonComponent extends _ButtonMixinBase implements OnInit, Afte
   fluid: boolean = false;
 
   /**
-   * 是否是虚线
+   * 是否是虚线 只适用于 `stroked`、`outlined` 轮廓按钮
    */
   @Input()
   @HostBinding('class.sim-button-dashed')
@@ -104,7 +111,7 @@ export class SimButtonComponent extends _ButtonMixinBase implements OnInit, Afte
   dashed: boolean = false;
 
   /**
-   * 是否胶量形状按钮
+   * 是否圆形胶量形状按钮
    */
   @Input()
   @HostBinding('class.sim-button-pilled')
@@ -165,8 +172,7 @@ export class SimButtonComponent extends _ButtonMixinBase implements OnInit, Afte
 
 @Component({
   selector: `a[sim-button], a[sim-flat-button], a[sim-icon-button],
-  a[sim-stroked-button], a[sim-outlined-button],
-  a[sim-fab-button], a[sim-raised-button]`,
+  a[sim-stroked-button], a[sim-outlined-button], a[sim-raised-button]`,
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,

@@ -32,10 +32,6 @@ $sim-button-focus-transition: opacity 200ms $sim-swift-ease-in-out-timing-functi
     outline: 0;
   }
 
-  & > .sim-button-wrapper > * {
-    vertical-align: middle;
-  }
-
   @if ($link) {
     &.sim-button-disabled {
       cursor: default;

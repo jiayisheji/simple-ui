@@ -68,15 +68,11 @@
     opacity: 0.15;
   }
 }
-.sim-button-base.sim-fab-button {
-  border-radius: 50%;
-}
 
 .sim-button,
 .sim-stroked-button,
 .sim-broken-button,
-.sim-icon-button,
-.sim-fab-button {
+.sim-icon-button {
   @include sim-button-focus-overlay;
 }
 
@@ -112,8 +108,7 @@
   }
 }
 
-.sim-icon-button,
-.sim-fab-button {
+.sim-icon-button {
   overflow: hidden;
   .sim-icon {
     margin: 0;
