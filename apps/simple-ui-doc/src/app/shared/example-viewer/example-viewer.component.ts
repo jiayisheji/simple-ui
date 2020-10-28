@@ -1,4 +1,5 @@
 import { Component, Directive, Input, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { environment } from '@doc/env';
 
 @Component({
   selector: 'doc-example-viewer',
@@ -39,6 +40,6 @@ export class ExampleUrlPipe implements PipeTransform {
     if (!value) {
       return undefined;
     }
-    return `/assets/examples/${value}.${suffix}`;
+    return environment.host + `/assets/examples/${value}.${suffix}`;
   }
 }
