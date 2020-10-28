@@ -19,11 +19,16 @@ export class SimTreeControl<T, K = T> {
   /**
    * 设置选择模式
    * @throws 设置以后之前的选中状态全部丢失，请慎重操作
-   * @param multiple
+   * @param multiple 节点是否多选
+   * @param selectable 节点是否可被选中
    */
-  setSelectMode(multiple: boolean) {
+  setSelectMode(multiple: boolean, selectable: boolean = true) {
     this._multiple = multiple;
-    this.selectionModel = new SelectionModel(multiple);
+    if (selectable) {
+      this.selectionModel = new SelectionModel(multiple);
+    } else {
+      this.selectionModel = null;
+    }
   }
 
   /** 按 key 获取 TreeNode 节点 */
@@ -33,12 +38,18 @@ export class SimTreeControl<T, K = T> {
 
   /** 获取组件被选中的节点集合 */
   getSelectedNodeList(): T[] {
-    return this.selectionModel.selected.map(id => this.getNodeByKey(id));
+    if (this.selectionModel) {
+      return this.selectionModel.selected.map(id => this.getNodeByKey(id));
+    }
+    return [];
   }
 
   /** 获取组件被选中的节点集合key */
   getSelectedKeys(): K[] {
-    return this.selectionModel.selected;
+    if (this.selectionModel) {
+      return this.selectionModel.selected;
+    }
+    return [];
   }
 
   /** 获取组件 checkBox 被点击选中的节点集合 */
@@ -140,12 +151,17 @@ export class SimTreeControl<T, K = T> {
 
   /** 给定数据节点是否选中。如果数据节点选中，则返回true。 */
   isSelected(dataNode: T): boolean {
-    return this.selectionModel.isSelected(this._trackByValue(dataNode));
+    if (this.selectionModel) {
+      return this.selectionModel.isSelected(this._trackByValue(dataNode));
+    }
+    return false;
   }
 
   /** 切换单个数据节点的选中状态 */
   toggleSelected(dataNode: T): void {
-    this.selectionModel.toggle(this._trackByValue(dataNode));
+    if (this.selectionModel) {
+      this.selectionModel.toggle(this._trackByValue(dataNode));
+    }
   }
 
   /** 给定数据节点是否选中。如果数据节点选中，则返回true。 */

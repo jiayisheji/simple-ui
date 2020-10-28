@@ -14,7 +14,7 @@
   <div class="sim-tree-content-wrapper" [@treeCollapseMotion]="_flattenNodes.length">
     <ng-template #elseTemplate>
       <ng-container *ngFor="let node of _flattenNodes; trackBy: trackBy">
-        <sim-tree-node [checkable]="checkable" [node]="node"></sim-tree-node>
+        <sim-tree-node [checkable]="checkable" [selectable]="selectable" [node]="node"></sim-tree-node>
       </ng-container>
     </ng-template>
   </div>

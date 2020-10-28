@@ -135,6 +135,20 @@ export class SimTreeComponent<T extends SimTreeNode> implements OnChanges, OnIni
   }
   private _checkable = false;
 
+  /** 设置节点是否可被选中 */
+  @Input()
+  get selectable(): boolean {
+    return this._selectable;
+  }
+  set selectable(value: boolean) {
+    const selectable = toBoolean(value);
+    if (this._selectable !== selectable) {
+      this._selectable = selectable;
+      this.treeControl.setSelectMode(this.multiple, selectable);
+    }
+  }
+  private _selectable = true;
+
   /** 是否支持节点拖拽 */
   @Input()
   get draggable(): boolean {
@@ -174,7 +188,7 @@ export class SimTreeComponent<T extends SimTreeNode> implements OnChanges, OnIni
     if (!this.treeControl) {
       throw Error(`SimTree: No provider found for SimTreeControl. You must binding one @Input() of the treeControl`);
     }
-    this.treeControl.setSelectMode(this.multiple);
+    this.treeControl.setSelectMode(this.multiple, this.selectable);
   }
 
   ngOnDestroy() {
