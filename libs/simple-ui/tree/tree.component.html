@@ -11,11 +11,11 @@
       </ng-container>
     </cdk-virtual-scroll-viewport>
   </ng-container>
-  <div class="sim-tree-content-wrapper" [@treeCollapseMotion]="_flattenNodes.length">
-    <ng-template #elseTemplate>
+  <ng-template #elseTemplate>
+    <div class="sim-tree-content-wrapper" [@treeCollapseMotion]="_flattenNodes.length">
       <ng-container *ngFor="let node of _flattenNodes; trackBy: trackBy">
         <sim-tree-node [checkable]="checkable" [selectable]="selectable" [node]="node"></sim-tree-node>
       </ng-container>
-    </ng-template>
-  </div>
+    </div>
+  </ng-template>
 </div>

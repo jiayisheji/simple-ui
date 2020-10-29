@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { SimTreeNode } from './tree-node.model';
 
 export class SimTreeControl<T, K = T> {
   /** 为`expandAll`操作保存的树节点数据 */
@@ -10,11 +11,77 @@ export class SimTreeControl<T, K = T> {
   /** 一种选择跟踪selected状态的选择模型 支持单/多选 */
   private selectionModel: SelectionModel<K>;
 
-  /** tree的checkbox的checked状态的选择模型 */
+  /** tree的checkbox的选中状态的选择模型 */
   private checklistModel: SelectionModel<K> = new SelectionModel<K>(true);
 
   /** 选择模式 */
   private _multiple: boolean;
+
+  /**
+   * 初始化节点状态
+   * - isChecked 复选框状态
+   * - isSelected 节点选中状态
+   * - isExpanded 节点展开状态
+   */
+  setNodeInitState() {
+    const nodes = this.dataNodes;
+    const checkedList = [];
+    const selectedList = [];
+    const expandedList = [];
+    for (let index = 0; index < nodes.length; index++) {
+      const node = (nodes[index] as unknown) as SimTreeNode;
+      if (node.isChecked) {
+        checkedList.push(node.key);
+      }
+      if (node.selectable && node.isSelected) {
+        selectedList.push(node.key);
+      }
+      if (node.expandable && node.isExpanded) {
+        expandedList.push(node.key);
+      }
+    }
+    if (checkedList.length) {
+      this.setCheckedKeys(checkedList);
+    }
+    if (selectedList.length) {
+      this.setSelectedKeys(selectedList);
+    }
+    if (expandedList.length) {
+      this.setExpandedKeys(expandedList);
+    }
+  }
+
+  /** 设置 checkBox 被选中的节点的key列表 */
+  setCheckedKeys(keys: K[]) {
+    keys.forEach(key => {
+      const node = this.getNodeByKey(key);
+      if (node != null) {
+        this.toggleChecked(node);
+      }
+    });
+  }
+
+  /** 设置节点被选中的节点的key列表 */
+  setSelectedKeys(keys: K[]) {
+    if (!this.selectionModel) {
+      this.setSelectMode(false, true);
+    }
+    keys.forEach(key => {
+      const node = this.getNodeByKey(key);
+      if (node != null) {
+        this.toggleSelected(node);
+      }
+    });
+  }
+  /** 设置节点展开的节点的key列表 */
+  setExpandedKeys(keys: K[]) {
+    keys.forEach(key => {
+      const node = this.getNodeByKey(key);
+      if (node != null) {
+        this.toggle(node);
+      }
+    });
+  }
 
   /**
    * 设置选择模式
@@ -25,7 +92,8 @@ export class SimTreeControl<T, K = T> {
   setSelectMode(multiple: boolean, selectable: boolean = true) {
     this._multiple = multiple;
     if (selectable) {
-      this.selectionModel = new SelectionModel(multiple);
+      const selected = this.selectionModel?.selected ?? [];
+      this.selectionModel = new SelectionModel(multiple, multiple ? selected : [selected.pop()]);
     } else {
       this.selectionModel = null;
     }
@@ -55,6 +123,25 @@ export class SimTreeControl<T, K = T> {
   /** 获取组件 checkBox 被点击选中的节点集合 */
   getCheckedNodeList(): T[] {
     return this.checklistModel.selected.map(id => this.getNodeByKey(id));
+  }
+
+  /** 获取组件 checkBox 被点击半选中的节点集合 */
+  getIndeterminateNodeList(): T[] {
+    const indeterminateness = [];
+    const selected = this.checklistModel.selected;
+    for (let i = 0; i <= selected.length - 1; i++) {
+      let parentNode = this.getParentNode(this.getNodeByKey(selected[i]));
+      /** 检查父级是否存在 */
+      while (parentNode != null) {
+        // 父节点去重
+        if (indeterminateness.indexOf(parentNode) === -1 && !this.checklistModel.isSelected(this._trackByValue(parentNode))) {
+          indeterminateness.push(parentNode);
+        }
+        // 递归查找当前父节点
+        parentNode = this.getParentNode(parentNode);
+      }
+    }
+    return indeterminateness;
   }
 
   /** 获取组件 checkBox 被点击选中的节点集合key */
@@ -180,16 +267,6 @@ export class SimTreeControl<T, K = T> {
     return false;
   }
 
-  /** 设置 checkBox 被选中的节点的key列表 */
-  setCheckedKeys(keys: K[]) {
-    keys.forEach(key => {
-      const node = this.getNodeByKey(key);
-      if (node != null) {
-        this.checklistModel.toggle(this._trackByValue(node));
-      }
-    });
-  }
-
   /**
    * 切换节点Checked状态。选择/取消选择所有的后代节点
    */
@@ -240,7 +317,7 @@ export class SimTreeControl<T, K = T> {
     const descAllSelected =
       descendants.length > 0 &&
       descendants.every(child => {
-        return this.checklistModel.isSelected(this._trackByValue(child));
+        return this.checklistModel.isSelected(this._trackByValue(child)) || ((child as unknown) as SimTreeNode).disableCheckbox;
       });
     return descAllSelected;
   }

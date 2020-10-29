@@ -11,7 +11,7 @@ import { TreeEvents } from './tree.typings';
   host: {
     class: 'sim-tree-node',
     role: 'treeitem',
-    '[class.sim-tree-node-disabled]': 'node.data.disabled'
+    '[class.sim-tree-node-disabled]': 'node.disabled'
   }
 })
 export class SimTreeNodeComponent<T extends SimTreeNode> {
@@ -19,7 +19,6 @@ export class SimTreeNodeComponent<T extends SimTreeNode> {
   @Input() checkable: boolean;
   @Input() selectable: boolean;
   @Input() draggable: boolean;
-  @Input() disableCheckbox: boolean;
   @Output() readonly nodeEvent = new EventEmitter<TreeEvents<T>>();
 
   get treeModel() {
@@ -37,9 +36,6 @@ export class SimTreeNodeComponent<T extends SimTreeNode> {
   /** 选择状态点击事件 */
   onSelectChange(event: MouseEvent): void {
     event.preventDefault();
-    if (!this.selectable) {
-      return;
-    }
 
     this.treeModel.toggleSelected(this.node as any);
 

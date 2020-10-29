@@ -9,9 +9,13 @@
   class="sim-tree-node-checkbox"
   [class.sim-pseudo-checkbox-checked]="treeModel.isChecked(node)"
   [class.sim-pseudo-checkbox-indeterminate]="treeModel.isIndeterminate(node)"
-  [class.sim-pseudo-checkbox-disabled]="disableCheckbox"
-  (click)="onCheckboxChange($event)"
+  [class.sim-pseudo-checkbox-disabled]="node.disableCheckbox"
+  (click)="!node.disableCheckbox ? onCheckboxChange($event) : null"
 ></sim-pseudo-checkbox>
-<div class="sim-tree-node-content" [class.sim-tree-node-selected]="treeModel.isSelected(node)" (click)="onSelectChange($event)">
+<div
+  class="sim-tree-node-content"
+  [class.sim-tree-node-selected]="!node.disabled && selectable && node.selectable && treeModel.isSelected(node)"
+  (click)="!node.disabled && selectable && node.selectable ? onSelectChange($event) : null"
+>
   {{ node.display }}
 </div>

@@ -33,14 +33,21 @@ $sim-tree: unquote(sim-tree);
 
   $primary: map-get($config, primary);
 
-  .sim-tree-node-content:hover {
-    background: sim-color($background, hover);
+  .sim-tree-node-disabled .sim-tree-node-content {
+    color: sim-color($foreground, disabled);
+    cursor: default;
   }
 
-  .sim-tree-node-content.sim-tree-node-selected {
-    background: sim-color($primary, 0.24);
-    &:hover {
+  .sim-tree-node:not(.sim-tree-node-disabled) {
+    .sim-tree-node-content:hover {
+      background: sim-color($background, hover);
+    }
+
+    .sim-tree-node-selected {
       background: sim-color($primary, 0.24);
+      &:hover {
+        background: sim-color($primary, 0.24);
+      }
     }
   }
 }

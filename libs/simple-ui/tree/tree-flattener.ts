@@ -11,18 +11,27 @@ export class SimTreeFlattener<T, F> {
   private flatNodeMap = new Map<F, T>();
 
   isExpandable: (node: T) => boolean;
-
   getChildren: (node: T) => Observable<T[]> | T[] | undefined | null;
-
   getKey: (node: T) => string;
-
   getDisplay: (node: T) => string;
+  getSelectable: (node: T) => boolean;
+  getDisabled: (node: T) => boolean;
+  getIsChecked: (node: T) => boolean;
+  getIsSelected: (node: T) => boolean;
+  getIsExpanded: (node: T) => boolean;
+  getDisableCheckbox: (node: T) => boolean;
 
   constructor(transformer: SimTreeTransformer<T & SimTreeNodeOptions> = new SimTreeTransformer<T & SimTreeNodeOptions>()) {
     this.isExpandable = transformer.isExpandable;
     this.getChildren = transformer.getChildren;
     this.getKey = transformer.getKey;
     this.getDisplay = transformer.getDisplay;
+    this.getSelectable = transformer.getSelectable;
+    this.getDisabled = transformer.getDisabled;
+    this.getIsChecked = transformer.getIsChecked;
+    this.getIsSelected = transformer.getIsSelected;
+    this.getIsExpanded = transformer.getIsExpanded;
+    this.getDisableCheckbox = transformer.getDisableCheckbox;
   }
 
   /**
@@ -87,6 +96,19 @@ export class SimTreeFlattener<T, F> {
     flatNode.level = level;
     // 节点可展开
     flatNode.expandable = this.isExpandable(node);
+    // 节点 Checkbox 是否选中
+    flatNode.isChecked = !!this.getIsChecked(node);
+    /** 设置节点是否可被选中 默认：true */
+    const selectable = this.getSelectable(node) == null;
+    flatNode.selectable = selectable ? true : selectable;
+    /** 设置是否禁用节点(不可进行任何操作) */
+    flatNode.disabled = !!this.getDisabled(node);
+    /** 设置节点本身是否选中 */
+    flatNode.isSelected = !!this.getIsSelected(node);
+    /** 设置节点是否展开(叶子节点无效) */
+    flatNode.isExpanded = !!this.getIsExpanded(node);
+    /** 设置节点禁用 Checkbox 如果整体禁用 复选框也被禁用掉 */
+    flatNode.disableCheckbox = !!this.getDisableCheckbox(node) || flatNode.disabled;
     // 自定义原始数据
     flatNode.data = node;
     this.flatNodeMap.set((flatNode as unknown) as F, node);
