@@ -256,6 +256,10 @@ export class SimPaginatorComponent extends _SimPaginatorBase implements OnInit, 
   }
 
   _onPageIndexChange(page: PageItem) {
+    // 禁用不应该可以点击
+    if (page.disabled) {
+      return;
+    }
     const index = {
       first: this._firstIndex,
       last: this._lastIndex,
