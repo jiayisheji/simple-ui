@@ -1,0 +1,96 @@
+<p>overview works!</p>
+
+<sim-chip>sim-chip</sim-chip>
+
+<sim-chip-list>
+  <sim-chip>sim-chip</sim-chip>
+  <sim-chip>sim-chip</sim-chip>
+  <sim-chip>sim-chip</sim-chip>
+  <sim-chip>sim-chip</sim-chip>
+</sim-chip-list>
+
+<sim-chip-list>
+  <sim-chip color="primary">sim-chip</sim-chip>
+  <sim-chip color="primary">sim-chip</sim-chip>
+  <sim-chip color="primary">sim-chip</sim-chip>
+  <sim-chip color="primary">sim-chip</sim-chip>
+</sim-chip-list>
+
+<h3>Without icon</h3>
+<sim-chip-list>
+  <sim-chip color="primary">primary</sim-chip>
+  <sim-chip color="secondary">secondary</sim-chip>
+  <sim-chip color="success">success</sim-chip>
+  <sim-chip color="info">info</sim-chip>
+  <sim-chip color="warning">warning</sim-chip>
+  <sim-chip color="danger">danger</sim-chip>
+  <sim-chip>default</sim-chip>
+</sim-chip-list>
+<h3>With icon</h3>
+<sim-chip-list>
+  <sim-chip color="primary">
+    <sim-icon svgIcon="check-circle"></sim-icon>
+    <span>primary</span>
+  </sim-chip>
+  <sim-chip color="secondary">
+    <sim-icon svgIcon="loading" class="doc-spin"></sim-icon>
+    <span>secondary</span>
+  </sim-chip>
+  <sim-chip color="success">
+    <sim-icon svgIcon="check-circle"></sim-icon>
+    <span>success</span>
+  </sim-chip>
+  <sim-chip color="info">
+    <sim-icon svgIcon="info-circle"></sim-icon>
+    <span>info</span>
+  </sim-chip>
+  <sim-chip color="warning">
+    <sim-icon svgIcon="exclamation-circle"></sim-icon>
+    <span>warning</span>
+  </sim-chip>
+  <sim-chip color="danger">
+    <sim-icon svgIcon="close-circle"></sim-icon>
+    <span>danger</span>
+  </sim-chip>
+  <sim-chip removable (removed)="removed($event)">
+    <sim-icon svgIcon="more-circle"></sim-icon>
+    <span>default</span>
+    <sim-icon svgIcon="close" simChipRemove></sim-icon>
+  </sim-chip>
+</sim-chip-list>
+<h3>动态添加(回车和失去焦点时添加)和删除</h3>
+<sim-chip-list #chip1>
+  <sim-chip *ngFor="let tag of tags; let i = index" [removable]="i !== 0" (removed)="tagRemoved(tag)">
+    {{ tag }}
+    <sim-icon svgIcon="close" simChipRemove *ngIf="i !== 0"></sim-icon>
+  </sim-chip>
+  <input type="text" [simChipInputFor]="chip1" simChipInputAddOnBlur (simChipInputTokenEnd)="simChipInputTokenEnd($event)" />
+</sim-chip-list>
+<h3>动态添加(回车时添加)和删除</h3>
+<sim-chip-list #chip2>
+  <sim-chip *ngFor="let tag of tags; let i = index" [removable]="i !== 0" (removed)="tagRemoved(tag)">
+    {{ tag }}
+    <sim-icon svgIcon="close-circle-full" simChipRemove *ngIf="i !== 0"></sim-icon>
+  </sim-chip>
+  <input type="text" [simChipInputFor]="chip2" (simChipInputTokenEnd)="simChipInputTokenEnd($event)" />
+</sim-chip-list>
+<h3>可选择，单选</h3>
+<sim-chip-list selectable>
+  <sim-chip value="primary" color="primary">primary</sim-chip>
+  <sim-chip value="secondary" color="secondary">secondary</sim-chip>
+  <sim-chip value="success" color="success">success</sim-chip>
+  <sim-chip value="info" color="info">info</sim-chip>
+  <sim-chip value="warning" color="warning">warning</sim-chip>
+  <sim-chip value="danger" color="danger">danger</sim-chip>
+  <sim-chip value="default">default</sim-chip>
+</sim-chip-list>
+<h3>可选择，多选</h3>
+<sim-chip-list multiple selectable>
+  <sim-chip value="primary" color="primary">primary</sim-chip>
+  <sim-chip value="secondary" color="secondary">secondary</sim-chip>
+  <sim-chip value="success" color="success">success</sim-chip>
+  <sim-chip value="info" color="info">info</sim-chip>
+  <sim-chip value="warning" color="warning">warning</sim-chip>
+  <sim-chip value="danger" color="danger">danger</sim-chip>
+  <sim-chip value="default">default</sim-chip>
+</sim-chip-list>

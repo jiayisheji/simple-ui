@@ -46,13 +46,13 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       //   path: 'table',
       //   name: '表格'
       // },
-      // {
-      //   path: 'data-grid',
-      //   name: '数据表格'
-      // },
       {
         path: 'tree',
         name: '树'
+      },
+      {
+        path: 'chips',
+        name: '芯片'
       }
     ]
   },

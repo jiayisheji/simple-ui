@@ -22,13 +22,9 @@ const routes: Routes = [
       { path: 'switch', loadChildren: () => import('./switch/switch.module').then(m => m.SwitchModule) },
       { path: 'tree', loadChildren: () => import('./tree/tree.module').then(m => m.TreeModule) },
       { path: 'icon', loadChildren: () => import('./icon/icon.module').then(m => m.IconModule) },
-      { path: 'drawer', loadChildren: () => import('./drawer/drawer.module').then(m => m.DrawerModule) }
+      { path: 'drawer', loadChildren: () => import('./drawer/drawer.module').then(m => m.DrawerModule) },
       // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
-      // { path: 'datepicker', loadChildren: () => import('./datepicker/datepicker.module').then(m => m.DatepickerModule) },
-      // { path: 'echarts', loadChildren: () => import('./echarts/echarts.module').then(m => m.EchartsModule) },
-      //   { path: 'timepicker', loadChildren: () => import('./timepicker/timepicker.module').then(m => m.TimepickerModule) },
-      //   { path: 'colorpicker', loadChildren: () => import('./colorpicker/colorpicker.module').then(m => m.ColorpickerModule) },
-      //   { path: 'data-grid', loadChildren: () => import('./data-grid/data-grid.module').then(m => m.DataGridModule) },
+      { path: 'chips', loadChildren: () => import('./chips/chips.module').then(m => m.ChipsModule) }
     ]
   }
 ];

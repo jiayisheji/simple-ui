@@ -1,0 +1,18 @@
+.sim-chip {
+  .sim-icon + span {
+    margin-left: 7px;
+  }
+}
+
+.doc-spin {
+  animation: spinAround 0.5s infinite linear;
+}
+
+@keyframes spinAround {
+  to {
+    transform: rotate(359deg);
+  }
+  from {
+    transform: rotate(0);
+  }
+}
