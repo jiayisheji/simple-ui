@@ -1,0 +1,13 @@
+<p>overview works!</p>
+
+<h3>主题切换</h3>
+
+<button sim-raised-button (click)="theme = 'roma'">roma</button>
+<button sim-raised-button (click)="theme = 'customed'">customed</button>
+<button sim-raised-button (click)="theme = 'infographic'">infographic</button>
+<button sim-raised-button (click)="theme = 'macarons'">macarons</button>
+<button sim-raised-button (click)="theme = 'wonderland'">wonderland</button>
+
+<div simEcharts [options]="options" [theme]="theme"></div>
+
+<sim-echarts [options]="options" [theme]="theme"></sim-echarts>

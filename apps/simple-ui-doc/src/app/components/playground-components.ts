@@ -120,10 +120,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     path: '',
     name: '集成组件',
     children: [
-      // {
-      //   path: 'echarts',
-      //   name: '图表组件'
-      // }
+      {
+        path: 'echarts',
+        name: '图表组件'
+      }
     ]
   }
 ];

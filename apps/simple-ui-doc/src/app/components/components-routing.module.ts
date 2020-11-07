@@ -24,7 +24,8 @@ const routes: Routes = [
       { path: 'icon', loadChildren: () => import('./icon/icon.module').then(m => m.IconModule) },
       { path: 'drawer', loadChildren: () => import('./drawer/drawer.module').then(m => m.DrawerModule) },
       // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
-      { path: 'chips', loadChildren: () => import('./chips/chips.module').then(m => m.ChipsModule) }
+      { path: 'chips', loadChildren: () => import('./chips/chips.module').then(m => m.ChipsModule) },
+      { path: 'echarts', loadChildren: () => import('./echarts/echarts.module').then(m => m.EchartsModule) }
     ]
   }
 ];

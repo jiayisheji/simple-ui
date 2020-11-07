@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '@doc/env';
 import { SimEventModule } from '@ngx-simple/core/events';
+import { SIM_ECHARTS_OPTIONS } from '@ngx-simple/echarts';
 import { SIM_HIGHLIGHT_OPTIONS } from '@ngx-simple/highlight';
 import { SimButtonModule } from '@ngx-simple/simple-ui/button';
 import { SimIconService } from '@ngx-simple/simple-ui/icon';
@@ -34,6 +35,37 @@ import { AppComponent } from './app.component';
           css: () => import('highlight.js/lib/languages/css'),
           xml: () => import('highlight.js/lib/languages/xml')
         }
+      }
+    },
+    {
+      provide: SIM_ECHARTS_OPTIONS,
+      useValue: {
+        echarts: () => import('echarts/dist/echarts'),
+        registerMap: {
+          assets: '/assets/echarts'
+        },
+        themes: [
+          {
+            name: 'roma',
+            url: '/assets/echarts/roma.project.json'
+          },
+          {
+            name: 'customed',
+            url: '/assets/echarts/customed.project.json'
+          },
+          {
+            name: 'infographic',
+            url: '/assets/echarts/infographic.project.json'
+          },
+          {
+            name: 'macarons',
+            url: '/assets/echarts/macarons.project.json'
+          },
+          {
+            name: 'wonderland',
+            url: '/assets/echarts/wonderland.project.json'
+          }
+        ]
       }
     }
   ],
