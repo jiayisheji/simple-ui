@@ -42,28 +42,28 @@ import { AppComponent } from './app.component';
       useValue: {
         echarts: () => import('echarts/dist/echarts'),
         registerMap: {
-          assets: '/assets/echarts'
+          assets: environment.host + '/assets/echarts'
         },
         themes: [
           {
             name: 'roma',
-            url: '/assets/echarts/roma.project.json'
+            url: environment.host + '/assets/echarts/roma.project.json'
           },
           {
             name: 'customed',
-            url: '/assets/echarts/customed.project.json'
+            url: environment.host + '/assets/echarts/customed.project.json'
           },
           {
             name: 'infographic',
-            url: '/assets/echarts/infographic.project.json'
+            url: environment.host + '/assets/echarts/infographic.project.json'
           },
           {
             name: 'macarons',
-            url: '/assets/echarts/macarons.project.json'
+            url: environment.host + '/assets/echarts/macarons.project.json'
           },
           {
             name: 'wonderland',
-            url: '/assets/echarts/wonderland.project.json'
+            url: environment.host + '/assets/echarts/wonderland.project.json'
           }
         ]
       }
