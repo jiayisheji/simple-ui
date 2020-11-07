@@ -78,7 +78,7 @@ export function SIM_ICON_LOCATION_FACTORY(): SimIconLocation {
  */
 @Component({
   selector: 'sim-icon',
-  template: '',
+  template: '<ng-content select="svg"></ng-content>',
   styleUrls: ['./icon.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -89,6 +89,9 @@ export function SIM_ICON_LOCATION_FACTORY(): SimIconLocation {
 })
 export class SimIconComponent extends _IconMixinBase implements OnChanges, OnInit, AfterViewChecked, OnDestroy, CanColor {
   static ngAcceptInputType_inline: BooleanInput;
+
+  /** SVG图标集中图标的名称 */
+  @Input() svgIcon: string;
 
   /** 字体集中图标的名称 */
   @Input()
@@ -108,10 +111,21 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
     this._fontSet = this._cleanupFontValue(value);
   }
 
-  /** 给图标添加样式 默认是父级颜色 */
+  /**
+   * 组件的主题颜色调色板 默认是继承父级 color
+   * - primary 主要的
+   * - secondary 次要的
+   * - success 成功的
+   * - info 信息的
+   * - warning 警告的
+   * - danger 危险的/错误的
+   * - 如果需要自定义其他 color 请采用 `style.color`方式绑定设置
+   */
   @Input() color: ThemePalette;
 
-  /** 给图标设置字体大小 默认是父级字体大小  */
+  /**
+   * 给图标设置 `font-size` 参照 `style.font-size` 绑定语法 默认继承父级 font-size
+   */
   @Input()
   @HostBinding('style.font-size')
   fontSize: string;
@@ -124,9 +138,6 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
   @InputBoolean<SimIconComponent, 'inline'>()
   @HostBinding('class.sim-icon-inline')
   inline: boolean;
-
-  /** SVG图标集中图标的名称 */
-  @Input() svgIcon: string;
 
   /** 跟踪我们用当前路径作为前缀的元素和属性。 */
   private _elementsWithExternalReferences?: Map<Element, Array<{ name: string; value: string }>>;
@@ -147,23 +158,6 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
     private readonly _errorHandler: ErrorHandler
   ) {
     super(elementRef);
-  }
-
-  ngAfterViewChecked() {
-    const cachedElements = this._elementsWithExternalReferences;
-
-    if (cachedElements && this._location && cachedElements.size) {
-      const newPath = this._location.getPathname();
-
-      // 我们需要在每次改变检测时检查URL是否改变了，
-      // 因为浏览器没有API让我们在点击链接时做出反应，而且我们不能依赖Angular路由器。
-      // 需要更新引用，因为尽管大多数浏览器在第一次呈现后并不关心URL是否正确，
-      // 但如果用户导航到另一个页面而SVG没有重新呈现，Safari就会崩溃。
-      if (newPath !== this._previousPath) {
-        this._previousPath = newPath;
-        this._prependPathToReferences(newPath);
-      }
-    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -190,15 +184,32 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
     }
   }
 
-  ngOnDestroy() {
-    if (this._elementsWithExternalReferences) {
-      this._elementsWithExternalReferences.clear();
-    }
-  }
-
   ngOnInit() {
     if (this._usingFontIcon()) {
       this._updateFontIconClasses();
+    }
+  }
+
+  ngAfterViewChecked() {
+    const cachedElements = this._elementsWithExternalReferences;
+
+    if (cachedElements && this._location && cachedElements.size) {
+      const newPath = this._location.getPathname();
+
+      // 我们需要在每次改变检测时检查URL是否改变了，
+      // 因为浏览器没有API让我们在点击链接时做出反应，而且我们不能依赖Angular路由器。
+      // 需要更新引用，因为尽管大多数浏览器在第一次呈现后并不关心URL是否正确，
+      // 但如果用户导航到另一个页面而SVG没有重新呈现，Safari就会崩溃。
+      if (newPath !== this._previousPath) {
+        this._previousPath = newPath;
+        this._prependPathToReferences(newPath);
+      }
+    }
+  }
+
+  ngOnDestroy() {
+    if (this._elementsWithExternalReferences) {
+      this._elementsWithExternalReferences.clear();
     }
   }
 
@@ -242,6 +253,9 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
     return typeof value === 'string' ? value.trim().split(' ')[0] : value;
   }
 
+  /**
+   * 清除svg元素
+   */
   private _clearSvgElement() {
     const layoutElement: HTMLElement = this._elementRef.nativeElement;
     let childCount = layoutElement.childNodes.length;
@@ -278,6 +292,10 @@ export class SimIconComponent extends _IconMixinBase implements OnChanges, OnIni
     }
   }
 
+  /**
+   * 设置svg元素
+   * @param svg
+   */
   private _setSvgElement(svg: SVGElement) {
     this._clearSvgElement();
 
