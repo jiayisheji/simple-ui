@@ -50,9 +50,4 @@ $sim-dialog: unquote(sim-dialog);
 /// 密度配置
 @mixin sim-dialog-density($config-or-theme) {
   $density-scale: sim-get-density-config($config-or-theme);
-
-  .sim-chip {
-    /// $size-scale-map: (small: minimum, large: maximum);
-    margin: sim-density-prop-value($sim-card-density-config, $density-scale, margin);
-  }
 }

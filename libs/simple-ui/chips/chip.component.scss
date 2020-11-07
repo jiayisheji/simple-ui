@@ -1,0 +1,71 @@
+@import '../theme/abstracts/mixins';
+@import '../theme/abstracts/variables';
+
+.sim-chip-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -4px;
+}
+
+.sim-chip-remove {
+  cursor: pointer;
+  transition: color 200ms $sim-swift-ease-in-out-timing-function;
+}
+
+.sim-button-disabled {
+  cursor: default;
+  pointer-events: none;
+
+  .sim-chip-remove {
+    cursor: default;
+  }
+}
+
+.sim-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 1px;
+  min-height: 24px;
+  margin: 4px;
+  padding: 0 7px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  cursor: default;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &.sim-chip-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+  &.sim-chip-selectable {
+    cursor: pointer;
+    transition: color 200ms $sim-swift-ease-in-out-timing-function, background 200ms $sim-swift-ease-in-out-timing-function;
+  }
+
+  &:focus {
+    outline: none;
+
+    &::after {
+      opacity: 0.16;
+    }
+  }
+
+  .sim-chip-remove {
+    margin-right: -2px;
+    margin-left: 5px;
+    font-size: 10px;
+  }
+}
+
+.sim-chip-input {
+  flex: 1 0 150px;
+  width: 150px;
+  margin: 4px;
+}

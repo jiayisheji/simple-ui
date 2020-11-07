@@ -1,0 +1,105 @@
+@import './chip-variables';
+
+$sim-chips: unquote(sim-chips);
+
+/// 注册组件
+@include sim-register-component($sim-chips);
+
+/// 主题风格
+@mixin sim-chips-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-chips) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-chips-color($color);
+    }
+    @if $density != null {
+      @include sim-chips-density($density);
+    }
+    @if $typography != null {
+      @include sim-chips-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-chips-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-chip {
+    color: sim-color($foreground, text);
+    background: sim-color($background, unselected-chip, 0.24);
+    border-color: sim-color($foreground, divider);
+    @include _sim-chip-theme($config);
+
+    &.sim-chip-selectable {
+      color: sim-color($foreground, text);
+      background: transparent;
+      border-color: transparent;
+      @include _sim-chip-selectable($config);
+    }
+
+    &.sim-chip-disabled {
+      opacity: 0.4;
+    }
+
+    .sim-chip-remove {
+      color: sim-color($foreground, icon);
+      opacity: 0.4;
+    }
+  }
+}
+
+@mixin _sim-chip-theme($theme) {
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($theme, $type);
+    &.sim-#{$type} {
+      color: sim-color($color, text);
+      background: sim-color($color, 0.12);
+      border-color: sim-color($color, 0.24);
+    }
+  }
+}
+
+@mixin _sim-chip-selectable($theme) {
+  &:hover {
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($theme, $type);
+      &.sim-#{$type} {
+        color: sim-color($color);
+      }
+    }
+  }
+
+  &.sim-chip-selected {
+    @each $type in (primary, secondary, info, success, warning, danger) {
+      $color: map-get($theme, $type);
+      &.sim-#{$type} {
+        color: sim-color($color, default-contrast);
+        background: sim-color($color);
+      }
+    }
+  }
+}
+
+/// 字体排版配置
+@mixin sim-chips-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+  .sim-chip-standard {
+    font-weight: sim-font-weight($config, body2);
+    font-size: sim-font-size($config, body2);
+  }
+  .sim-chip-tag {
+    font-size: sim-font-size($config, caption);
+  }
+}
+
+/// 密度配置
+@mixin sim-chips-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}
