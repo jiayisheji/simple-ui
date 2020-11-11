@@ -36,6 +36,7 @@ import { InputBoolean } from '@ngx-simple/core/decorators';
   exportAs: 'simButtonGroup'
 })
 export class SimButtonGroupDirective {
+  /** 间隔均匀 */
   @Input()
   @HostBinding('class.sim-button-group-spaced')
   @InputBoolean<SimButtonGroupDirective, 'spaced'>()
@@ -47,7 +48,7 @@ export class SimButtonGroupDirective {
   @Input()
   size: ThemeSize;
 
-  constructor(_elementRef: ElementRef, protected renderer: Renderer2) {}
+  constructor(_elementRef: ElementRef, protected _renderer: Renderer2) {}
 }
 
 const BUTTON_HOST_ATTRIBUTES = [
@@ -119,13 +120,25 @@ export class SimButtonComponent extends _ButtonMixinBase implements OnInit, Afte
   pilled: boolean = false;
 
   /**
-   * 按钮主题
+   * 组件的主题颜色调色板
+   * - primary 主要的
+   * - secondary 次要的
+   * - success 成功的
+   * - info 信息的
+   * - warning 警告的
+   * - danger 危险的/错误的
    */
   @Input()
   color: ThemePalette;
 
   /**
-   * 按钮尺寸
+   * 组件的主题尺寸
+   */
+  /**
+   * 组件的主题尺寸 默认 `medium`
+   *  - large 大的
+   *  - medium 中的
+   *  - small 小的
    */
   @Input()
   size: ThemeSize;
@@ -134,12 +147,12 @@ export class SimButtonComponent extends _ButtonMixinBase implements OnInit, Afte
   @HostBinding('class.sim-button-disabled')
   disabled: boolean;
 
-  constructor(_elementRef: ElementRef, protected renderer: Renderer2, protected _focusMonitor: FocusMonitor) {
+  constructor(_elementRef: ElementRef, protected _renderer: Renderer2, protected _focusMonitor: FocusMonitor) {
     super(_elementRef);
     // <button>如果不填type在各大浏览器解析不一样，强制设为<button type="button"> 避免出现bug
     const getHostElement = this._getHostElement() as HTMLButtonElement;
     if (_elementRef && !getHostElement.hasAttribute('type')) {
-      this.renderer.setAttribute(getHostElement, 'type', 'button');
+      this._renderer.setAttribute(getHostElement, 'type', 'button');
     }
   }
 
@@ -186,12 +199,12 @@ export class SimAnchorComponent extends SimButtonComponent implements OnInit {
   /** 按钮的tabIndex */
   @Input() tabIndex: number;
 
-  constructor(elementRef: ElementRef, renderer: Renderer2, _focusMonitor: FocusMonitor) {
-    super(elementRef, renderer, _focusMonitor);
+  constructor(elementRef: ElementRef, _renderer: Renderer2, _focusMonitor: FocusMonitor) {
+    super(elementRef, _renderer, _focusMonitor);
   }
 
   /**
-   * a标签点击事件处理
+   * `<a>`点击事件处理
    * @param event
    */
   @HostListener('click', ['$event'])
@@ -204,6 +217,8 @@ export class SimAnchorComponent extends SimButtonComponent implements OnInit {
   }
 }
 
+const _ButtonLinkMixinBase = mixinColor(mixinDisabled(MixinElementRefBase), 'primary');
+
 @Component({
   selector: ` a[sim-link-button]`,
   template: '<ng-content></ng-content>',
@@ -212,28 +227,65 @@ export class SimAnchorComponent extends SimButtonComponent implements OnInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'simLink',
   host: {
+    class: 'sim-link-button',
     '[attr.tabindex]': 'disabled ? -1 : tabIndex || 0'
   }
 })
-export class SimLinkComponent extends SimAnchorComponent implements OnInit {
+export class SimLinkComponent extends _ButtonLinkMixinBase implements AfterViewInit, OnDestroy {
   static ngAcceptInputType_disabled: BooleanInput;
+
+  /**
+   * 组件的主题颜色调色板 默认 `primary`
+   * - primary 主要的
+   * - secondary 次要的
+   * - success 成功的
+   * - info 信息的
+   * - warning 警告的
+   * - danger 危险的/错误的
+   */
+  @Input()
+  color: ThemePalette;
 
   /** 按钮的tabIndex */
   @Input() tabIndex: number;
 
+  /** 组件是否禁用 */
   @Input()
   @InputBoolean<SimLinkComponent, 'disabled'>()
   @HostBinding('class.sim-button-disabled')
   disabled: boolean;
 
-  constructor(_elementRef: ElementRef, _renderer: Renderer2, _focusMonitor: FocusMonitor) {
-    super(_elementRef, _renderer, _focusMonitor);
-    _renderer.addClass(_elementRef.nativeElement, 'sim-link-button');
+  constructor(_elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
+    super(_elementRef);
   }
 
-  ngOnInit(): void {
-    if (!this.color) {
-      this.color = 'primary';
+  ngAfterViewInit() {
+    this._focusMonitor.monitor(this._elementRef, true);
+  }
+
+  ngOnDestroy(): void {
+    this._focusMonitor.stopMonitoring(this._elementRef);
+  }
+
+  /**
+   * 获取焦点
+   * @param origin 焦点源
+   * @param options 焦点配置
+   */
+  focus(origin: FocusOrigin = 'program', options?: FocusOptions): void {
+    this._focusMonitor.focusVia(this._elementRef, origin, options);
+  }
+
+  /**
+   * `<a>`点击事件处理
+   * @param event
+   */
+  @HostListener('click', ['$event'])
+  _haltDisabledEvents(event: Event) {
+    // 禁用按钮不应应用任何操作
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     }
   }
 }

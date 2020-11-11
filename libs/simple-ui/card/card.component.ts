@@ -72,7 +72,6 @@ export class SimCardContentComponent implements OnInit {
 
   ngOnInit(): void {
     this._data = this.skeletonToData(this.skeleton);
-    console.log(this._data);
   }
 
   private skeletonToData(skeleton: SimSkeletonRow[]): SimSkeletonRow[] {
