@@ -1,0 +1,37 @@
+.sim-time-view-body {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+.sim-time-view-column {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 54px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.sim-time-view-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 48px;
+  height: 40px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.sim-time-view-item-selected {
+  font-size: 20px;
+}
+
+.sim-time-view-item-disabled {
+  cursor: default;
+}

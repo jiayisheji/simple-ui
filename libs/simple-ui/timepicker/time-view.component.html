@@ -1,0 +1,46 @@
+<div class="sim-time-view-body">
+  <div *ngIf="_showHoursList" class="sim-time-view-hours" #hourList [simTimeList]="'hours'">
+    <span
+      class="sim-time-view-item"
+      [class.sim-time-view-item-selected]="item.selected"
+      *ngFor="let item of _hoursViewList"
+      [class.sim-time-view-item-disabled]="item.disabled"
+      (click)="scrollHoursIntoView(item.value, $event)"
+    >
+      {{ item.view }}
+    </span>
+  </div>
+  <div *ngIf="_showMinutesList" class="sim-time-view-minutes" #minuteList [simTimeList]="'minutes'">
+    <span
+      class="sim-time-view-item"
+      [class.sim-time-view-item-selected]="item.selected"
+      *ngFor="let item of _minutesViewList"
+      [class.sim-time-view-item-disabled]="item.disabled"
+      (click)="scrollMinutesIntoView(item.value, $event)"
+    >
+      {{ item.view }}
+    </span>
+  </div>
+  <div *ngIf="_showSecondsList" class="sim-time-view-seconds" #secondList [simTimeList]="'seconds'">
+    <span
+      class="sim-time-view-item"
+      [class.sim-time-view-item-selected]="item.selected"
+      *ngFor="let item of _secondsViewList"
+      [class.sim-time-view-item-disabled]="item.disabled"
+      (click)="scrollSecondsIntoView(item.value, $event)"
+    >
+      {{ item.view }}
+    </span>
+  </div>
+  <div *ngIf="_showAmPmList" class="sim-time-view-ampm" #ampmList [simTimeList]="'ampm'">
+    <span
+      class="sim-time-view-item"
+      [class.sim-time-view-item-selected]="item.selected"
+      *ngFor="let item of _ampmViewList"
+      [class.sim-time-view-item-disabled]="item.disabled"
+      (click)="scrollAmPmIntoView(item.view, $event)"
+    >
+      {{ item.view }}
+    </span>
+  </div>
+</div>

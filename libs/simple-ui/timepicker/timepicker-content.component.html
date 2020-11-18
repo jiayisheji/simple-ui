@@ -1,0 +1,17 @@
+<sim-time-view
+  [selected]="timepicker._selected"
+  (userSelection)="timepicker.select($event)"
+  [minDate]="timepicker._getMinDate()"
+  [maxDate]="timepicker._getMaxDate()"
+  [dateFilter]="timepicker._getDateFilter()"
+  [format]="timepicker._getFormat()"
+  [hourStep]="timepicker.hourStep"
+  [minuteStep]="timepicker.minuteStep"
+  [secondStep]="timepicker.secondStep"
+></sim-time-view>
+<div class="sim-timepicker-footer">
+  <div class="sim-timepicker-actions">
+    <button sim-button size="small" (click)="timepicker.selectNow($event)" [color]="color">此刻</button>
+    <button sim-flat-button size="small" (click)="timepicker.selectTime($event)" [color]="color">确定</button>
+  </div>
+</div>

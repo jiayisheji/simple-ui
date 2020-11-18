@@ -30,6 +30,7 @@
 @import '../tree/tree.component.theme';
 @import '../drawer/drawer.component.theme';
 @import '../chips/chip.component.theme';
+@import '../timepicker/timepicker.component.theme';
 /// @import component.theme
 /// 组件结束
 
@@ -64,5 +65,6 @@
   @include sim-tree-theme($config-or-theme);
   @include sim-drawer-theme($config-or-theme);
   @include sim-chips-theme($config-or-theme);
+  @include sim-timepicker-theme($config-or-theme);
   /// @include component.theme
 }

@@ -1,0 +1,80 @@
+@import './timepicker-variables';
+
+$sim-timepicker: unquote(sim-timepicker);
+
+/// 注册组件
+@include sim-register-component($sim-timepicker);
+
+/// 主题风格
+@mixin sim-timepicker-theme($config-or-theme) {
+  @include sim-check-component-theme($config-or-theme, $sim-timepicker) {
+    $color: sim-get-color-config($config-or-theme);
+    $density: sim-get-density-config($config-or-theme);
+    $typography: sim-get-typography-config($config-or-theme);
+
+    @if $color != null {
+      @include sim-timepicker-color($color);
+    }
+    @if $density != null {
+      @include sim-timepicker-density($density);
+    }
+    @if $typography != null {
+      @include sim-timepicker-typography($typography);
+    }
+  }
+}
+
+/// 主题颜色配置
+@mixin sim-timepicker-color($config-or-theme) {
+  $config: sim-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $is-dark: map-get($config, is-dark);
+
+  .sim-timepicker-content {
+    @include sim-theme-elevation(4, $config);
+
+    color: sim-color($foreground, text);
+    background-color: sim-color($background, card);
+  }
+
+  .sim-timepicker-footer {
+    border-color: sim-color($foreground, divider);
+  }
+
+  .sim-time-view-item {
+    color: sim-color($foreground, secondary-text);
+    &.sim-time-view-item-disabled {
+      color: sim-color($foreground, disabled-text);
+    }
+  }
+
+  // 循环获取调色板对象
+  @each $type in (primary, secondary, info, success, warning, danger) {
+    $color: map-get($config, $type);
+    .sim-#{$type} {
+      .sim-time-view-item:not(.sim-time-view-item-disabled) {
+        &:hover {
+          color: sim-color($color);
+        }
+      }
+      .sim-time-view-item-selected:not(.sim-time-view-item-disabled) {
+        color: sim-color($color);
+      }
+    }
+  }
+
+  .sim-time-view-column-active .sim-time-view-item-selected {
+    background-color: sim-color($background, background);
+  }
+}
+
+/// 字体排版配置
+@mixin sim-timepicker-typography($config-or-theme) {
+  $config: sim-get-typography-config($config-or-theme);
+}
+
+/// 密度配置
+@mixin sim-timepicker-density($config-or-theme) {
+  $density-scale: sim-get-density-config($config-or-theme);
+}
