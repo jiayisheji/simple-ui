@@ -2,59 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SafeAny } from '@ngx-simple/core/types';
 import { SimTreeComponent, SimTreeControl, SimTreeDataSource, SimTreeFlattener, SimTreeTransformer } from '@ngx-simple/simple-ui/tree';
 
-const data = [
-  {
-    id: 1,
-    name: '1',
-    children: [
-      {
-        id: 11,
-        name: '11'
-      },
-      {
-        id: 12,
-        name: '12'
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: '2',
-    children: [
-      {
-        id: 21,
-        name: '21'
-      },
-      {
-        id: 22,
-        name: '22'
-      },
-      {
-        id: 23,
-        name: '23'
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: '3',
-    children: [
-      {
-        id: 31,
-        name: '31'
-      },
-      {
-        id: 32,
-        name: '32'
-      },
-      {
-        id: 33,
-        name: '33'
-      }
-    ]
-  }
-];
-
 const nodes = [
   {
     title: '0-0',
@@ -64,6 +11,8 @@ const nodes = [
       {
         title: '0-0-0',
         key: '0-0-0',
+        isSelected: true,
+        selected: true,
         children: [
           { title: '0-0-0-0', key: '0-0-0-0', isLeaf: true },
           { title: '0-0-0-1', key: '0-0-0-1', isLeaf: true },
@@ -82,7 +31,8 @@ const nodes = [
       {
         title: '0-0-2',
         key: '0-0-2',
-        isLeaf: true
+        isLeaf: true,
+        disableCheckbox: true
       }
     ]
   },
@@ -96,6 +46,7 @@ const nodes = [
     ]
   },
   {
+    disabled: true,
     title: '0-2',
     key: '0-2',
     isLeaf: true
@@ -108,6 +59,14 @@ class TreeTransformer extends SimTreeTransformer<any> {
    */
   getDisplay(node): string {
     return node.title;
+  }
+
+  getIsChecked(node): boolean {
+    return node.selected;
+  }
+
+  getIsExpanded(node): boolean {
+    return node.expanded;
   }
 }
 
@@ -131,6 +90,8 @@ export class OverviewComponent implements OnInit {
     this.dataSource = new SimTreeDataSource(this.treeControl, new SimTreeFlattener(new TreeTransformer()));
 
     this.dataSource.data = nodes;
+
+    this.treeControl.setNodeInitState();
   }
 
   onSelectChange($event) {

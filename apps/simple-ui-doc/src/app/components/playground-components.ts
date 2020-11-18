@@ -83,15 +83,15 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'switch',
         name: '开关'
-      }
+      },
       // {
       //   path: 'datepicker',
       //   name: '日期选择器'
-      // }
-      // {
-      //   path: 'timepicker',
-      //   name: '时间选择器'
       // },
+      {
+        path: 'timepicker',
+        name: '时间选择器'
+      }
       // {
       //   path: 'colorpicker',
       //   name: '颜色选择器'

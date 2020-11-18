@@ -23,9 +23,11 @@ const routes: Routes = [
       { path: 'tree', loadChildren: () => import('./tree/tree.module').then(m => m.TreeModule) },
       { path: 'icon', loadChildren: () => import('./icon/icon.module').then(m => m.IconModule) },
       { path: 'drawer', loadChildren: () => import('./drawer/drawer.module').then(m => m.DrawerModule) },
-      // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
       { path: 'chips', loadChildren: () => import('./chips/chips.module').then(m => m.ChipsModule) },
-      { path: 'echarts', loadChildren: () => import('./echarts/echarts.module').then(m => m.EchartsModule) }
+      { path: 'echarts', loadChildren: () => import('./echarts/echarts.module').then(m => m.EchartsModule) },
+      { path: 'timepicker', loadChildren: () => import('./timepicker/timepicker.module').then(m => m.TimepickerModule) }
+      // { path: 'datepicker', loadChildren: () => import('./datepicker/datepicker.module').then(m => m.DatepickerModule) },
+      // { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
     ]
   }
 ];

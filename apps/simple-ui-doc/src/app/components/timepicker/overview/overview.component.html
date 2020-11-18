@@ -1,0 +1,27 @@
+<doc-viewer>
+  <h2>何时使用</h2>
+  <p>当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。</p>
+  <h2>单选日期</h2>
+  <div class="doc-different-types">
+    <doc-figure>
+      <sim-form-field>
+        <input
+          type="text"
+          picker="year"
+          placeholder="请选择时间"
+          [(ngModel)]="time"
+          simInput
+          [simTimepicker]="timepicker"
+          (timeChange)="timeChange($event)"
+        />
+        <!-- <sim-timepicker-toggle simSuffix [for]="timepicker"></sim-timepicker-toggle> -->
+        <sim-timepicker #timepicker></sim-timepicker>
+      </sim-form-field>
+      <figcaption>
+        单选日期选择器
+      </figcaption>
+    </doc-figure>
+  </div>
+</doc-viewer>
+
+<sim-time-view [selected]="selected" class="sim-primary" (userSelection)="userSelection($event)" [dateFilter]="dateFilter"></sim-time-view>

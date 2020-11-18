@@ -85,6 +85,8 @@
   "[markdown]": {
     "editor.defaultFormatter": "shd101wyy.markdown-preview-enhanced"
   },
+  // 禁用提示 对修饰器的实验支持是一项将在将来版本中更改的功能 错误提示
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
   // typescript
   "typescript.tsdk": "node_modules\\typescript\\lib",
   // commitizen
@@ -98,6 +100,7 @@
     "autosize",
     "datepicker",
     "datetime",
+    "dgeni",
     "echarts",
     "hljs",
     "ngneat",
@@ -105,6 +108,8 @@
     "overridable",
     "readonly",
     "stylelint",
-    "tabset"
+    "tabindex",
+    "tabset",
+    "timepicker"
   ]
 }
